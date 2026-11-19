@@ -142,7 +142,8 @@ object SmsParser {
 
     private val REF_RE = Regex(
         "(?i)\\b(?:ref(?:erence)?|txn|utr|rrn|cheque|upi\\s*[/ ]?\\s*ref)" +
-            "(?:\\s*(?:no\\.?|number|id))?(?![A-Za-z])[.:\\s#/-]*([A-Za-z0-9]{6,22})"
+            "(?:\\s*(?:no\\.?|number|id))?(?![A-Za-z])[.:\\s#/-]*" +
+            "([A-Za-z0-9]{6,22})(?![A-Za-z0-9])"
     )
 
     // ------------------------------------------------------------------
