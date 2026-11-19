@@ -53,6 +53,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -227,35 +228,48 @@ fun FlowerSticker(
     color: Color,
     size: Dp,
     modifier: Modifier = Modifier,
+    petals: Int = 11,
+    depth: Float = 7f,
 ) {
     Box(modifier.size(size), contentAlignment = Alignment.Center) {
         Canvas(Modifier.matchParentSize()) {
-            val petals = 11
             val scale = this.size.minDimension / 100f
             val cx = this.size.width / 2f
             val cy = this.size.height / 2f
-            val path = Path()
-            val steps = petals * 14
+            val steps = petals * 10
+            val points = ArrayList<Offset>(steps + 1)
             for (i in 0..steps) {
                 val t = i.toFloat() / steps * (2f * Math.PI.toFloat())
-                val r = (40f + 7f * sin(petals * t)) * scale
-                val x = cx + r * cos(t)
-                val y = cy + r * sin(t)
-                if (i == 0) path.moveTo(x, y) else path.lineTo(x, y)
+                val r = (40f + depth * sin(petals * t)) * scale
+                points.add(Offset(cx + r * cos(t), cy + r * sin(t)))
             }
+            // Smooth the scallop with quadratic segments through midpoints so the
+            // sticker reads as a rounded flower, not a jagged star.
+            val path = Path()
+            path.moveTo(points[0].x, points[0].y)
+            var i = 1
+            while (i < points.size - 1) {
+                val midX = (points[i].x + points[i + 1].x) / 2f
+                val midY = (points[i].y + points[i + 1].y) / 2f
+                path.quadraticBezierTo(points[i].x, points[i].y, midX, midY)
+                i++
+            }
+            path.quadraticBezierTo(points.last().x, points.last().y, points[0].x, points[0].y)
             path.close()
             drawPath(path, color = color)
             drawPath(path, color = Ink, style = Stroke(width = 2.6f * scale))
         }
-        Text(
-            text = label,
-            modifier = Modifier.padding(horizontal = size * 0.16f),
-            textAlign = TextAlign.Center,
-            fontWeight = FontWeight.ExtraBold,
-            fontSize = (size.value * 0.095f).sp,
-            lineHeight = (size.value * 0.115f).sp,
-            color = Ink,
-        )
+        if (label.isNotBlank()) {
+            Text(
+                text = label,
+                modifier = Modifier.padding(horizontal = size * 0.16f),
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.ExtraBold,
+                fontSize = (size.value * 0.095f).sp,
+                lineHeight = (size.value * 0.115f).sp,
+                color = Ink,
+            )
+        }
     }
 }
 
