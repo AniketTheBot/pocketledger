@@ -3,6 +3,7 @@ package app.pocketledger
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import app.pocketledger.widget.BalanceWidget
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,7 +17,7 @@ import kotlinx.coroutines.launch
 class DemoSeedReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         if (!BuildConfig.DEBUG) return
-        val app = context.applicationContext as? App ?: return
+                        val app = context.applicationContext as? App ?: return
         val pending = goAsync()
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -35,6 +36,7 @@ class DemoSeedReceiver : BroadcastReceiver() {
                     }
                     ACTION_SCAN -> app.container.scanner.scan()
                 }
+                BalanceWidget.refresh(context)
             } finally {
                 pending.finish()
             }

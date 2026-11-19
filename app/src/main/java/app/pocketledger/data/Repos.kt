@@ -79,6 +79,32 @@ class WalletRepository(val db: AppDatabase) {
     suspend fun activeAccounts(): List<AccountEntity> = db.accountDao().active()
     suspend fun allTxns(): List<TxnEntity> = db.txnDao().all()
     suspend fun allSms(): List<SmsEntity> = db.smsDao().all()
+
+    suspend fun analyticsSnapshot(accountId: Long?, from: Long, to: Long): app.pocketledger.domain.AnalyticsSnapshot {
+        val txns = db.txnDao().between(from, to, accountId)
+        val opening = db.txnDao().openings(accountId)
+        val before = db.txnDao().netBefore(from, accountId)
+        val periodLength = (to - from).coerceAtLeast(1L)
+        val previousDebit = db.txnDao().between(from - periodLength, from, accountId)
+            .filter { it.direction == "DEBIT" }.sumOf { it.amountMinor }
+        val daily = app.pocketledger.domain.AnalyticsMath.dailySeries(
+            txns = txns,
+            from = from,
+            to = to,
+            openingBalanceMinor = opening + before,
+        )
+        return app.pocketledger.domain.AnalyticsSnapshot(
+            from = from,
+            to = to,
+            debitMinor = txns.filter { it.direction == "DEBIT" }.sumOf { it.amountMinor },
+            creditMinor = txns.filter { it.direction == "CREDIT" }.sumOf { it.amountMinor },
+            previousDebitMinor = previousDebit,
+            daily = daily,
+            topMerchants = app.pocketledger.domain.AnalyticsMath.topMerchants(txns),
+            balanceStartMinor = opening + before,
+            balanceEndMinor = daily.lastOrNull()?.balanceMinor ?: (opening + before),
+        )
+    }
     suspend fun account(id: Long): AccountEntity? = db.accountDao().byId(id)
     suspend fun txn(id: Long): TxnEntity? = db.txnDao().byId(id)
     suspend fun sms(id: Long): SmsEntity? = db.smsDao().byId(id)

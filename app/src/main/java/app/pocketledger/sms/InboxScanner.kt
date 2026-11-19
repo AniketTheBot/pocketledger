@@ -72,6 +72,7 @@ class InboxScanner(
             }
         }
         settings.setLastScanTs(System.currentTimeMillis())
+        app.pocketledger.widget.BalanceWidget.refresh(context)
         onProgress(scanned, scanned)
         ScanSummary(scanned, processed, review, ignored, duplicates)
     }
