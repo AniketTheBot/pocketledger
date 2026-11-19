@@ -22,6 +22,7 @@ private val Context.settingsStore: DataStore<Preferences> by preferencesDataStor
 data class AppSettings(
     val onboarded: Boolean = false,
     val currency: String = "INR",
+    val userName: String = "",
     val activeAccountId: Long = -1L,
     val lastScanTs: Long = 0L,
     val autoThreshold: Int = 85,
@@ -34,6 +35,7 @@ class SettingsRepository(private val context: Context) {
     private object Keys {
         val ONBOARDED = booleanPreferencesKey("onboarded")
         val CURRENCY = stringPreferencesKey("currency")
+        val USER_NAME = stringPreferencesKey("userName")
         val ACTIVE_ACCOUNT = longPreferencesKey("activeAccountId")
         val LAST_SCAN = longPreferencesKey("lastScanTs")
         val AUTO_THRESHOLD = intPreferencesKey("autoThreshold")
@@ -45,6 +47,7 @@ class SettingsRepository(private val context: Context) {
         AppSettings(
             onboarded = p[Keys.ONBOARDED] ?: false,
             currency = p[Keys.CURRENCY] ?: "INR",
+            userName = p[Keys.USER_NAME] ?: "",
             activeAccountId = p[Keys.ACTIVE_ACCOUNT] ?: -1L,
             lastScanTs = p[Keys.LAST_SCAN] ?: 0L,
             autoThreshold = p[Keys.AUTO_THRESHOLD] ?: 85,
@@ -57,6 +60,7 @@ class SettingsRepository(private val context: Context) {
 
     suspend fun setOnboarded(value: Boolean) = context.settingsStore.edit { it[Keys.ONBOARDED] = value }
     suspend fun setCurrency(value: String) = context.settingsStore.edit { it[Keys.CURRENCY] = value }
+    suspend fun setUserName(value: String) = context.settingsStore.edit { it[Keys.USER_NAME] = value.trim() }
     suspend fun setActiveAccount(id: Long) = context.settingsStore.edit { it[Keys.ACTIVE_ACCOUNT] = id }
     suspend fun setLastScanTs(ts: Long) = context.settingsStore.edit { it[Keys.LAST_SCAN] = ts }
     suspend fun setThresholds(auto: Int, review: Int) = context.settingsStore.edit {
