@@ -47,7 +47,7 @@ fun WelcomeScreen(onNext: () -> Unit) {
 
     val motion = rememberInfiniteTransition(label = "welcome-idle")
     val coinBob by motion.animateFloat(
-        initialValue = 0f, targetValue = -3.5f,
+        initialValue = 0f, targetValue = -6f,
         animationSpec = infiniteRepeatable(tween(1700, easing = FastOutSlowInEasing), RepeatMode.Reverse),
         label = "coinBob",
     )
@@ -57,27 +57,27 @@ fun WelcomeScreen(onNext: () -> Unit) {
         label = "coinTilt",
     )
     val handBob by motion.animateFloat(
-        initialValue = -1.3f, targetValue = 1.3f,
+        initialValue = -2.2f, targetValue = 2.2f,
         animationSpec = infiniteRepeatable(tween(2600, easing = FastOutSlowInEasing), RepeatMode.Reverse),
         label = "handBob",
     )
     val bubbleFloat by motion.animateFloat(
-        initialValue = -2f, targetValue = 2f,
+        initialValue = -4f, targetValue = 4f,
         animationSpec = infiniteRepeatable(tween(3200, easing = FastOutSlowInEasing), RepeatMode.Reverse),
         label = "bubbleFloat",
     )
     val humanBob by motion.animateFloat(
-        initialValue = -0.8f, targetValue = 0.8f,
+        initialValue = -1.5f, targetValue = 1.5f,
         animationSpec = infiniteRepeatable(tween(2400, easing = FastOutSlowInEasing), RepeatMode.Reverse),
         label = "humanBob",
     )
     val walletBreath by motion.animateFloat(
-        initialValue = 0.997f, targetValue = 1.006f,
+        initialValue = 0.99f, targetValue = 1.015f,
         animationSpec = infiniteRepeatable(tween(2800, easing = FastOutSlowInEasing), RepeatMode.Reverse),
         label = "walletBreath",
     )
     val walletTilt by motion.animateFloat(
-        initialValue = -0.8f, targetValue = 0.8f,
+        initialValue = -1.5f, targetValue = 1.5f,
         animationSpec = infiniteRepeatable(tween(4200, easing = FastOutSlowInEasing), RepeatMode.Reverse),
         label = "walletTilt",
     )
@@ -113,11 +113,12 @@ fun WelcomeScreen(onNext: () -> Unit) {
         ) {
             val u = maxWidth / 271f
 
+            // 4-unit padding baked into each part drawable restores stroke bleed.
             fun part(x: Float, y: Float, w: Float, h: Float) =
                 Modifier
-                    .offset(x = u * x, y = u * y)
-                    .width(u * w)
-                    .height(u * h)
+                    .offset(x = u * (x - 4f), y = u * (y - 4f))
+                    .width(u * (w + 8f))
+                    .height(u * (h + 8f))
 
             Image(
                 painter = painterResource(R.drawable.welcome_abstractshapes),
@@ -185,6 +186,16 @@ fun WelcomeScreen(onNext: () -> Unit) {
                     translationX = (-64f * (1f - handIn)).dp.toPx()
                     translationY = handBob.dp.toPx()
                 },
+                contentScale = ContentScale.FillBounds,
+            )
+            Image(
+                painter = painterResource(R.drawable.welcome_bottomshapes),
+                contentDescription = null,
+                modifier = Modifier
+                    .offset(x = 0.dp, y = u * 502f)
+                    .width(u * 271f)
+                    .height(u * 130f)
+                    .graphicsLayer { alpha = shapesIn },
                 contentScale = ContentScale.FillBounds,
             )
         }
