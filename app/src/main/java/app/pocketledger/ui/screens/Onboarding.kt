@@ -70,6 +70,7 @@ import app.pocketledger.ui.theme.Mustard
 import app.pocketledger.ui.theme.MutedInk
 import app.pocketledger.ui.theme.Pink
 import app.pocketledger.ui.theme.Purple
+import app.pocketledger.ui.theme.WelcomeYellow
 import kotlinx.coroutines.launch
 
 @Composable
@@ -123,13 +124,13 @@ fun OnboardingFlow(container: AppContainer, onFinished: () -> Unit) {
     Column(
         Modifier
             .fillMaxSize()
-            .background(Cream)
+            .background(if (step == 0) WelcomeYellow else Cream)
             .statusBarsPadding()
             .navigationBarsPadding()
             .padding(horizontal = 22.dp, vertical = 6.dp)
     ) {
         when (step) {
-            0 -> WelcomeStep { step = 1 }
+            0 -> WelcomeScreen { step = 1 }
             1 -> NameStep(userName, { userName = it }) { step = 2 }
             2 -> CurrencyStep(
                 currency = currency,
