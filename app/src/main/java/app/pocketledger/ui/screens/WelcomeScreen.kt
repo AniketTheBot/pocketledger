@@ -43,61 +43,77 @@ private val WelcomeBg = Color(0xFFF5F5F5)
 
 @Composable
 fun WelcomeScreen(onNext: () -> Unit) {
-    val entranceAlpha = remember { Animatable(0f) }
-    val entranceScale = remember { Animatable(1.03f) }
+    val entrance = remember { Animatable(0f) }
 
-    val motion = rememberInfiniteTransition(label = "welcome-motion")
+    val motion = rememberInfiniteTransition(label = "welcome-idle")
     val coinBob by motion.animateFloat(
-        initialValue = 0f,
-        targetValue = -4f,
+        initialValue = 0f, targetValue = -3.5f,
         animationSpec = infiniteRepeatable(tween(1700, easing = FastOutSlowInEasing), RepeatMode.Reverse),
-        label = "coin",
+        label = "coinBob",
+    )
+    val coinTilt by motion.animateFloat(
+        initialValue = -3f, targetValue = 3f,
+        animationSpec = infiniteRepeatable(tween(2600, easing = FastOutSlowInEasing), RepeatMode.Reverse),
+        label = "coinTilt",
     )
     val handBob by motion.animateFloat(
-        initialValue = -1.2f,
-        targetValue = 1.2f,
+        initialValue = -1.3f, targetValue = 1.3f,
         animationSpec = infiniteRepeatable(tween(2600, easing = FastOutSlowInEasing), RepeatMode.Reverse),
-        label = "hand",
+        label = "handBob",
     )
     val bubbleFloat by motion.animateFloat(
-        initialValue = -2f,
-        targetValue = 2f,
+        initialValue = -2f, targetValue = 2f,
         animationSpec = infiniteRepeatable(tween(3200, easing = FastOutSlowInEasing), RepeatMode.Reverse),
-        label = "bubble",
+        label = "bubbleFloat",
     )
     val humanBob by motion.animateFloat(
-        initialValue = -0.8f,
-        targetValue = 0.8f,
+        initialValue = -0.8f, targetValue = 0.8f,
         animationSpec = infiniteRepeatable(tween(2400, easing = FastOutSlowInEasing), RepeatMode.Reverse),
-        label = "human",
+        label = "humanBob",
     )
     val walletBreath by motion.animateFloat(
-        initialValue = 0.995f,
-        targetValue = 1.008f,
+        initialValue = 0.997f, targetValue = 1.006f,
         animationSpec = infiniteRepeatable(tween(2800, easing = FastOutSlowInEasing), RepeatMode.Reverse),
-        label = "wallet",
+        label = "walletBreath",
+    )
+    val walletTilt by motion.animateFloat(
+        initialValue = -0.8f, targetValue = 0.8f,
+        animationSpec = infiniteRepeatable(tween(4200, easing = FastOutSlowInEasing), RepeatMode.Reverse),
+        label = "walletTilt",
+    )
+    val shapesDrift by motion.animateFloat(
+        initialValue = -1f, targetValue = 1f,
+        animationSpec = infiniteRepeatable(tween(5600, easing = FastOutSlowInEasing), RepeatMode.Reverse),
+        label = "shapesDrift",
     )
 
     LaunchedEffect(Unit) {
-        entranceAlpha.animateTo(1f, tween(520))
-        entranceScale.animateTo(1f, tween(760, easing = FastOutSlowInEasing))
+        entrance.animateTo(1f, tween(1250, easing = FastOutSlowInEasing))
     }
+
+    val p = entrance.value
+    fun seg(start: Float, end: Float) = ((p - start) / (end - start)).coerceIn(0f, 1f)
+    fun ease(x: Float) = 1f - (1f - x) * (1f - x)
+
+    val shapesIn = ease(seg(0f, 0.35f))
+    val bubbleIn = ease(seg(0.08f, 0.42f))
+    val humanIn = ease(seg(0.18f, 0.55f))
+    val walletIn = ease(seg(0.28f, 0.65f))
+    val handIn = ease(seg(0.40f, 0.78f))
+    val coinIn = ease(seg(0.45f, 0.82f))
+    val coinDrop = ease(seg(0.55f, 0.95f))
+    val ctaIn = ease(seg(0.75f, 1f))
 
     Box(Modifier.fillMaxSize().background(WelcomeBg)) {
         BoxWithConstraints(
             Modifier
                 .fillMaxWidth()
                 .aspectRatio(271f / 502f)
-                .align(Alignment.TopCenter)
-                .graphicsLayer {
-                    alpha = entranceAlpha.value
-                    scaleX = entranceScale.value
-                    scaleY = entranceScale.value
-                },
+                .align(Alignment.TopCenter),
         ) {
             val u = maxWidth / 271f
 
-            fun partModifier(x: Float, y: Float, w: Float, h: Float) =
+            fun part(x: Float, y: Float, w: Float, h: Float) =
                 Modifier
                     .offset(x = u * x, y = u * y)
                     .width(u * w)
@@ -106,40 +122,69 @@ fun WelcomeScreen(onNext: () -> Unit) {
             Image(
                 painter = painterResource(R.drawable.welcome_abstractshapes),
                 contentDescription = null,
-                modifier = partModifier(0f, 0f, 271f, 502f),
+                modifier = part(0f, 0f, 271f, 502f).graphicsLayer {
+                    alpha = shapesIn
+                    val s = 0.96f + 0.04f * shapesIn
+                    scaleX = s
+                    scaleY = s
+                    translationY = shapesDrift.dp.toPx()
+                },
                 contentScale = ContentScale.FillBounds,
             )
             Image(
                 painter = painterResource(R.drawable.welcome_human),
                 contentDescription = null,
-                modifier = partModifier(170.5f, 190.5f, 100f, 89f).graphicsLayer { translationY = humanBob.dp.toPx() },
+                modifier = part(170.5f, 190.5f, 100f, 89f).graphicsLayer {
+                    alpha = humanIn
+                    translationX = (52f * (1f - humanIn)).dp.toPx()
+                    translationY = humanBob.dp.toPx()
+                },
                 contentScale = ContentScale.FillBounds,
             )
             Image(
                 painter = painterResource(R.drawable.welcome_wallet),
                 contentDescription = null,
-                modifier = partModifier(60f, 322f, 171f, 148f).graphicsLayer {
-                    scaleX = walletBreath
-                    scaleY = walletBreath
+                modifier = part(60f, 322f, 171f, 148f).graphicsLayer {
+                    alpha = walletIn
+                    val s = (0.92f + 0.08f * walletIn) * walletBreath
+                    scaleX = s
+                    scaleY = s
+                    rotationZ = walletTilt
+                    translationY = (46f * (1f - walletIn)).dp.toPx()
                 },
                 contentScale = ContentScale.FillBounds,
             )
             Image(
                 painter = painterResource(R.drawable.welcome_coin),
                 contentDescription = null,
-                modifier = partModifier(108f, 298f, 47f, 47f).graphicsLayer { translationY = coinBob.dp.toPx() },
+                modifier = part(108f, 298f, 47f, 47f).graphicsLayer {
+                    alpha = coinIn
+                    translationY = (handBob + coinBob - 120f * (1f - coinDrop)).dp.toPx()
+                    rotationZ = coinTilt - 28f * (1f - coinDrop)
+                },
                 contentScale = ContentScale.FillBounds,
             )
             Image(
                 painter = painterResource(R.drawable.welcome_speechbubble),
                 contentDescription = null,
-                modifier = partModifier(10f, 62.3f, 154f, 129f).graphicsLayer { translationY = bubbleFloat.dp.toPx() },
+                modifier = part(10f, 62.3f, 154f, 129f).graphicsLayer {
+                    alpha = bubbleIn
+                    val s = 0.70f + 0.30f * bubbleIn
+                    scaleX = s
+                    scaleY = s
+                    rotationZ = -5f * (1f - bubbleIn)
+                    translationY = (18f * (1f - bubbleIn) + bubbleFloat).dp.toPx()
+                },
                 contentScale = ContentScale.FillBounds,
             )
             Image(
                 painter = painterResource(R.drawable.welcome_hand),
                 contentDescription = null,
-                modifier = partModifier(17.5f, 226.5f, 140f, 103f).graphicsLayer { translationY = handBob.dp.toPx() },
+                modifier = part(17.5f, 226.5f, 140f, 103f).graphicsLayer {
+                    alpha = handIn
+                    translationX = (-64f * (1f - handIn)).dp.toPx()
+                    translationY = handBob.dp.toPx()
+                },
                 contentScale = ContentScale.FillBounds,
             )
         }
@@ -151,9 +196,13 @@ fun WelcomeScreen(onNext: () -> Unit) {
                 .navigationBarsPadding()
                 .padding(horizontal = 24.dp, vertical = 26.dp)
                 .height(58.dp)
+                .graphicsLayer {
+                    alpha = ctaIn
+                    translationY = (22f * (1f - ctaIn)).dp.toPx()
+                }
                 .clip(RoundedCornerShape(percent = 50))
                 .background(WelcomePurple)
-                .clickable(onClick = onNext),
+                .clickable(enabled = ctaIn > 0.2f, onClick = onNext),
             contentAlignment = Alignment.Center,
         ) {
             Text(

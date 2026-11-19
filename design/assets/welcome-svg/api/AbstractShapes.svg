@@ -1,0 +1,36 @@
+<svg width="271" height="502" viewBox="0 0 271 502" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M268 57C268 72.1173 262.469 86.6155 252.623 97.3051C242.777 107.995 229.424 114 215.5 114C201.576 114 188.223 107.995 178.377 97.3051C168.531 86.6155 163 72.1173 163 57L215.5 57H268Z" fill="#FFE300"/>
+<rect x="236" y="128" width="27" height="45" fill="#009AD8"/>
+<rect x="218" y="88" width="20" height="95" fill="#FF949C"/>
+<rect x="194" y="151" width="24" height="22" fill="#009AD8"/>
+<rect x="175" y="168" width="19" height="15" fill="#FF949C"/>
+<mask id="stroke0_8_146" fill="white">
+<path d="M188 193L176.742 169.75H199.258L188 193Z"/>
+</mask>
+<path d="M188 193L176.742 169.75H199.258L188 193Z" stroke-width="2" stroke="black" mask="url(#stroke0_8_146)"/>
+<mask id="stroke1_8_146" fill="white">
+<path d="M252.5 350L268.521 377H236.479L252.5 350Z"/>
+</mask>
+<path d="M252.5 350L268.521 377H236.479L252.5 350Z" stroke-width="2" stroke="black" mask="url(#stroke1_8_146)"/>
+<circle cx="255" cy="423" r="5.35" stroke-width="0.7" stroke="black"/>
+<circle cx="196.5" cy="79.5" r="3.85" stroke-width="0.7" stroke="black"/>
+<path d="M179 86L188 91L179 96.5L188 102.5L179 107.5L188 113.5L179 119L188 124L179 129.5L188 134.5L179 140" stroke-width="0.7" stroke-miterlimit="5.4874" stroke-linecap="round" stroke="black"/>
+<rect x="219.35" y="441.35" width="13.3" height="13.3" stroke-width="0.7" stroke="black"/>
+<rect x="220" y="324" width="14" height="14" fill="#FF949C"/>
+<rect x="9" y="381" width="29" height="49" fill="#FF7800"/>
+<path d="M97 454C97 441.27 91.9429 429.061 82.9411 420.059C73.9394 411.057 61.7304 406 49 406C36.2696 406 24.0606 411.057 15.0589 420.059C6.05713 429.061 1 441.27 1 454L49 454H97Z" fill="#FFE300"/>
+<path d="M7.5 353.5L11.5 362L16 353.5L20 362L24.5 353.5L29 362L33 353.5L37 362L41.5 353.5L46 362L50.5 353.5" stroke-width="0.7" stroke-miterlimit="5.4874" stroke-linecap="round" stroke="black"/>
+<path d="M74 454C74 450.717 73.3534 447.466 72.097 444.433C70.8406 441.4 68.9991 438.644 66.6777 436.322C64.3562 434.001 61.6002 432.159 58.5671 430.903C55.5339 429.647 52.283 429 49 429C45.717 429 42.4661 429.647 39.4329 430.903C36.3998 432.159 33.6438 434.001 31.3223 436.322C29.0009 438.644 27.1594 441.4 25.903 444.433C24.6466 447.466 24 450.717 24 454L49 454H74Z" fill="#F5F5F5"/>
+<circle cx="252.5" cy="293.5" r="2.5" fill="black"/>
+<circle cx="252.5" cy="301.5" r="2.5" fill="black"/>
+<circle cx="261.5" cy="301.5" r="2.5" fill="black"/>
+<circle cx="153.5" cy="199.5" r="2.5" fill="black"/>
+<circle cx="153.5" cy="191.5" r="2.5" fill="black"/>
+<circle cx="144.5" cy="191.5" r="2.5" fill="black"/>
+<circle cx="144.5" cy="199.5" r="2.5" fill="black"/>
+<circle cx="261.5" cy="293.5" r="2.5" fill="black"/>
+<rect x="7" y="202" width="82" height="133" fill="#009E72"/>
+<rect x="89" y="202" width="23" height="37" fill="#009E72"/>
+<rect x="26" y="189" width="27" height="27" fill="#FF7800"/>
+<rect y="218" width="18" height="126" fill="#FFE200"/>
+</svg>
