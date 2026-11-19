@@ -21,8 +21,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
+import androidx.compose.animation.core.tween
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import app.pocketledger.data.AppContainer
 import app.pocketledger.data.SmsEntity
@@ -83,6 +88,7 @@ private fun MainShell(container: AppContainer) {
     var showAnalyzer by remember { mutableStateOf(false) }
     val reviewCount by container.wallet.observeReviewCount().collectAsState(initial = 0)
     val scope = rememberCoroutineScope()
+    val saveableStateHolder = rememberSaveableStateHolder()
 
     Scaffold(
         containerColor = Cream,
@@ -110,40 +116,60 @@ private fun MainShell(container: AppContainer) {
             }
         },
     ) { padding ->
-        Box(Modifier.fillMaxSize().padding(padding)) {
-            when (tab) {
-                "home" -> HomeScreen(
-                    container = container,
-                    onAddEntry = {
-                        editingSms = null
-                        showEntry = true
+        val tabOrder = listOf("home", "accounts", "review", "settings")
+        Box(
+            Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .swipeToChangeTab(
+                    onSwipeLeft = {
+                        val i = tabOrder.indexOf(tab)
+                        if (i in 0 until tabOrder.lastIndex) tab = tabOrder[i + 1]
                     },
-                    onScan = { showScan = true },
-                    onReconcile = { showReconcile = true },
-                    onAccounts = { tab = "accounts" },
-                    onReview = { tab = "review" },
-                    onAnalyze = { showAnalyzer = true },
-                )
-                "accounts" -> AccountsScreen(
-                    container = container,
-                    onAddAccount = { showAddAccount = true },
-                    onSelectAccount = { id ->
-                        scope.launch { container.settings.setActiveAccount(id) }
-                        tab = "home"
+                    onSwipeRight = {
+                        val i = tabOrder.indexOf(tab)
+                        if (i > 0) tab = tabOrder[i - 1]
                     },
                 )
-                "review" -> ReviewScreen(
-                    container = container,
-                    onEdit = { sms ->
-                        editingSms = sms
-                        showEntry = true
-                    },
-                )
-                "settings" -> SettingsScreen(
-                    container = container,
-                    onScan = { showScan = true },
-                    onReconcile = { showReconcile = true },
-                )
+        ) {
+            Crossfade(targetState = tab, animationSpec = tween(160), label = "tab") { current ->
+                saveableStateHolder.SaveableStateProvider(current) {
+                when (current) {
+                    "home" -> HomeScreen(
+                        container = container,
+                        onAddEntry = {
+                            editingSms = null
+                            showEntry = true
+                        },
+                        onScan = { showScan = true },
+                        onReconcile = { showReconcile = true },
+                        onAccounts = { tab = "accounts" },
+                        onReview = { tab = "review" },
+                        onAnalyze = { showAnalyzer = true },
+                        onOpenSettings = { tab = "settings" },
+                    )
+                    "accounts" -> AccountsScreen(
+                        container = container,
+                        onAddAccount = { showAddAccount = true },
+                        onSelectAccount = { id ->
+                            scope.launch { container.settings.setActiveAccount(id) }
+                            tab = "home"
+                        },
+                    )
+                    "review" -> ReviewScreen(
+                        container = container,
+                        onEdit = { sms ->
+                            editingSms = sms
+                            showEntry = true
+                        },
+                    )
+                    "settings" -> SettingsScreen(
+                        container = container,
+                        onScan = { showScan = true },
+                        onReconcile = { showReconcile = true },
+                    )
+                }
+                }
             }
         }
     }
@@ -166,4 +192,20 @@ private fun MainShell(container: AppContainer) {
     if (showAnalyzer) {
         AnalyzerDialog(container) { showAnalyzer = false }
     }
+}
+
+/** Horizontal swipe anywhere in the tab content moves to the neighbouring tab. */
+private fun Modifier.swipeToChangeTab(
+    onSwipeLeft: () -> Unit,
+    onSwipeRight: () -> Unit,
+): Modifier = pointerInput(onSwipeLeft, onSwipeRight) {
+    var totalDrag = 0f
+    detectHorizontalDragGestures(
+        onDragStart = { totalDrag = 0f },
+        onHorizontalDrag = { _, dragAmount -> totalDrag += dragAmount },
+        onDragEnd = {
+            if (totalDrag <= -90.dp.toPx()) onSwipeLeft()
+            else if (totalDrag >= 90.dp.toPx()) onSwipeRight()
+        },
+    )
 }

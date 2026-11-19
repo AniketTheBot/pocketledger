@@ -66,6 +66,12 @@ class SmsPipeline(
 
         val cfg = settings.current()
 
+        // The balance anchor is the starting line: anything older is history.
+        if (cfg.anchorTs > 0L && ts < cfg.anchorTs) {
+            db.smsDao().setStatus(id, STATUS_IGNORED, null, null, "before_anchor")
+            return IngestResult(id, STATUS_IGNORED, 0, null, "before_anchor")
+        }
+
         // 1) Deterministic junk veto always wins over the model.
         if (parsed.junk != null) {
             db.smsDao().setStatus(id, STATUS_IGNORED, null, null, parsed.junk.lowercase())
@@ -87,10 +93,6 @@ class SmsPipeline(
         if (account == null) {
             val rule = db.senderRuleDao().all().firstOrNull { norm.contains(it.pattern) }
             if (rule?.accountId != null) account = accounts.firstOrNull { it.id == rule.accountId }
-        }
-        // Single-account convenience: only with a parsed tail and solid confidence.
-        if (account == null && accounts.size == 1 && parsed.accountTail != null && conf >= 85) {
-            account = accounts.first()
         }
 
         // 3) ML fusion — conflicts never auto-write.
@@ -130,6 +132,20 @@ class SmsPipeline(
             return IngestResult(id, STATUS_REVIEW, minOf(conf, 79), null, "currency_mismatch")
         }
 
+        // Cross-sender duplicate guard: bank alert + UPI-app alert for the same
+        // payment must never book twice. Anything suspicious goes to Review.
+        val duplicate = db.txnDao().similar(
+            accountId = account.id,
+            direction = parsed.direction!!,
+            amountMinor = parsed.amountMinor!!,
+            from = ts - 120_000L,
+            to = ts + 120_000L,
+        )
+        if (duplicate != null) {
+            db.smsDao().setStatus(id, STATUS_REVIEW, minOf(conf, 79), account.id, "possible_duplicate")
+            return IngestResult(id, STATUS_REVIEW, minOf(conf, 79), null, "possible_duplicate")
+        }
+
         // 4) Route.
         if (conf >= cfg.autoThreshold && !conflict) {
             val txnId = db.txnDao().insert(
@@ -160,6 +176,76 @@ class SmsPipeline(
         return IngestResult(id, STATUS_IGNORED, conf, null, "below_threshold")
     }
 
+    /**
+     * History mode: reads old messages to teach the on-device classifier only.
+     * Never books anything, never queues review, never moves a balance.
+     * Returns "LEARNED", "IGNORED" or "DUPLICATE".
+     */
+    suspend fun learnFromHistory(
+        sender: String,
+        body: String,
+        ts: Long,
+        allowLearning: Boolean = true,
+    ): String {
+        val norm = normalizeSender(sender)
+        val hash = sha256("$norm|$body|$ts")
+        val parsed = SmsParser.parse(sender, body)
+        val id = db.smsDao().insertIgnore(
+            SmsEntity(
+                sender = sender,
+                senderNorm = norm,
+                body = body,
+                ts = ts,
+                hash = hash,
+                status = STATUS_PENDING,
+                junk = parsed.junk,
+                direction = parsed.direction,
+                amountMinor = parsed.amountMinor,
+                currency = parsed.currency,
+                accountTail = parsed.accountTail,
+                ref = parsed.ref,
+                merchant = parsed.merchant,
+                reportedBalanceMinor = parsed.reportedBalanceMinor,
+                confidence = null,
+                accountId = null,
+                reason = null,
+            )
+        )
+        if (id == -1L) return "DUPLICATE"
+
+        val ml = runCatching { classifier.classify(body) }.getOrNull()
+        val whitelisted = WHITELIST.any { norm.contains(it) }
+        val idealLabel = when (parsed.direction) {
+            DIR_DEBIT -> SmsClass.DEBIT
+            DIR_CREDIT -> SmsClass.CREDIT
+            else -> null
+        }
+        val eligible = allowLearning &&
+            parsed.junk == null &&
+            parsed.isTransaction &&
+            idealLabel != null &&
+            parsed.amountMinor != null &&
+            (whitelisted || (ml?.pTxn ?: 0f) >= 0.9f) &&
+            (ml == null || ml.label == SmsClass.NOT_TXN || ml.label == idealLabel)
+
+        var learned = false
+        if (eligible) {
+            val hybrid = classifier
+            if (hybrid is HybridClassifier) {
+                runCatching { hybrid.learn(body, idealLabel!!) }
+                learned = true
+            }
+        }
+        db.smsDao().setStatus(
+            id,
+            STATUS_IGNORED,
+            null,
+            null,
+            if (learned) "history_learning" else "history_skipped",
+        )
+        return if (learned) "LEARNED" else STATUS_IGNORED
+    }
+
     /** User confirmed a review item (possibly edited in the UI). */
     suspend fun confirm(
         smsId: Long,
@@ -172,6 +258,7 @@ class SmsPipeline(
         note: String?,
     ): Long {
         val sms = db.smsDao().byId(smsId) ?: error("SMS $smsId not found")
+        val before = db.txnDao().balanceFor(accountId) ?: 0L
         val txnId = db.txnDao().insert(
             TxnEntity(
                 accountId = accountId,
@@ -190,6 +277,17 @@ class SmsPipeline(
             )
         )
         db.smsDao().markConfirmed(smsId, accountId, direction, amountMinor, merchant)
+        // Historical SMS (received before onboarding completed) are catalogue
+        // entries only: neutralise their effect so the anchored balance holds.
+        if (sms.ts < settings.current().anchorTs) {
+            val after = db.txnDao().balanceFor(accountId) ?: before
+            val delta = before - after
+            if (delta != 0L) {
+                db.accountDao().byId(accountId)?.let { acc ->
+                    db.accountDao().update(acc.copy(openingBalanceMinor = acc.openingBalanceMinor + delta))
+                }
+            }
+        }
         learnQuietly(sms.body, if (direction == DIR_DEBIT) SmsClass.DEBIT else SmsClass.CREDIT)
         return txnId
     }

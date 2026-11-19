@@ -17,6 +17,7 @@ data class ScanSummary(
     val review: Int,
     val ignored: Int,
     val duplicates: Int,
+    val learned: Int = 0,
 ) {
     val found: Int get() = processed + review
 }
@@ -34,6 +35,7 @@ class InboxScanner(
 ) {
     suspend fun scan(
         limit: Int = 5000,
+        learningOnly: Boolean = false,
         onProgress: (scanned: Int, total: Int) -> Unit = { _, _ -> },
     ): ScanSummary = withContext(Dispatchers.IO) {
         if (!SmsPermissions.granted(context)) {
@@ -49,6 +51,7 @@ class InboxScanner(
         var review = 0
         var ignored = 0
         var duplicates = 0
+        var learned = 0
 
         cursor.use { c ->
             val idxAddr = c.getColumnIndexOrThrow("address")
@@ -60,9 +63,18 @@ class InboxScanner(
                 val body = c.getString(idxBody) ?: ""
                 val ts = c.getLong(idxDate)
                 if (body.isBlank()) continue
-                val result = pipeline.ingest(sender, body, ts)
+                val status = if (learningOnly) {
+                    pipeline.learnFromHistory(
+                        sender = sender,
+                        body = body,
+                        ts = ts,
+                        allowLearning = learned < 400,
+                    ).also { if (it == "LEARNED") learned++ }
+                } else {
+                    pipeline.ingest(sender, body, ts).status
+                }
                 scanned++
-                when (result.status) {
+                when (status) {
                     STATUS_PROCESSED -> processed++
                     STATUS_REVIEW -> review++
                     STATUS_IGNORED -> ignored++
@@ -74,6 +86,6 @@ class InboxScanner(
         settings.setLastScanTs(System.currentTimeMillis())
         app.pocketledger.widget.BalanceWidget.refresh(context)
         onProgress(scanned, scanned)
-        ScanSummary(scanned, processed, review, ignored, duplicates)
+        ScanSummary(scanned, processed, review, ignored, duplicates, learned)
     }
 }

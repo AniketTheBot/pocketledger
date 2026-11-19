@@ -287,9 +287,9 @@ fun BottomPillNav(
                 .animateContentSize(spring(dampingRatio = 0.82f, stiffness = 420f))
                 .clip(RoundedCornerShape(percent = 50))
                 .background(Ink)
-                .padding(horizontal = 5.dp, vertical = 4.dp),
+                .padding(horizontal = 6.dp, vertical = 5.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(2.dp),
+            horizontalArrangement = Arrangement.spacedBy(3.dp),
         ) {
             NavDestinations.forEach { dest ->
                 NavPillItem(
@@ -344,8 +344,8 @@ private fun NavPillItem(
             .clip(shape)
             .background(bg)
             .clickable(interactionSource = interaction, indication = null, onClick = onClick)
-            .heightIn(min = 36.dp)
-            .padding(horizontal = if (active) 11.dp else 9.dp, vertical = 7.dp),
+            .heightIn(min = 42.dp)
+            .padding(horizontal = if (active) 14.dp else 11.dp, vertical = 9.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Box {
@@ -354,7 +354,7 @@ private fun NavPillItem(
                 contentDescription = dest.label,
                 tint = contentColor,
                 modifier = Modifier
-                    .size(17.dp)
+                    .size(21.dp)
                     .scale(iconScale),
             )
             if (badgeCount > 0) {
@@ -363,7 +363,7 @@ private fun NavPillItem(
                         .align(Alignment.TopEnd)
                         .offset(x = 4.dp, y = (-3).dp)
                         .scale(badgeScale)
-                        .size(9.dp)
+                        .size(10.dp)
                         .clip(CircleShape)
                         .background(Pink)
                         .border(1.5.dp, Ink, CircleShape)
@@ -377,11 +377,11 @@ private fun NavPillItem(
             exit = fadeOut(tween(90)) + shrinkHorizontally(tween(110), shrinkTowards = Alignment.Start),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Spacer(Modifier.width(5.dp))
+                Spacer(Modifier.width(6.dp))
                 Text(
                     dest.label,
                     fontWeight = FontWeight.ExtraBold,
-                    fontSize = 11.sp,
+                    fontSize = 12.sp,
                     color = contentColor,
                 )
             }
