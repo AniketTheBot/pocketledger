@@ -62,6 +62,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun OnboardingFlow(container: AppContainer, onFinished: () -> Unit) {
     var step by rememberSaveable { mutableIntStateOf(0) }
+    var userName by rememberSaveable { mutableStateOf("") }
     var currency by rememberSaveable { mutableStateOf("INR") }
     var name by rememberSaveable { mutableStateOf("Everyday") }
     var type by rememberSaveable { mutableStateOf("CHECKING") }
@@ -80,9 +81,10 @@ fun OnboardingFlow(container: AppContainer, onFinished: () -> Unit) {
         ActivityResultContracts.RequestMultiplePermissions()
     ) { result ->
         if (result[Manifest.permission.READ_SMS] == true) {
-            step = 5
+            step = 6
         } else {
             scope.launch {
+                container.settings.setUserName(userName)
                 container.settings.setOnboarded(true)
                 container.settings.setActiveAccount(accountId)
                 onFinished()
@@ -91,7 +93,7 @@ fun OnboardingFlow(container: AppContainer, onFinished: () -> Unit) {
     }
 
     LaunchedEffect(step) {
-        if (step == 5) {
+        if (step == 6) {
             scanning = true
             summary = null
             val result = container.scanner.scan { s, t ->
@@ -103,7 +105,7 @@ fun OnboardingFlow(container: AppContainer, onFinished: () -> Unit) {
         }
     }
 
-    BackHandler(enabled = step in 1..4 && !scanning) { step -= 1 }
+    BackHandler(enabled = step in 1..5 && !scanning) { step -= 1 }
 
     Column(
         Modifier
@@ -115,13 +117,14 @@ fun OnboardingFlow(container: AppContainer, onFinished: () -> Unit) {
     ) {
         when (step) {
             0 -> WelcomeStep { step = 1 }
-            1 -> CurrencyStep(currency) { currency = it; step = 2 }
-            2 -> AccountStep(
+            1 -> NameStep(userName, { userName = it }) { step = 2 }
+            2 -> CurrencyStep(currency) { currency = it; step = 3 }
+            3 -> AccountStep(
                 name = name, type = type, tail = tail,
                 onName = { name = it }, onType = { type = it }, onTail = { tail = it },
-                onNext = { step = 3 },
+                onNext = { step = 4 },
             )
-            3 -> BalanceStep(
+            4 -> BalanceStep(
                 currency = currency,
                 amountText = amountText,
                 onKey = { amountText = applyKey(amountText, it) },
@@ -130,11 +133,11 @@ fun OnboardingFlow(container: AppContainer, onFinished: () -> Unit) {
                     scope.launch {
                         accountId = container.wallet.addAccount(name, type, currency, minor, tail)
                         container.settings.setCurrency(currency)
-                        step = 4
+                        step = 5
                     }
                 },
             )
-            4 -> PermissionStep(
+            5 -> PermissionStep(
                 onAllow = {
                     permissionLauncher.launch(
                         arrayOf(Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS)
@@ -142,16 +145,18 @@ fun OnboardingFlow(container: AppContainer, onFinished: () -> Unit) {
                 },
                 onSkip = {
                     scope.launch {
+                        container.settings.setUserName(userName)
                         container.settings.setOnboarded(true)
                         container.settings.setActiveAccount(accountId)
                         onFinished()
                     }
                 },
             )
-            5 -> ScanStep(
+            6 -> ScanStep(
                 scanning = scanning, scanned = scanned, total = scanTotal, summary = summary,
                 onDone = {
                     scope.launch {
+                        container.settings.setUserName(userName)
                         container.settings.setOnboarded(true)
                         container.settings.setActiveAccount(accountId)
                         onFinished()
@@ -232,9 +237,25 @@ private fun StepHeader(stepLabel: String, title: String, body: String? = null) {
 }
 
 @Composable
+private fun NameStep(name: String, onName: (String) -> Unit, onNext: () -> Unit) {
+    Column(Modifier.fillMaxSize()) {
+        StepHeader(
+            "Step 1 of 4 · you",
+            "What should we call you?",
+            "Only used for the greeting on your home screen. It never leaves this phone.",
+        )
+        Spacer(Modifier.height(16.dp))
+        StickerTextField(name, onName, "Your name")
+        Spacer(Modifier.weight(1f))
+        PillButton("Continue", onNext, Modifier.fillMaxWidth(), enabled = name.isNotBlank())
+        Spacer(Modifier.height(18.dp))
+    }
+}
+
+@Composable
 private fun CurrencyStep(currency: String, onPick: (String) -> Unit) {
     Column(Modifier.fillMaxSize()) {
-        StepHeader("Step 1 of 3 · currency", "Which currency?", "You can add accounts in other currencies later — each account keeps its own.")
+        StepHeader("Step 2 of 4 · currency", "Which currency?", "You can add accounts in other currencies later — each account keeps its own.")
         Spacer(Modifier.height(18.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             listOf("INR", "GBP").forEach { c ->
@@ -265,7 +286,7 @@ private fun AccountStep(
 ) {
     val types = listOf("CHECKING" to "Checking", "SAVINGS" to "Savings", "WALLET" to "Wallet", "CASH" to "Cash", "CREDIT" to "Credit")
     Column(Modifier.fillMaxSize()) {
-        StepHeader("Step 2 of 3 · account", "Your first account", "The last digits help the scanner route bank SMS automatically.")
+        StepHeader("Step 3 of 4 · account", "Your first account", "The last digits help the scanner route bank SMS automatically.")
         Spacer(Modifier.height(16.dp))
         StickerTextField(name, onName, "Account name")
         Spacer(Modifier.height(12.dp))
@@ -298,7 +319,7 @@ private fun BalanceStep(
     onNext: () -> Unit,
 ) {
     Column(Modifier.fillMaxSize()) {
-        StepHeader("Step 3 of 3 · balance", "What’s your balance right now?", "Exact to the last digit — you can correct it any time with Reconcile.")
+        StepHeader("Step 4 of 4 · balance", "What’s your balance right now?", "Exact to the last digit — you can correct it any time with Reconcile.")
         Spacer(Modifier.height(18.dp))
         StickerCard(Modifier.fillMaxWidth()) {
             Text("EVERYDAY · CHECKING", fontSize = 9.5.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.2.sp, color = MutedInk)

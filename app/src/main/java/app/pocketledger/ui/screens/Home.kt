@@ -115,14 +115,19 @@ fun HomeScreen(
         Spacer(Modifier.height(8.dp))
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
             Column {
-                Text("Hello, Ani 👋", fontWeight = FontWeight.ExtraBold, fontSize = 17.sp, color = Ink)
+                Text(
+                    "Hello, ${settings.userName.ifBlank { "there" }} 👋",
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 17.sp,
+                    color = Ink,
+                )
                 Text(
                     lastScan?.let { "Last scan $it · on-device" } ?: "Ready when you are",
                     fontSize = 10.5.sp,
                     color = MutedInk,
                 )
             }
-            Avatar("A", Pink, 34.dp)
+            Avatar(settings.userName.firstOrNull()?.uppercaseChar()?.toString() ?: "A", Pink, 34.dp)
         }
 
         Spacer(Modifier.height(10.dp))
