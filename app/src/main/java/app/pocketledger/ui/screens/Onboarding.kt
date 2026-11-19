@@ -35,6 +35,18 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.unit.Dp
+import kotlinx.coroutines.delay
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -199,34 +211,138 @@ private fun displayAmount(text: String, currency: String): String {
 
 @Composable
 private fun WelcomeStep(onNext: () -> Unit) {
-    Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
-        Spacer(Modifier.weight(0.9f))
-        Text(
-            "Set up\nyour wallet",
-            style = MaterialTheme.typography.displayLarge,
-            color = Ink,
-            lineHeight = 36.sp,
-            textAlign = TextAlign.Center,
-        )
-        Spacer(Modifier.height(10.dp))
-        Text(
-            "PocketLedger reads your bank SMS on this phone only and logs every debit & credit — starting from your exact balance.",
-            fontSize = 13.sp,
-            color = MutedInk,
-            lineHeight = 19.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(horizontal = 6.dp),
-        )
-        Spacer(Modifier.height(16.dp))
-        Box(Modifier.fillMaxWidth().height(300.dp)) {
-            FlowerSticker("Scan bank SMS", Pink, 112.dp, Modifier.align(Alignment.TopStart).offset(x = 4.dp, y = 14.dp))
-            FlowerSticker("Exact balance start", Mustard, 148.dp, Modifier.align(Alignment.TopEnd).offset(x = (-4).dp, y = 0.dp))
-            FlowerSticker("Auto debit & credit log", Green, 132.dp, Modifier.align(Alignment.BottomStart).offset(x = 0.dp, y = (-18).dp))
-            FlowerSticker("100% offline", Purple, 108.dp, Modifier.align(Alignment.BottomEnd).offset(x = (-8).dp, y = 0.dp))
+    val headerAlpha = remember { Animatable(0f) }
+    val headerScale = remember { Animatable(0.94f) }
+    val headerOffsetY = remember { Animatable(240f) }
+    val buttonAlpha = remember { Animatable(0f) }
+    val buttonOffset = remember { Animatable(10f) }
+
+    LaunchedEffect(Unit) {
+        launch { headerAlpha.animateTo(1f, tween(280)) }
+        launch { headerScale.animateTo(1f, spring(dampingRatio = 0.55f, stiffness = 320f)) }
+        launch {
+            delay(780)
+            headerOffsetY.animateTo(0f, tween(540, easing = FastOutSlowInEasing))
         }
+        launch {
+            delay(1800)
+            buttonAlpha.animateTo(1f, tween(420, easing = FastOutSlowInEasing))
+            buttonOffset.animateTo(0f, tween(420, easing = FastOutSlowInEasing))
+        }
+    }
+
+    Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .graphicsLayer {
+                    alpha = headerAlpha.value
+                    translationY = headerOffsetY.value.dp.toPx()
+                    scaleX = headerScale.value
+                    scaleY = headerScale.value
+                },
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(
+                "Set up\nyour wallet",
+                style = MaterialTheme.typography.displayLarge,
+                color = Ink,
+                lineHeight = 36.sp,
+                textAlign = TextAlign.Center,
+            )
+            Spacer(Modifier.height(14.dp))
+            Text(
+                "PocketLedger reads your bank SMS on this phone only and logs every debit & credit — starting from your exact balance.",
+                fontSize = 13.sp,
+                color = MutedInk,
+                lineHeight = 19.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(horizontal = 10.dp),
+            )
+        }
+
+        Spacer(Modifier.height(26.dp))
+        Box(Modifier.fillMaxWidth().height(376.dp)) {
+            AnimatedFlower(
+                "Scan SMS", Pink, 126.dp,
+                Modifier.align(Alignment.TopStart),
+                delayMs = 980, petals = 9, depth = 6.5f,
+            )
+            AnimatedFlower(
+                "Exact balance", Mustard, 170.dp,
+                Modifier.align(Alignment.TopEnd).offset(x = (-2).dp, y = 6.dp),
+                delayMs = 1120, petals = 12, depth = 7f, idleFloat = true,
+            )
+            AnimatedFlower(
+                "Auto log", Green, 128.dp,
+                Modifier.align(Alignment.BottomStart).offset(y = (-4).dp),
+                delayMs = 1260, petals = 7, depth = 8f,
+            )
+            AnimatedFlower(
+                "100% offline", Purple, 112.dp,
+                Modifier.align(Alignment.BottomEnd).offset(x = (-6).dp, y = (-2).dp),
+                delayMs = 1400, petals = 16, depth = 5.5f,
+            )
+        }
+
         Spacer(Modifier.weight(1f))
-        PillButton("Get started", onNext, Modifier.fillMaxWidth())
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .graphicsLayer {
+                    alpha = buttonAlpha.value
+                    translationY = buttonOffset.value.dp.toPx()
+                }
+        ) {
+            PillButton("Get started", onNext, Modifier.fillMaxWidth())
+        }
         Spacer(Modifier.height(18.dp))
+    }
+}
+
+/** Sticker entrance: springy pop + un-tilt, then a slow ambient sway. */
+@Composable
+private fun AnimatedFlower(
+    label: String,
+    color: Color,
+    size: Dp,
+    modifier: Modifier = Modifier,
+    delayMs: Int = 0,
+    petals: Int = 11,
+    depth: Float = 7f,
+    idleFloat: Boolean = false,
+) {
+    val alpha = remember { Animatable(0f) }
+    val scale = remember { Animatable(0.72f) }
+    val rotation = remember { Animatable(-6f) }
+    val floatTransition = rememberInfiniteTransition(label = "flower-float")
+    val floatY by floatTransition.animateFloat(
+        initialValue = if (idleFloat) -3f else 0f,
+        targetValue = if (idleFloat) 3f else 0f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 3200, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Reverse,
+        ),
+        label = "floatY",
+    )
+
+    LaunchedEffect(Unit) {
+        delay(delayMs.toLong())
+        launch { alpha.animateTo(1f, tween(220)) }
+        launch { scale.animateTo(1f, spring(dampingRatio = 0.5f, stiffness = 300f)) }
+        launch { rotation.animateTo(0f, spring(dampingRatio = 0.6f, stiffness = 280f)) }
+    }
+
+    Box(
+        modifier.graphicsLayer {
+            this.alpha = alpha.value
+            scaleX = scale.value
+            scaleY = scale.value
+            rotationZ = rotation.value
+            translationY = floatY.dp.toPx()
+        }
+    ) {
+        FlowerSticker(label, color, size, petals = petals, depth = depth)
     }
 }
 
