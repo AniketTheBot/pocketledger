@@ -5,8 +5,10 @@ auto-records every debit & credit into a clean ledger, and keeps your exact
 balance to the paise — across all your accounts. It asks for your current
 balance (exact, to the last digit) before tracking starts. No internet. Ever.
 
-**Status:** 🎨 Design complete — 4 directions, fully specced. Implementation not
-started — that is the next agent's job, and this folder is its briefing.
+**Status:** ✅ **Implemented** — Design 5 is live (`v0.1.0-foundation`), tests
+green, verified on a Pixel 8 emulator with fake bank SMS. See the repo root
+`README.md` for build/run instructions and `ML_REPORT.md` for the classifier
+evaluation.
 
 ---
 
