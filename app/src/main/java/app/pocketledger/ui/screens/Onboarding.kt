@@ -8,6 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,11 +17,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -33,7 +35,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -113,12 +114,16 @@ fun OnboardingFlow(container: AppContainer, onFinished: () -> Unit) {
             .background(Cream)
             .statusBarsPadding()
             .navigationBarsPadding()
-            .padding(horizontal = 20.dp, vertical = 8.dp)
+            .padding(horizontal = 22.dp, vertical = 6.dp)
     ) {
         when (step) {
             0 -> WelcomeStep { step = 1 }
             1 -> NameStep(userName, { userName = it }) { step = 2 }
-            2 -> CurrencyStep(currency) { currency = it; step = 3 }
+            2 -> CurrencyStep(
+                currency = currency,
+                onSelect = { currency = it },
+                onNext = { step = 3 },
+            )
             3 -> AccountStep(
                 name = name, type = type, tail = tail,
                 onName = { name = it }, onType = { type = it }, onTail = { tail = it },
@@ -186,38 +191,36 @@ private fun displayAmount(text: String, currency: String): String {
     return Money.format(v, currency)
 }
 
+/* ------------------------------------------------------------------ */
+/* Steps — everything vertically centered, buttons pinned at bottom.   */
+/* ------------------------------------------------------------------ */
+
 @Composable
 private fun WelcomeStep(onNext: () -> Unit) {
-    Column(Modifier.fillMaxSize()) {
+    Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Spacer(Modifier.weight(0.9f))
         Text(
             "Set up\nyour wallet",
             style = MaterialTheme.typography.displayLarge,
             color = Ink,
-            lineHeight = 34.sp,
+            lineHeight = 36.sp,
+            textAlign = TextAlign.Center,
         )
-        Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(10.dp))
         Text(
             "PocketLedger reads your bank SMS on this phone only and logs every debit & credit — starting from your exact balance.",
-            fontSize = 12.5.sp,
+            fontSize = 13.sp,
             color = MutedInk,
-            lineHeight = 18.sp,
+            lineHeight = 19.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(horizontal = 6.dp),
         )
-        Box(Modifier.fillMaxWidth().height(310.dp)) {
-            FlowerSticker("Scan bank SMS", Pink, 112.dp, Modifier.align(Alignment.TopStart).offset(x = 4.dp, y = 12.dp))
+        Spacer(Modifier.height(16.dp))
+        Box(Modifier.fillMaxWidth().height(300.dp)) {
+            FlowerSticker("Scan bank SMS", Pink, 112.dp, Modifier.align(Alignment.TopStart).offset(x = 4.dp, y = 14.dp))
             FlowerSticker("Exact balance start", Mustard, 148.dp, Modifier.align(Alignment.TopEnd).offset(x = (-4).dp, y = 0.dp))
-            FlowerSticker("Auto debit & credit log", Green, 132.dp, Modifier.align(Alignment.BottomStart).offset(x = 0.dp, y = (-20).dp))
+            FlowerSticker("Auto debit & credit log", Green, 132.dp, Modifier.align(Alignment.BottomStart).offset(x = 0.dp, y = (-18).dp))
             FlowerSticker("100% offline", Purple, 108.dp, Modifier.align(Alignment.BottomEnd).offset(x = (-8).dp, y = 0.dp))
-        }
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-            listOf(0, 1, 2).forEach { i ->
-                Box(
-                    Modifier
-                        .padding(horizontal = 3.dp)
-                        .size(if (i == 0) 9.dp else 8.dp)
-                        .clip(CircleShape)
-                        .background(if (i == 0) Ink else CardCream),
-                )
-            }
         }
         Spacer(Modifier.weight(1f))
         PillButton("Get started", onNext, Modifier.fillMaxWidth())
@@ -226,26 +229,53 @@ private fun WelcomeStep(onNext: () -> Unit) {
 }
 
 @Composable
-private fun StepHeader(stepLabel: String, title: String, body: String? = null) {
-    SectionLabel(stepLabel)
-    Spacer(Modifier.height(6.dp))
-    Text(title, style = MaterialTheme.typography.headlineMedium, color = Ink)
-    if (body != null) {
-        Spacer(Modifier.height(6.dp))
-        Text(body, fontSize = 12.5.sp, color = MutedInk, lineHeight = 18.sp)
-    }
-}
-
-@Composable
 private fun NameStep(name: String, onName: (String) -> Unit, onNext: () -> Unit) {
-    Column(Modifier.fillMaxSize()) {
-        StepHeader(
-            "Step 1 of 4 · you",
+    Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Spacer(Modifier.weight(1f))
+        SectionLabel("Step 1 of 4 · you")
+        Spacer(Modifier.height(8.dp))
+        Text(
             "What should we call you?",
-            "Only used for the greeting on your home screen. It never leaves this phone.",
+            style = MaterialTheme.typography.headlineMedium,
+            color = Ink,
+            textAlign = TextAlign.Center,
         )
-        Spacer(Modifier.height(16.dp))
-        StickerTextField(name, onName, "Your name")
+        Spacer(Modifier.height(8.dp))
+        Text(
+            "Only used for the greeting on your home screen.\nIt never leaves this phone.",
+            fontSize = 12.5.sp,
+            color = MutedInk,
+            lineHeight = 18.sp,
+            textAlign = TextAlign.Center,
+        )
+        Spacer(Modifier.height(26.dp))
+        OutlinedTextField(
+            value = name,
+            onValueChange = { if (it.length <= 24) onName(it) },
+            singleLine = true,
+            placeholder = {
+                Text(
+                    "Your name",
+                    fontSize = 20.sp,
+                    color = MutedInk.copy(alpha = 0.6f),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            },
+            textStyle = MaterialTheme.typography.headlineMedium.copy(
+                textAlign = TextAlign.Center,
+                color = Ink,
+            ),
+            modifier = Modifier.fillMaxWidth().height(82.dp),
+            shape = RoundedCornerShape(20.dp),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Ink,
+                unfocusedBorderColor = Ink,
+                cursorColor = Ink,
+                focusedContainerColor = CardCream,
+                unfocusedContainerColor = CardCream,
+            ),
+        )
         Spacer(Modifier.weight(1f))
         PillButton("Continue", onNext, Modifier.fillMaxWidth(), enabled = name.isNotBlank())
         Spacer(Modifier.height(18.dp))
@@ -253,24 +283,59 @@ private fun NameStep(name: String, onName: (String) -> Unit, onNext: () -> Unit)
 }
 
 @Composable
-private fun CurrencyStep(currency: String, onPick: (String) -> Unit) {
+private fun CurrencyStep(currency: String, onSelect: (String) -> Unit, onNext: () -> Unit) {
     Column(Modifier.fillMaxSize()) {
-        StepHeader("Step 2 of 4 · currency", "Which currency?", "You can add accounts in other currencies later — each account keeps its own.")
-        Spacer(Modifier.height(18.dp))
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            listOf("INR", "GBP").forEach { c ->
-                FilterChipSticker("${Money.symbolFor(c)}  $c", currency == c, { onPick(c) })
+        Spacer(Modifier.weight(0.55f))
+        SectionLabel("Step 2 of 4 · currency")
+        Spacer(Modifier.height(6.dp))
+        Text("Which currency?", style = MaterialTheme.typography.headlineMedium, color = Ink)
+        Spacer(Modifier.height(6.dp))
+        Text(
+            "You can add accounts in other currencies later — each account keeps its own.",
+            fontSize = 12.5.sp,
+            color = MutedInk,
+            lineHeight = 18.sp,
+        )
+        Spacer(Modifier.height(22.dp))
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                CurrencyCard("INR", "₹", "Indian Rupee", currency == "INR", { onSelect("INR") }, Modifier.weight(1f))
+                CurrencyCard("GBP", "£", "British Pound", currency == "GBP", { onSelect("GBP") }, Modifier.weight(1f))
             }
-        }
-        Spacer(Modifier.height(8.dp))
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            listOf("USD", "EUR").forEach { c ->
-                FilterChipSticker("${Money.symbolFor(c)}  $c", currency == c, { onPick(c) })
+            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                CurrencyCard("USD", "$", "US Dollar", currency == "USD", { onSelect("USD") }, Modifier.weight(1f))
+                CurrencyCard("EUR", "€", "Euro", currency == "EUR", { onSelect("EUR") }, Modifier.weight(1f))
             }
         }
         Spacer(Modifier.weight(1f))
-        PillButton("Continue", { onPick(currency) }, Modifier.fillMaxWidth())
+        PillButton("Continue", onNext, Modifier.fillMaxWidth())
         Spacer(Modifier.height(18.dp))
+    }
+}
+
+@Composable
+private fun CurrencyCard(
+    code: String,
+    symbol: String,
+    name: String,
+    selected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    StickerCard(
+        modifier = modifier.height(112.dp),
+        onClick = onClick,
+        color = if (selected) Mustard else CardCream,
+    ) {
+        Column(
+            Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(symbol, style = MaterialTheme.typography.displayLarge, color = Ink)
+            Text(code, fontWeight = FontWeight.ExtraBold, fontSize = 13.sp, color = Ink)
+            Text(name, fontSize = 9.5.sp, color = MutedInk)
+        }
     }
 }
 
@@ -286,25 +351,31 @@ private fun AccountStep(
 ) {
     val types = listOf("CHECKING" to "Checking", "SAVINGS" to "Savings", "WALLET" to "Wallet", "CASH" to "Cash", "CREDIT" to "Credit")
     Column(Modifier.fillMaxSize()) {
-        StepHeader("Step 3 of 4 · account", "Your first account", "The last digits help the scanner route bank SMS automatically.")
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.weight(0.55f))
+        SectionLabel("Step 3 of 4 · account")
+        Spacer(Modifier.height(6.dp))
+        Text("Your first account", style = MaterialTheme.typography.headlineMedium, color = Ink)
+        Spacer(Modifier.height(6.dp))
+        Text(
+            "The last digits help the scanner route bank SMS automatically.",
+            fontSize = 12.5.sp,
+            color = MutedInk,
+            lineHeight = 18.sp,
+        )
+        Spacer(Modifier.height(18.dp))
         StickerTextField(name, onName, "Account name")
-        Spacer(Modifier.height(12.dp))
+        Spacer(Modifier.height(14.dp))
         Text("TYPE", fontWeight = FontWeight.ExtraBold, fontSize = 10.sp, letterSpacing = 1.sp, color = MutedInk)
         Spacer(Modifier.height(6.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            types.take(3).forEach { (key, label) ->
-                FilterChipSticker(label, type == key, { onType(key) })
-            }
+            types.take(3).forEach { (key, label) -> FilterChipSticker(label, type == key, { onType(key) }) }
         }
         Spacer(Modifier.height(6.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            types.drop(3).forEach { (key, label) ->
-                FilterChipSticker(label, type == key, { onType(key) })
-            }
+            types.drop(3).forEach { (key, label) -> FilterChipSticker(label, type == key, { onType(key) }) }
         }
-        Spacer(Modifier.height(16.dp))
-        StickerTextField(tail, { onTail(it.filter { ch -> ch.isDigit() }.take(4)) }, "Last 3–4 digits of a/c (optional)", numeric = true)
+        Spacer(Modifier.height(14.dp))
+        StickerTextField(tail, { onTail(it.filter(Char::isDigit).take(4)) }, "Last 3–4 digits of a/c (optional)", numeric = true)
         Spacer(Modifier.weight(1f))
         PillButton("Continue", onNext, Modifier.fillMaxWidth(), enabled = name.isNotBlank())
         Spacer(Modifier.height(18.dp))
@@ -319,7 +390,15 @@ private fun BalanceStep(
     onNext: () -> Unit,
 ) {
     Column(Modifier.fillMaxSize()) {
-        StepHeader("Step 4 of 4 · balance", "What’s your balance right now?", "Exact to the last digit — you can correct it any time with Reconcile.")
+        Spacer(Modifier.weight(0.7f))
+        SectionLabel("Step 4 of 4 · balance")
+        Spacer(Modifier.height(6.dp))
+        Text("What’s your balance right now?", style = MaterialTheme.typography.headlineMedium, color = Ink)
+        Spacer(Modifier.height(6.dp))
+        Text(
+            "Exact to the last digit — you can correct it any time with Reconcile.",
+            fontSize = 12.5.sp, color = MutedInk, lineHeight = 18.sp,
+        )
         Spacer(Modifier.height(18.dp))
         StickerCard(Modifier.fillMaxWidth()) {
             Text("EVERYDAY · CHECKING", fontSize = 9.5.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.2.sp, color = MutedInk)
@@ -337,10 +416,15 @@ private fun BalanceStep(
 @Composable
 private fun PermissionStep(onAllow: () -> Unit, onSkip: () -> Unit) {
     Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Spacer(Modifier.weight(0.8f))
+        FlowerSticker("SMS", Green, 128.dp)
         Spacer(Modifier.height(20.dp))
-        FlowerSticker("SMS", Green, 120.dp)
-        Spacer(Modifier.height(18.dp))
-        Text("Let PocketLedger read bank SMS?", style = MaterialTheme.typography.headlineMedium, textAlign = TextAlign.Center, color = Ink)
+        Text(
+            "Let PocketLedger read bank SMS?",
+            style = MaterialTheme.typography.headlineMedium,
+            textAlign = TextAlign.Center,
+            color = Ink,
+        )
         Spacer(Modifier.height(10.dp))
         Text(
             "Transactions are detected on-device by a small built-in model. Messages never leave this phone — the app has no internet permission at all.",
@@ -363,7 +447,14 @@ private fun ScanStep(
     onDone: () -> Unit,
 ) {
     Column(Modifier.fillMaxSize()) {
-        StepHeader("Almost there", if (scanning) "Scanning your inbox…" else "Scan complete")
+        Spacer(Modifier.weight(0.7f))
+        SectionLabel("Almost there")
+        Spacer(Modifier.height(6.dp))
+        Text(
+            if (scanning) "Scanning your inbox…" else "Scan complete",
+            style = MaterialTheme.typography.headlineMedium,
+            color = Ink,
+        )
         Spacer(Modifier.height(14.dp))
         StickerCard(Modifier.fillMaxWidth()) {
             if (scanning) {
