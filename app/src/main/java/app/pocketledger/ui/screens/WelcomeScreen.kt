@@ -192,9 +192,9 @@ fun WelcomeScreen(onNext: () -> Unit) {
                 painter = painterResource(R.drawable.welcome_bottomshapes),
                 contentDescription = null,
                 modifier = Modifier
-                    .offset(x = 0.dp, y = u * 502f)
+                    .offset(x = 0.dp, y = u * 458f)
                     .width(u * 271f)
-                    .height(u * 130f)
+                    .height(u * 116f)
                     .graphicsLayer { alpha = shapesIn },
                 contentScale = ContentScale.FillBounds,
             )
