@@ -1,0 +1,89 @@
+{"sender":"ADVERSARIAL","body":"123456 is your OTP for a debit of Rs.4,999.00 on your HDFC Bank card ending 1234. Do not share.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Your OTP for txn of ₹12,450.00 to AMAZON is 998877. Never share with anyone.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"OTP 445566 for IMPS transfer of Rs.25,000 from A/c XX1234. Valid 10 min.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Use 778899 to authorize £250.00 payment to TESCO. Never share this code.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Your Chase verification code is 334455 for a $1,250.00 purchase at BEST BUY. We never ask for codes.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"4471 is your one-time password for the UPI payment of ₹750 to Swiggy. Do not share.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Do not share OTP 112233. A debit of INR 18,999 is pending on your card.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Your SBI OTP is 556677 for NEFT of Rs.1,00,000 to RAHUL SHARMA.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Security code 889900 to authorize a transaction of $89.99 at UBER. Expires in 5 min.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"OTP for your credit card bill payment of Rs.15,000 is 223344. Never share.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Your one time password is 667788 for a payment of £45.20 to DELIVEROO.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Get ₹5,000 cashback credited to your account on your first credit card spend. Apply now.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Congratulations! You are pre-approved for a personal loan of Rs.10,00,000 at 9.99%. Apply today.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Earn up to £200 cashback when you switch your current account to Barclays. Terms apply.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Your HDFC credit card offer: spend ₹25,000 and get ₹1,000 back. Activate by 30 Nov.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Limited offer: 0% EMI on purchases above ₹15,000 at Croma. Click here.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"You have won ₹50,000 in the Kotak lucky draw! Claim by calling 1800123456.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Special Diwali offer: flat ₹2,500 off on flight bookings. Use code FLY2500.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Your loan of $25,000 is approved. No documents needed. Apply in 2 minutes.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Get paid ₹500 for every friend you refer. Start earning today.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Your bill of ₹3,499 is due tomorrow. Pay now and avoid late fee.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Chase: You're eligible for a $500 bonus when you open a new checking account.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Your EMI of ₹8,750 will be debited on 05 Dec. Keep sufficient balance.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Your card ending 4321 will be charged £12.99 on 01 Dec for Netflix. Manage in app.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Your A/c XX1234 was debited. Details in the app.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"Your account has been credited. Ref 9988776655.","label":"CREDIT"}
+{"sender":"ADVERSARIAL","body":"A payment from RAHUL was received in your account ending 5678.","label":"CREDIT"}
+{"sender":"ADVERSARIAL","body":"Your card was used at STARBUCKS for $4.75.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"You have received a payment from PRIYA NAIR.","label":"CREDIT"}
+{"sender":"ADVERSARIAL","body":"Debit alert: a transaction was authorised on your HDFC card ending 1122.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"Salary has been credited to your account ending 8899.","label":"CREDIT"}
+{"sender":"ADVERSARIAL","body":"Your account was debited for INR 500.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"A credit of £120 was posted to your account.","label":"CREDIT"}
+{"sender":"ADVERSARIAL","body":"Your A/c was debited by Rs.2,000 on 19 Nov.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"₹1,234.50 has been debited from your HDFC Bank account ending 1234.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"£50.00 was debited from your account ****4321 on 19/11/2026.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"$45.20 was charged to your Chase card ending 9876 at STARBUCKS.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"Rs.25,000.00 has been credited to A/c XX5678 towards NEFT.","label":"CREDIT"}
+{"sender":"ADVERSARIAL","body":"₹299.00 was received from ANITA via UPI. Ref 1122334455.","label":"CREDIT"}
+{"sender":"ADVERSARIAL","body":"£1,500.00 was credited to your HSBC account on 19 Nov.","label":"CREDIT"}
+{"sender":"ADVERSARIAL","body":"INR 750 has been paid to ZOMATO using your ICICI UPI.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"$2,000.00 was deposited into your account ending 3344.","label":"CREDIT"}
+{"sender":"ADVERSARIAL","body":"₹12,450 has been transferred to AMIT KUMAR via IMPS. Ref 998877.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"Rs.5,000 was withdrawn from your SBI account at an ATM in PUNE.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"Your A/c XX1234 has been debited by Rs.1,234.50 on 19-11-26.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"Your account was credited with £250.00 by ACME LTD.","label":"CREDIT"}
+{"sender":"ADVERSARIAL","body":"A debit of $18.75 was applied to card ending 5566 at CVS.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"Your card has been charged ₹999 for your annual subscription.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"Your savings account has been credited with interest of ₹4,210.","label":"CREDIT"}
+{"sender":"ADVERSARIAL","body":"An amount of ₹2,500 was deducted from your account ending 7788.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"A refund of $12.99 has been issued to your card ending 3344.","label":"CREDIT"}
+{"sender":"ADVERSARIAL","body":"Your account was debited £15.00 for a contactless payment at PRET.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"Your wallet has been topped up with ₹500.","label":"CREDIT"}
+{"sender":"ADVERSARIAL","body":"The sum of ₹18,000 was transferred from your account to MR SHARMA.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"I spent ₹500 on dinner last night. It was worth it.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"She paid £40 for the concert tickets.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"We received your complaint and will respond within 48 hours.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"He paid $20 for parking and didn't get a receipt.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"I received ₹1,000 from my cousin as a gift.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"The courier says he paid the customs fee of ₹350.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"I spent $12 on coffee today, inflation is real.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"They received the parcel but not the invoice.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"You paid the electricity bill? Great, thanks!","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"I will pay you back the ₹500 tomorrow, promise.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Aapke A/c XX1234 se Rs.950 debit ho gaya. Avl bal Rs.23,450.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"Rs.5,000 aapke account mein credit ho gaya hai. Bal Rs.18,200.","label":"CREDIT"}
+{"sender":"ADVERSARIAL","body":"Aapka OTP 445566 hai. Kisi ke saath share na karein.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Aapke liye Rs.2,00,000 ka pre-approved loan ready hai. Apply karein.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Payment of Rs.1,200 aapke UPI se ho gaya. Ref 887766.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"Aapko Rs.500 cashback mila hai. Account mein credit ho gaya.","label":"CREDIT"}
+{"sender":"ADVERSARIAL","body":"Aapke account se paisa debit hua. Details check karein.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"Salary aa gayi hai account mein. Congrats!","label":"CREDIT"}
+{"sender":"ADVERSARIAL","body":"Aapka account block ho gaya hai. Bank se contact karein.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Rs.750 received from PRIYA. Balance updated.","label":"CREDIT"}
+{"sender":"ADVERSARIAL","body":"Your available balance is ₹45,678.90. No debits or credits since your last statement.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Your HDFC account statement for November is ready. Opening balance ₹12,000, closing ₹18,500.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Your card ending 1234 is blocked. No transactions will be allowed until you call us.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"KYC pending: your account will be debited for verification charges if not completed.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Your credit card bill of ₹12,450 is due on 05 Dec. Minimum due ₹620.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Your EMI of ₹8,750 is scheduled for 05 Dec from A/c XX1234.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"We have received your request. Your card will be replaced in 7 days.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"Your request to reset UPI PIN is received. Do not share the OTP with anyone.","label":"NOT_TXN"}
+{"sender":"ADVERSARIAL","body":"HDFC Bank: INR 2,000 debited A/c XX1234 19/11/26. Bal 8,540.20","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"ICICI: UPI/AMIT/₹500/SUCCESS. Bal ₹2,350.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"SBI: Credit of INR 15,000 in A/c XX9999 by NEFT. Bal 42,100.","label":"CREDIT"}
+{"sender":"ADVERSARIAL","body":"AXIS: ATM WDL ₹3,000 A/c XX3322 19NOV. Bal ₹9,200.","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"MONZO: Tesco £8.50. Balance £620.40","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"CHASE: $12.34 at CVS 11/19. Avail bal $980.12","label":"DEBIT"}
+{"sender":"ADVERSARIAL","body":"BOFA: Deposit $1,000 posted 11/19 to acct 3344.","label":"CREDIT"}
