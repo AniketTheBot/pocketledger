@@ -29,6 +29,7 @@ import app.pocketledger.data.SmsEntity
 import app.pocketledger.ui.components.BottomPillNav
 import app.pocketledger.ui.screens.AccountsScreen
 import app.pocketledger.ui.screens.AddAccountDialog
+import app.pocketledger.ui.screens.AnalyzerDialog
 import app.pocketledger.ui.screens.EntryDialog
 import app.pocketledger.ui.screens.HomeScreen
 import app.pocketledger.ui.screens.OnboardingFlow
@@ -52,6 +53,11 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        app.pocketledger.widget.BalanceWidget.refresh(this)
+    }
 }
 
 @Composable
@@ -74,6 +80,7 @@ private fun MainShell(container: AppContainer) {
     var showReconcile by remember { mutableStateOf(false) }
     var showAddAccount by remember { mutableStateOf(false) }
     var showScan by remember { mutableStateOf(false) }
+    var showAnalyzer by remember { mutableStateOf(false) }
     val reviewCount by container.wallet.observeReviewCount().collectAsState(initial = 0)
     val scope = rememberCoroutineScope()
 
@@ -115,6 +122,7 @@ private fun MainShell(container: AppContainer) {
                     onReconcile = { showReconcile = true },
                     onAccounts = { tab = "accounts" },
                     onReview = { tab = "review" },
+                    onAnalyze = { showAnalyzer = true },
                 )
                 "accounts" -> AccountsScreen(
                     container = container,
@@ -154,5 +162,8 @@ private fun MainShell(container: AppContainer) {
     }
     if (showScan) {
         ScanDialog(container) { showScan = false }
+    }
+    if (showAnalyzer) {
+        AnalyzerDialog(container) { showAnalyzer = false }
     }
 }

@@ -69,6 +69,7 @@ fun HomeScreen(
     onReconcile: () -> Unit,
     onAccounts: () -> Unit,
     onReview: () -> Unit,
+    onAnalyze: () -> Unit,
 ) {
     val accounts by container.wallet.observeAccounts().collectAsState(initial = emptyList())
     val settings by container.settings.settings.collectAsState(initial = AppSettings())
@@ -173,6 +174,18 @@ fun HomeScreen(
                     }
                     CustArrow()
                 }
+            }
+        }
+
+        Spacer(Modifier.height(12.dp))
+        StickerCard(color = Mustard, onClick = onAnalyze, modifier = Modifier.fillMaxWidth()) {
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                Column {
+                    Text("SMART ANALYZER", fontSize = 9.5.sp, fontWeight = FontWeight.ExtraBold, letterSpacing = 1.4.sp, color = Ink.copy(alpha = .7f))
+                    Text("See where your money goes", fontWeight = FontWeight.ExtraBold, fontSize = 13.sp, color = Ink)
+                    Text("Periods · accounts · trends", fontSize = 10.5.sp, color = Ink.copy(alpha = .65f))
+                }
+                Text("→", fontSize = 20.sp, fontWeight = FontWeight.ExtraBold, color = Ink)
             }
         }
 

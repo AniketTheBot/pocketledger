@@ -144,6 +144,24 @@ interface TxnDao {
     @Query("SELECT * FROM txns ORDER BY ts ASC, id ASC")
     suspend fun all(): List<TxnEntity>
 
+    @Query(
+        "SELECT * FROM txns WHERE kind = 'TXN' AND ts >= :from AND ts < :to " +
+            "AND (:accountId IS NULL OR accountId = :accountId) ORDER BY ts ASC"
+    )
+    suspend fun between(from: Long, to: Long, accountId: Long?): List<TxnEntity>
+
+    @Query(
+        "SELECT COALESCE(SUM(openingBalanceMinor), 0) FROM accounts " +
+            "WHERE archived = 0 AND (:accountId IS NULL OR id = :accountId)"
+    )
+    suspend fun openings(accountId: Long?): Long
+
+    @Query(
+        "SELECT COALESCE(SUM(CASE WHEN direction = 'CREDIT' THEN amountMinor ELSE -amountMinor END), 0) " +
+            "FROM txns WHERE kind = 'TXN' AND ts < :ts AND (:accountId IS NULL OR accountId = :accountId)"
+    )
+    suspend fun netBefore(ts: Long, accountId: Long?): Long
+
     @Query("SELECT * FROM txns WHERE accountId = :accountId ORDER BY ts DESC, id DESC LIMIT :limit")
     fun observeRecentForAccount(accountId: Long, limit: Int): Flow<List<TxnEntity>>
 
