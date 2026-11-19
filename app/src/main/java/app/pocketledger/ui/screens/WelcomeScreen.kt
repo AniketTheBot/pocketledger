@@ -36,16 +36,11 @@ private val CollagePurple = Color(0xFF9B5DE5)
 @Composable
 fun WelcomeScreen(onNext: () -> Unit) {
     val artAlpha = remember { Animatable(0f) }
-    val artScale = remember { Animatable(1.06f) }
-    val ctaAlpha = remember { Animatable(0f) }
-    val ctaLift = remember { Animatable(12f) }
+    val artScale = remember { Animatable(1.04f) }
 
     LaunchedEffect(Unit) {
         artAlpha.animateTo(1f, tween(520))
-        artScale.animateTo(1f, tween(700, easing = FastOutSlowInEasing))
-        delay(160)
-        ctaAlpha.animateTo(1f, tween(420, easing = FastOutSlowInEasing))
-        ctaLift.animateTo(0f, tween(420, easing = FastOutSlowInEasing))
+        artScale.animateTo(1f, tween(760, easing = FastOutSlowInEasing))
     }
 
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -54,7 +49,7 @@ fun WelcomeScreen(onNext: () -> Unit) {
             contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(345f / 520f)
+                .aspectRatio(271f / 502f)
                 .graphicsLayer {
                     alpha = artAlpha.value
                     scaleX = artScale.value
@@ -70,10 +65,6 @@ fun WelcomeScreen(onNext: () -> Unit) {
                 .navigationBarsPadding()
                 .padding(horizontal = 24.dp, vertical = 26.dp)
                 .height(58.dp)
-                .graphicsLayer {
-                    alpha = ctaAlpha.value
-                    translationY = ctaLift.value.dp.toPx()
-                }
                 .clip(RoundedCornerShape(percent = 50))
                 .background(CollagePurple)
                 .clickable(onClick = onNext),
