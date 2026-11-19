@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.provider.Telephony
 import app.pocketledger.App
+import app.pocketledger.widget.BalanceWidget
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,6 +28,7 @@ class SmsReceiver : BroadcastReceiver() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 app.container.pipeline.ingest(sender, body, ts)
+                BalanceWidget.refresh(context)
             } catch (_: Throwable) {
                 // Never crash the receiver; the message stays unprocessed and will be
                 // picked up by the next inbox scan (dedup keeps it safe).

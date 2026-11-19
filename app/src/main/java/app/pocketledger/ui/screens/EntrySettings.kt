@@ -66,6 +66,7 @@ fun EntryDialog(container: AppContainer, prefillSms: SmsEntity?, onDismiss: () -
     val allAccounts by container.wallet.observeAccounts().collectAsState(initial = emptyList())
     val accounts = allAccounts.filter { !it.archived }
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     var direction by remember {
         mutableStateOf(if (prefillSms?.direction == "CREDIT") "IN" else "OUT")
@@ -91,7 +92,7 @@ fun EntryDialog(container: AppContainer, prefillSms: SmsEntity?, onDismiss: () -
 
     Dialog(
         onDismissRequest = { if (!saving) onDismiss() },
-        properties = DialogProperties(usePlatformDefaultWidth = false),
+        properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = false),
     ) {
         Surface(Modifier.fillMaxSize(), color = Cream) {
             Column(
@@ -204,6 +205,7 @@ fun EntryDialog(container: AppContainer, prefillSms: SmsEntity?, onDismiss: () -
                                         merchant = merchant.ifBlank { null },
                                     )
                                 }
+                                app.pocketledger.widget.BalanceWidget.refresh(context)
                                 onDismiss()
                             } finally {
                                 saving = false
@@ -223,6 +225,7 @@ fun ReconcileDialog(container: AppContainer, onDismiss: () -> Unit) {
     val accounts by container.wallet.observeAccounts().collectAsState(initial = emptyList())
     val settings by container.settings.settings.collectAsState(initial = null)
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     var selectedId by remember {
         mutableStateOf(
@@ -243,7 +246,7 @@ fun ReconcileDialog(container: AppContainer, onDismiss: () -> Unit) {
     val diff = if (parsed != null && current != null) parsed - current!! else null
     val currency = account?.currency ?: "INR"
 
-    Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false)) {
+    Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = false)) {
         Surface(Modifier.fillMaxSize(), color = Cream) {
             Column(
                 Modifier
@@ -296,6 +299,7 @@ fun ReconcileDialog(container: AppContainer, onDismiss: () -> Unit) {
                         if (selectedId <= 0) return@PillButton
                         scope.launch {
                             container.money.reconcile(selectedId, minor)
+                            app.pocketledger.widget.BalanceWidget.refresh(context)
                             onDismiss()
                         }
                     },
@@ -330,7 +334,7 @@ fun ScanDialog(container: AppContainer, onDismiss: () -> Unit) {
 
     Dialog(
         onDismissRequest = { if (!scanning) onDismiss() },
-        properties = DialogProperties(usePlatformDefaultWidth = false),
+        properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = false),
     ) {
         Surface(Modifier.fillMaxSize(), color = Cream) {
             Column(
