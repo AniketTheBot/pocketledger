@@ -201,8 +201,9 @@ class SmsPipeline(
     }
 
     private suspend fun learnQuietly(body: String, label: SmsClass) {
-        if (classifier is HybridClassifier) {
-            runCatching { classifier.learn(body, label) }
+        val c = classifier
+        if (c is HybridClassifier) {
+            runCatching { c.learn(body, label) }
         }
     }
 
