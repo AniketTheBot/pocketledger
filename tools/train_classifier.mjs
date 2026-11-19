@@ -36,8 +36,11 @@ const BUCKETS = 1024;
 const CLASSES = ["NOT_TXN", "DEBIT", "CREDIT"];
 const CLASS_INDEX = { NOT_TXN: 0, DEBIT: 1, CREDIT: 2 };
 
-const TRAIN_COUNTS = { NOT_TXN: 220, DEBIT: 195, CREDIT: 155 }; // ~550, with extra hard negatives
+const TRAIN_COUNTS = { NOT_TXN: 220, DEBIT: 195, CREDIT: 155 }; // ~550 base messages
 const HOLDOUT_COUNTS = { NOT_TXN: 100, DEBIT: 110, CREDIT: 90 }; // 300
+// Each base message is rendered with fresh amounts/dates/refs in training, so
+// numeric n-grams do not acquire spurious class weights.
+const TRAIN_AUGMENTATION_COPIES = 1;
 
 const TRAINING = {
   optimizer: "Adam",
@@ -425,6 +428,11 @@ const T = {
       "You sent {amt} to {name} via UPI. {ref}",
       "Your card ending {tail} has been charged {amt} for {merchant}.",
       "Your card has been charged {amt} for your {merchant} subscription.",
+      "Your account has been debited by {amt} on {date}.",
+      "{amt} has been debited from your {bank} account towards {merchant}.",
+      "A debit alert: a transaction was authorised on your card ending {tail}.",
+      "Aapke account se {amt} debit hua. Details check karein.",
+      "Aapke UPI se {amt} ka payment ho gaya. {ref}",
     ],
     credit: [
       "{amt} credited to a/c XX{tail} towards NEFT CR-{company} {ref}. Avl Bal {bal}",
@@ -454,6 +462,10 @@ const T = {
       "A credit of {amt} has been posted to your account ending {tail}.",
       "{amt} was received from {name} via UPI. {ref}.",
       "IMPS CR of {amt} received from {name}. A/c XX{tail}. {ref}",
+      "Received {amt} from {name} via UPI in your {bank} account. {ref}",
+      "You have received a payment of {amt} from {name} in your account ending {tail}.",
+      "Aapko {amt} cashback mila hai. Account mein credit ho gaya.",
+      "IMPS CR: {amt} received in A/c XX{tail} from {name}.",
     ],
     otp: [
       "{otp} is your OTP for {bank} netbanking. Do not share it with anyone.",
@@ -472,6 +484,7 @@ const T = {
       "OTP {otp} for a payment of {amt} to {merchant}. Never share.",
       "OTP {otp} for IMPS transfer of {amt} from A/c XX{tail}. Valid 10 min.",
       "OTP {otp} for NEFT transfer of {amt} from your {bank} account. Do not share.",
+      "Aapka OTP {otp} hai. Kisi ke saath share na karein.",
     ],
     promo: [
       "Get pre-approved personal loan up to {big}! Apply now. T&C apply.",
@@ -494,6 +507,8 @@ const T = {
       "Get paid {amt} for every friend you refer. Start earning today.",
       "Flat {amt} off on your next {merchant} order. Use code {short}{tail}.",
       "{amt} off on flight bookings this weekend. Use code FLY{tail}.",
+      "Aapke liye {big} ka pre-approved loan ready hai. Apply karein.",
+      "Aapko {amt} cashback milega. Offer activate karein.",
     ],
     balance: [
       "Your A/c XX{tail} balance is {amt} as on {date}.",
@@ -504,6 +519,8 @@ const T = {
       "As on {date}, your balance is {amt} in A/c XX{tail}.",
       "Your available balance is {amt}. No debits or credits since your last statement.",
       "Available balance: {amt} in A/c XX{tail}. No new transactions.",
+      "Aapka account balance {amt} hai.",
+      "Aapke account mein balance {amt} hai.",
     ],
     service: [
       "Your card ending {tail} has been blocked. Call {phone} for help.",
@@ -516,6 +533,8 @@ const T = {
       "Your account will be debited for the annual fee of {amt} soon.",
       "Your credit card bill of {amt} is due on {date}.",
       "Your card ending {tail} will be debited {amt} on {date} for {merchant}.",
+      "Aapka account block ho gaya hai. Bank se contact karein.",
+      "Aapka card block ho gaya hai. Customer care ko call karein.",
       "{bank}: Your payment of {amt} is scheduled for {date}. Ensure sufficient balance.",
       "Your loan EMI of {amt} is due on {date}. Pay now to avoid late fees.",
       "Your EMI of {amt} will be debited on {date}. Keep sufficient balance.",
@@ -561,6 +580,8 @@ const T = {
       "We received your complaint and will reply soon.",
       "He spent {amt} on groceries last week.",
       "She received {amt} from a client yesterday.",
+      "You paid the electricity bill? Great, thanks!",
+      "You paid the rent already? Thanks a lot!",
     ],
     spam: [
       "URGENT: Your account will be suspended. Click http://bit.ly/xyz to verify KYC.",
@@ -590,6 +611,8 @@ const T = {
       "Your {bank} card was charged {amt} at {merchant}.",
       "{amt} was debited from your current account for {merchant} on {date}. Balance {bal}.",
       "Your card has been charged {amt} for your {merchant} subscription.",
+      "{short}: {merchant} {amt}. Balance {bal}",
+      "A transaction of {amt} was authorised on your {bank} card ending {tail}.",
     ],
     credit: [
       "You received {amt} from {name}. Your balance is {bal}.",
@@ -603,6 +626,8 @@ const T = {
       "Your account was credited with {amt} by {company}. Balance {bal}.",
       "{amt} deposit received in your {bank} account ending {tail}.",
       "Cashback of {amt} has been credited to your {bank} card.",
+      "Received {amt} from {name} in your {bank} account. Balance {bal}.",
+      "You have received a payment of {amt} from {name}.",
     ],
     otp: [
       "Your {bank} verification code is {otp}. Never share it.",
@@ -679,6 +704,8 @@ const T = {
       "We received your complaint and will reply soon.",
       "He spent {amt} on groceries last week.",
       "She received {amt} from a client yesterday.",
+      "You paid the electricity bill? Great, thanks!",
+      "You paid the rent already? Thanks a lot!",
     ],
     spam: [
       "URGENT: Your account will be suspended. Click http://bit.ly/xyz to verify your details.",
@@ -705,6 +732,7 @@ const T = {
       "Recurring payment of {amt} to {merchant} was debited from your account.",
       "Your {bank} debit card was used for {amt} at {merchant} on {date}.",
       "Your card has been charged {amt} for your {merchant} subscription.",
+      "A debit alert: a transaction was authorised on your card ending {tail}.",
     ],
     credit: [
       "{short}: {amt} credited to your account ending {tail}. Avail bal {bal}",
@@ -795,6 +823,8 @@ const T = {
       "We received your complaint and will reply soon.",
       "He spent {amt} on groceries last week.",
       "She received {amt} from a client yesterday.",
+      "You paid the electricity bill? Great, thanks!",
+      "You paid the rent already? Thanks a lot!",
     ],
     spam: [
       "URGENT: Your account will be suspended. Click http://bit.ly/xyz to verify your details.",
@@ -859,78 +889,59 @@ function pickRegion(rng) {
   return REGIONS[REGIONS.length - 1];
 }
 
-function genTxn(rng, kind) {
+/**
+ * A sample spec fixes the language (region + template) and the label. Bodies
+ * are rendered later with fresh slots, which lets the trainer show the same
+ * phrasing with many different amounts/dates/refs. Real SMS are extremely
+ * diverse in their numbers; without this augmentation the 1024-bucket model
+ * overfits digit n-grams and becomes unstable on balance-only alerts.
+ */
+function makeSpec(rng, label, pool) {
   const region = pickRegion(rng);
-  const slots = mkSlots(rng, region);
-  const body = fill(pick(rng, T[region][kind]), slots);
-  return { sender: senderFor(rng, region), body, label: kind === "debit" ? "DEBIT" : "CREDIT" };
+  return {
+    region,
+    template: pick(rng, T[region][pool]),
+    label,
+    sender: senderFor(rng, region),
+  };
 }
 
-function genOtp(rng) {
-  const region = pickRegion(rng);
-  return { sender: senderFor(rng, region), body: fill(pick(rng, T[region].otp), mkSlots(rng, region)), label: "NOT_TXN" };
+const SPEC_GENERATORS = {
+  NOT_TXN: (rng) => {
+    const r = rng();
+    if (r < 0.22) return makeSpec(rng, "NOT_TXN", "otp");
+    if (r < 0.44) return makeSpec(rng, "NOT_TXN", "promo");
+    if (r < 0.58) return makeSpec(rng, "NOT_TXN", "balance");
+    if (r < 0.68) return makeSpec(rng, "NOT_TXN", "service");
+    if (r < 0.83) return makeSpec(rng, "NOT_TXN", "future");
+    if (r < 0.93) return makeSpec(rng, "NOT_TXN", "personal");
+    return makeSpec(rng, "NOT_TXN", "spam");
+  },
+  DEBIT: (rng) => makeSpec(rng, "DEBIT", "debit"),
+  CREDIT: (rng) => makeSpec(rng, "CREDIT", "credit"),
+};
+
+function renderBody(rng, spec) {
+  return fill(spec.template, mkSlots(rng, spec.region));
 }
 
-function genPromo(rng) {
-  const region = pickRegion(rng);
-  return { sender: senderFor(rng, region), body: fill(pick(rng, T[region].promo), mkSlots(rng, region)), label: "NOT_TXN" };
-}
-
-function genBalance(rng) {
-  const region = pickRegion(rng);
-  return { sender: senderFor(rng, region), body: fill(pick(rng, T[region].balance), mkSlots(rng, region)), label: "NOT_TXN" };
-}
-
-function genService(rng) {
-  const region = pickRegion(rng);
-  return { sender: senderFor(rng, region), body: fill(pick(rng, T[region].service), mkSlots(rng, region)), label: "NOT_TXN" };
-}
-
-function genPersonal(rng) {
-  const region = pickRegion(rng);
-  return { sender: senderFor(rng, region), body: fill(pick(rng, T[region].personal), mkSlots(rng, region)), label: "NOT_TXN" };
-}
-
-function genSpam(rng) {
-  const region = pickRegion(rng);
-  return { sender: senderFor(rng, region), body: fill(pick(rng, T[region].spam), mkSlots(rng, region)), label: "NOT_TXN" };
-}
-
-function genNotTxn(rng) {
-  const r = rng();
-  if (r < 0.28) return genOtp(rng);
-  if (r < 0.53) return genPromo(rng);
-  if (r < 0.68) return genBalance(rng);
-  if (r < 0.82) return genService(rng);
-  if (r < 0.93) return genPersonal(rng);
-  return genSpam(rng);
-}
-
-function generateRows(seed, counts) {
+function generateRows(seed, counts, copies = 1) {
   const rng = mulberry32(seed);
   const rows = [];
   const seen = new Set();
-  const generators = {
-    NOT_TXN: genNotTxn,
-    DEBIT: (r) => genTxn(r, "debit"),
-    CREDIT: (r) => genTxn(r, "credit"),
-  };
   for (const label of ["NOT_TXN", "DEBIT", "CREDIT"]) {
-    let made = 0;
-    let attempts = 0;
-    while (made < counts[label]) {
-      const row = generators[label](rng);
-      attempts++;
-      if (seen.has(row.body)) {
-        if (attempts > counts[label] * 40) {
-          // Extremely unlikely; keep going rather than loop forever.
-          continue;
-        }
-        continue;
+    let baseMessages = 0;
+    let uniqueBodies = 0;
+    while (baseMessages < counts[label] || (copies === 1 && uniqueBodies < counts[label])) {
+      const spec = SPEC_GENERATORS[label](rng);
+      baseMessages++;
+      for (let copy = 0; copy < copies; copy++) {
+        const body = renderBody(rng, spec);
+        if (seen.has(body)) continue;
+        seen.add(body);
+        rows.push({ sender: spec.sender, body, label });
+        uniqueBodies++;
       }
-      seen.add(row.body);
-      rows.push(row);
-      made++;
     }
   }
   // Shuffle so the row order does not leak class during training.
@@ -1352,20 +1363,26 @@ function main() {
     `Adam lr=${TRAINING.learningRate} batch=${TRAINING.batchSize} epochs=${TRAINING.epochs} l2=${TRAINING.l2}`,
   );
 
-  const trainRows = generateRows(SEED, TRAIN_COUNTS);
-  const holdoutRows = generateRows(SEED + 101, HOLDOUT_COUNTS);
+  const trainRows = generateRows(SEED, TRAIN_COUNTS, TRAIN_AUGMENTATION_COPIES);
+  const holdoutRows = generateRows(SEED + 101, HOLDOUT_COUNTS, 1);
   const adversarialRows = ADVERSARIAL;
 
   console.log(
-    `dataset: train ${trainRows.length}, holdout ${holdoutRows.length}, adversarial ${adversarialRows.length}`,
+    `dataset: train ${Object.values(TRAIN_COUNTS).reduce((a, b) => a + b, 0)} base ` +
+      `x${TRAIN_AUGMENTATION_COPIES} = ${trainRows.length} rows, ` +
+      `holdout ${holdoutRows.length}, adversarial ${adversarialRows.length}`,
   );
 
   const { W, bias } = trainModel(trainRows);
 
+  const train = evaluateDataset(trainRows, W, bias);
   const holdout = evaluateDataset(holdoutRows, W, bias);
   const adversarial = evaluateDataset(adversarialRows, W, bias);
 
   console.log("");
+  console.log(
+    `Train: acc=${train.accuracy} txn P=${train.txn_binary.precision} R=${train.txn_binary.recall}`,
+  );
   console.log("Holdout confusion matrix (rows actual, cols predicted: NOT_TXN, DEBIT, CREDIT)");
   for (const row of holdout.confusion_matrix) console.log("  " + row.join("  "));
   console.log(
@@ -1435,14 +1452,24 @@ function main() {
     },
     training: TRAINING,
     dataset_sizes: {
-      train: trainRows.length,
+      train_base_messages: Object.values(TRAIN_COUNTS).reduce((a, b) => a + b, 0),
+      train_rows: trainRows.length,
       holdout: holdoutRows.length,
       adversarial: adversarialRows.length,
     },
-    train_class_counts: {
+    augmentation: {
+      copies_per_base_message: TRAIN_AUGMENTATION_COPIES,
+      note: "training bases are rendered with independent amount/date/ref slots",
+    },
+    train_base_class_counts: {
       NOT_TXN: TRAIN_COUNTS.NOT_TXN,
       DEBIT: TRAIN_COUNTS.DEBIT,
       CREDIT: TRAIN_COUNTS.CREDIT,
+    },
+    train_row_class_counts: {
+      NOT_TXN: trainRows.filter((r) => r.label === "NOT_TXN").length,
+      DEBIT: trainRows.filter((r) => r.label === "DEBIT").length,
+      CREDIT: trainRows.filter((r) => r.label === "CREDIT").length,
     },
     holdout_class_counts: {
       NOT_TXN: HOLDOUT_COUNTS.NOT_TXN,
