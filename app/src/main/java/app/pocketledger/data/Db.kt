@@ -135,6 +135,18 @@ interface TxnDao {
     @Query("SELECT * FROM txns WHERE id = :id")
     suspend fun byId(id: Long): TxnEntity?
 
+    @Query(
+        "SELECT * FROM txns WHERE accountId = :accountId AND direction = :direction " +
+            "AND amountMinor = :amountMinor AND kind = 'TXN' AND ts BETWEEN :from AND :to LIMIT 1"
+    )
+    suspend fun similar(
+        accountId: Long,
+        direction: String,
+        amountMinor: Long,
+        from: Long,
+        to: Long,
+    ): TxnEntity?
+
     @Query("SELECT * FROM txns WHERE transferId = :transferId")
     suspend fun byTransfer(transferId: String): List<TxnEntity>
 
@@ -214,8 +226,8 @@ interface SmsDao {
     @Query("SELECT * FROM sms ORDER BY ts ASC, id ASC")
     suspend fun all(): List<SmsEntity>
 
-    @Query("SELECT * FROM sms WHERE status = 'REVIEW' ORDER BY ts DESC")
-    fun observeReview(): Flow<List<SmsEntity>>
+    @Query("SELECT * FROM sms WHERE status = 'REVIEW' ORDER BY ts DESC LIMIT :limit")
+    fun observeReview(limit: Int): Flow<List<SmsEntity>>
 
     @Query("SELECT COUNT(*) FROM sms WHERE status = 'REVIEW'")
     fun observeReviewCount(): Flow<Int>

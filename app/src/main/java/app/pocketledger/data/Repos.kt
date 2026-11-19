@@ -25,6 +25,7 @@ data class AppSettings(
     val userName: String = "",
     val activeAccountId: Long = -1L,
     val lastScanTs: Long = 0L,
+    val anchorTs: Long = 0L,
     val autoThreshold: Int = 85,
     val reviewThreshold: Int = 50,
     val scanningEnabled: Boolean = true,
@@ -38,6 +39,7 @@ class SettingsRepository(private val context: Context) {
         val USER_NAME = stringPreferencesKey("userName")
         val ACTIVE_ACCOUNT = longPreferencesKey("activeAccountId")
         val LAST_SCAN = longPreferencesKey("lastScanTs")
+        val ANCHOR_TS = longPreferencesKey("anchorTs")
         val AUTO_THRESHOLD = intPreferencesKey("autoThreshold")
         val REVIEW_THRESHOLD = intPreferencesKey("reviewThreshold")
         val SCANNING = booleanPreferencesKey("scanningEnabled")
@@ -50,6 +52,7 @@ class SettingsRepository(private val context: Context) {
             userName = p[Keys.USER_NAME] ?: "",
             activeAccountId = p[Keys.ACTIVE_ACCOUNT] ?: -1L,
             lastScanTs = p[Keys.LAST_SCAN] ?: 0L,
+            anchorTs = p[Keys.ANCHOR_TS] ?: 0L,
             autoThreshold = p[Keys.AUTO_THRESHOLD] ?: 85,
             reviewThreshold = p[Keys.REVIEW_THRESHOLD] ?: 50,
             scanningEnabled = p[Keys.SCANNING] ?: true,
@@ -63,6 +66,7 @@ class SettingsRepository(private val context: Context) {
     suspend fun setUserName(value: String) = context.settingsStore.edit { it[Keys.USER_NAME] = value.trim() }
     suspend fun setActiveAccount(id: Long) = context.settingsStore.edit { it[Keys.ACTIVE_ACCOUNT] = id }
     suspend fun setLastScanTs(ts: Long) = context.settingsStore.edit { it[Keys.LAST_SCAN] = ts }
+    suspend fun setAnchorTs(ts: Long) = context.settingsStore.edit { it[Keys.ANCHOR_TS] = ts }
     suspend fun setThresholds(auto: Int, review: Int) = context.settingsStore.edit {
         it[Keys.AUTO_THRESHOLD] = auto.coerceIn(60, 100)
         it[Keys.REVIEW_THRESHOLD] = review.coerceIn(10, 84)
@@ -74,7 +78,7 @@ class WalletRepository(val db: AppDatabase) {
 
     fun observeAccounts(): Flow<List<AccountEntity>> = db.accountDao().observeAll()
     fun observeRecentTxns(limit: Int = 40): Flow<List<TxnEntity>> = db.txnDao().observeRecent(limit)
-    fun observeReviewSms(): Flow<List<SmsEntity>> = db.smsDao().observeReview()
+    fun observeReviewSms(limit: Int = 60): Flow<List<SmsEntity>> = db.smsDao().observeReview(limit)
     fun observeReviewCount(): Flow<Int> = db.smsDao().observeReviewCount()
     fun observeTotal(): Flow<Long> = db.txnDao().observeTotal()
     fun observeSenderRules(): Flow<List<SenderRuleEntity>> = db.senderRuleDao().observeAll()

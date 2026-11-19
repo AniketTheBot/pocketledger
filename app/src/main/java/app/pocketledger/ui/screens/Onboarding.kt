@@ -97,7 +97,7 @@ fun OnboardingFlow(container: AppContainer, onFinished: () -> Unit) {
         if (step == 6) {
             scanning = true
             summary = null
-            val result = container.scanner.scan { s, t ->
+            val result = container.scanner.scan(learningOnly = true) { s, t ->
                 scanned = s
                 scanTotal = t
             }
@@ -138,6 +138,8 @@ fun OnboardingFlow(container: AppContainer, onFinished: () -> Unit) {
                     scope.launch {
                         accountId = container.wallet.addAccount(name, type, currency, minor, tail)
                         container.settings.setCurrency(currency)
+                        // Everything before this instant is history, never ledger.
+                        container.settings.setAnchorTs(System.currentTimeMillis())
                         step = 5
                     }
                 },
@@ -357,7 +359,7 @@ private fun AccountStep(
         Text("Your first account", style = MaterialTheme.typography.headlineMedium, color = Ink)
         Spacer(Modifier.height(6.dp))
         Text(
-            "The last digits help the scanner route bank SMS automatically.",
+            "The last 3–4 digits (optional) route SMS from this account automatically. Have more than one bank account? Add them later — unmatched messages go to Review, never guessed.",
             fontSize = 12.5.sp,
             color = MutedInk,
             lineHeight = 18.sp,
@@ -451,7 +453,7 @@ private fun ScanStep(
         SectionLabel("Almost there")
         Spacer(Modifier.height(6.dp))
         Text(
-            if (scanning) "Scanning your inbox…" else "Scan complete",
+            if (scanning) "Scanning your inbox…" else "You’re all set",
             style = MaterialTheme.typography.headlineMedium,
             color = Ink,
         )
@@ -466,15 +468,19 @@ private fun ScanStep(
                 if (s == null) {
                     Text("Scanning unavailable — you can start manually.", fontSize = 12.5.sp, color = MutedInk)
                 } else {
-                    Text("${s.scanned} messages scanned", style = MaterialTheme.typography.headlineMedium, color = Ink)
+                    Text("${s.scanned} messages checked", style = MaterialTheme.typography.headlineMedium, color = Ink)
                     Spacer(Modifier.height(8.dp))
                     Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                        CandyChip("${s.processed} recorded", bg = Green)
-                        CandyChip("${s.review} review", bg = Purple)
-                        CandyChip("${s.ignored} ignored", bg = CardCream)
+                        CandyChip("${s.learned} patterns learned", bg = Green)
+                        CandyChip("${(s.scanned - s.learned).coerceAtLeast(0)} skipped", bg = CardCream)
                     }
-                    Spacer(Modifier.height(6.dp))
-                    Text("Everything stayed on-device.", fontSize = 11.sp, color = MutedInk)
+                    Spacer(Modifier.height(8.dp))
+                    Text(
+                        "History never touches your balance. It only teaches the on-device model how your banks phrase money in and out. Tracking starts from the amount you entered — only new messages record from here on.",
+                        fontSize = 11.sp,
+                        color = MutedInk,
+                        lineHeight = 16.sp,
+                    )
                 }
             }
         }
