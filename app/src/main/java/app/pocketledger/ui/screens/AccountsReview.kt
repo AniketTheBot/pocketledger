@@ -14,6 +14,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.draw.clip
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -28,6 +34,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -132,35 +139,71 @@ fun AccountsScreen(
 
 @Composable
 fun ReviewScreen(container: AppContainer, onEdit: (SmsEntity) -> Unit) {
-    val queue by container.wallet.observeReviewSms().collectAsState(initial = emptyList())
+    var pageSize by rememberSaveable { mutableIntStateOf(30) }
+    val queue by container.wallet.observeReviewSms(pageSize).collectAsState(initial = null)
+    val waiting by container.wallet.observeReviewCount().collectAsState(initial = 0)
     val accounts by container.wallet.observeAccounts().collectAsState(initial = emptyList())
     val scope = rememberCoroutineScope()
-    val accountNames = accounts.associate { it.id to it.name }
+    val listState = rememberLazyListState()
+    val accountNames = remember(accounts) { accounts.associate { it.id to it.name } }
+    val currencyById = remember(accounts) { accounts.associate { it.id to it.currency } }
 
-    Column(
-        Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = 16.dp)
+    LaunchedEffect(listState, queue?.size, pageSize) {
+        snapshotFlow { listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: -1 }
+            .collect { last ->
+                val size = queue?.size ?: 0
+                if (size >= pageSize && pageSize < 1000 && last >= size - 2) {
+                    pageSize += 30
+                }
+            }
+    }
+
+    LazyColumn(
+        state = listState,
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 10.dp, bottom = 130.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
-        Spacer(Modifier.height(10.dp))
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-            Text("Review", style = MaterialTheme.typography.headlineMedium, color = Ink)
-            if (queue.isNotEmpty()) CandyChip("${queue.size} waiting", bg = Mustard, pill = true)
+        item {
+            Row(
+                Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text("Review", style = MaterialTheme.typography.headlineMedium, color = Ink)
+                if (waiting > 0) {
+                    CandyChip("$waiting waiting", bg = Mustard, pill = true)
+                }
+            }
+            Spacer(Modifier.height(4.dp))
+            Text(
+                "Only high-confidence messages auto-record. Everything else waits here for you.",
+                fontSize = 11.sp,
+                color = MutedInk,
+            )
         }
-        Spacer(Modifier.height(4.dp))
-        Text("Only high-confidence messages auto-record. Everything else waits here for you.", fontSize = 11.sp, color = MutedInk)
-        Spacer(Modifier.height(12.dp))
 
-        if (queue.isEmpty()) {
-            Column(Modifier.fillMaxWidth().padding(top = 40.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                FlowerSticker("All clear", Green, 120.dp)
-                Spacer(Modifier.height(14.dp))
-                Text("Nothing needs a look.", fontWeight = FontWeight.ExtraBold, fontSize = 14.sp, color = Ink)
-                Text("Parsed messages that need confirmation will appear here — fully offline.", fontSize = 11.sp, color = MutedInk)
+        val reviewItems = queue
+        if (reviewItems == null) {
+            items(2) { ReviewSkeletonCard() }
+        } else if (reviewItems.isEmpty()) {
+            item {
+                Column(
+                    Modifier.fillMaxWidth().padding(top = 40.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    FlowerSticker("All clear", Green, 120.dp)
+                    Spacer(Modifier.height(14.dp))
+                    Text("Nothing needs a look.", fontWeight = FontWeight.ExtraBold, fontSize = 14.sp, color = Ink)
+                    Text(
+                        "Parsed messages that need confirmation will appear here — fully offline.",
+                        fontSize = 11.sp,
+                        color = MutedInk,
+                    )
+                }
             }
         } else {
-            queue.forEach { sms ->
+            items(reviewItems, key = { it.id }) { sms ->
                 SmsReviewCard(
                     sms = sms,
                     accountName = sms.accountId?.let { accountNames[it] },
@@ -169,7 +212,7 @@ fun ReviewScreen(container: AppContainer, onEdit: (SmsEntity) -> Unit) {
                         val amount = sms.amountMinor
                         val direction = sms.direction
                         if (accountId != null && amount != null && direction != null) {
-                            val currency = accounts.firstOrNull { it.id == accountId }?.currency ?: "INR"
+                            val currency = currencyById[accountId] ?: "INR"
                             scope.launch {
                                 container.pipeline.confirm(
                                     smsId = sms.id,
@@ -193,10 +236,46 @@ fun ReviewScreen(container: AppContainer, onEdit: (SmsEntity) -> Unit) {
                         }
                     },
                 )
-                Spacer(Modifier.height(10.dp))
             }
         }
-        Spacer(Modifier.height(120.dp))
+    }
+}
+
+/** Placeholder cards so Review paints instantly while the queue loads from Room. */
+@Composable
+private fun ReviewSkeletonCard() {
+    StickerCard(Modifier.fillMaxWidth()) {
+        Box(
+            Modifier
+                .fillMaxWidth(0.35f)
+                .height(12.dp)
+                .clip(RoundedCornerShape(6.dp))
+                .background(Color(0xFFEFE9DA))
+        )
+        Spacer(Modifier.height(10.dp))
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .height(44.dp)
+                .clip(RoundedCornerShape(10.dp))
+                .background(Color(0xFFEFE9DA))
+        )
+        Spacer(Modifier.height(10.dp))
+        Box(
+            Modifier
+                .fillMaxWidth(0.8f)
+                .height(10.dp)
+                .clip(RoundedCornerShape(5.dp))
+                .background(Color(0xFFEFE9DA))
+        )
+        Spacer(Modifier.height(6.dp))
+        Box(
+            Modifier
+                .fillMaxWidth(0.6f)
+                .height(10.dp)
+                .clip(RoundedCornerShape(5.dp))
+                .background(Color(0xFFEFE9DA))
+        )
     }
 }
 

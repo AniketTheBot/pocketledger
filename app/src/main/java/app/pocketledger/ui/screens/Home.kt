@@ -70,6 +70,7 @@ fun HomeScreen(
     onAccounts: () -> Unit,
     onReview: () -> Unit,
     onAnalyze: () -> Unit,
+    onOpenSettings: () -> Unit,
 ) {
     val accounts by container.wallet.observeAccounts().collectAsState(initial = emptyList())
     val settings by container.settings.settings.collectAsState(initial = AppSettings())
@@ -113,7 +114,13 @@ fun HomeScreen(
             .padding(horizontal = 16.dp)
     ) {
         Spacer(Modifier.height(8.dp))
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .clickableNoRipple(onOpenSettings),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
             Column {
                 Text(
                     "Hello, ${settings.userName.ifBlank { "there" }} 👋",
