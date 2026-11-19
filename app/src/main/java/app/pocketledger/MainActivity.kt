@@ -87,7 +87,7 @@ private fun MainShell(container: AppContainer) {
             )
         },
         floatingActionButton = {
-            if (tab != "settings") {
+            if (tab == "home" || tab == "accounts") {
                 FloatingActionButton(
                     onClick = {
                         editingSms = null
