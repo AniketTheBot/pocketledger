@@ -1,0 +1,217 @@
+{
+  "app": {
+    "name": "PocketLedger",
+    "package": "app.pocketledger",
+    "platform": "android",
+    "stack": "Kotlin + Jetpack Compose + Material3 + Room + DataStore (native); themes map via lightColorScheme/darkColorScheme"
+  },
+  "chosen": {
+    "layout": "sticker-ledger",
+    "theme": "sticker-ledger",
+    "note": "Design 5 is the chosen direction for the app build. Other layouts/themes remain documented for future variants."
+  },
+  "global": {
+    "spacingScale": [4, 8, 12, 16, 24, 32],
+    "minTouchTargetDp": 48,
+    "money": "Long minor units (paise/cents); locale-aware formatter, en-IN lakh grouping",
+    "iconStyle": "outline stroke icons, 2dp stroke, 24dp grid"
+  },
+  "themes": [
+    {
+      "id": "quiet-ledger",
+      "label": "Theme 1 - Quiet Ledger",
+      "vibe": "Paper passbook. Calm, precise, private.",
+      "defaultMode": "system",
+      "light": {
+        "background": "#FAF9F7", "onBackground": "#191817",
+        "surface": "#FFFFFF", "surfaceContainer": "#F6F4F0", "surfaceVariant": "#F1EEE9", "onSurfaceVariant": "#8A857D",
+        "onSurface": "#191817",
+        "primary": "#1E6E4B", "onPrimary": "#FFFFFF", "primaryContainer": "#DDEEE4", "onPrimaryContainer": "#123D29",
+        "outline": "#D9D3CA", "outlineVariant": "#E8E4DE", "error": "#B23A2E",
+        "positive": "#1E6E4B", "onPositive": "#FFFFFF", "negative": "#B23A2E", "onNegative": "#FFFFFF",
+        "pending": "#8A6A1F", "onPending": "#FFFFFF"
+      },
+      "dark": {
+        "background": "#121417", "onBackground": "#ECEAE6",
+        "surface": "#1B1E22", "surfaceContainer": "#202429", "surfaceVariant": "#23272D", "onSurfaceVariant": "#9BA1A6",
+        "onSurface": "#ECEAE6",
+        "primary": "#7BCB9F", "onPrimary": "#0E2A1C", "primaryContainer": "#1F4D36", "onPrimaryContainer": "#D6F0E0",
+        "outline": "#3A3F45", "outlineVariant": "#2A2E33", "error": "#E08379",
+        "positive": "#7BD3A0", "onPositive": "#0E2A1C", "negative": "#E08379", "onNegative": "#2A100C",
+        "pending": "#D9B25E", "onPending": "#2A1F05"
+      },
+      "typography": { "fontDisplay": "Inter", "fontBody": "Inter", "fontNumeric": "Inter tabular" },
+      "shape": { "card": 12, "sheet": 20, "chip": 999, "button": 12, "key": 12 },
+      "elevation": "none - 1dp hairline borders",
+      "motion": "fade + 8dp slide, 150ms"
+    },
+    {
+      "id": "nordic-mint",
+      "label": "Theme 2 - Nordic Mint",
+      "vibe": "Soft friendly fintech. Rounded cards, teal, chips.",
+      "defaultMode": "system",
+      "light": {
+        "background": "#F3F6F8", "onBackground": "#0E2439",
+        "surface": "#FFFFFF", "surfaceContainer": "#FFFFFF", "surfaceVariant": "#E9EFF3", "onSurfaceVariant": "#6B7C8C",
+        "onSurface": "#0E2439",
+        "primary": "#0FA3A3", "onPrimary": "#FFFFFF", "primaryContainer": "#D9F3F3", "onPrimaryContainer": "#064A4A",
+        "outline": "#DCE4EA", "outlineVariant": "#E4EAEE", "error": "#E5484D",
+        "positive": "#0E9F6E", "onPositive": "#FFFFFF", "negative": "#E5484D", "onNegative": "#FFFFFF",
+        "pending": "#B7791F", "onPending": "#FFFFFF"
+      },
+      "dark": {
+        "background": "#0D1620", "onBackground": "#E6EEF5",
+        "surface": "#16222E", "surfaceContainer": "#1B2A38", "surfaceVariant": "#223140", "onSurfaceVariant": "#8CA0B3",
+        "onSurface": "#E6EEF5",
+        "primary": "#2EC4B6", "onPrimary": "#062522", "primaryContainer": "#0B5A55", "onPrimaryContainer": "#B8F0EA",
+        "outline": "#33465A", "outlineVariant": "#27364A", "error": "#FF6B6E",
+        "positive": "#45D6A4", "onPositive": "#062522", "negative": "#FF6B6E", "onNegative": "#2B0A0B",
+        "pending": "#E2B857", "onPending": "#2A1F05"
+      },
+      "typography": { "fontDisplay": "Manrope", "fontBody": "Manrope", "fontNumeric": "Manrope tabular" },
+      "shape": { "card": 20, "sheet": 28, "chip": 999, "button": 16, "key": 16 },
+      "elevation": "soft shadow 0 8dp 20dp rgba(14,36,57,.08)",
+      "motion": "spring 300ms, balance counts up"
+    },
+    {
+      "id": "midnight-terminal",
+      "label": "Theme 3 - Midnight Terminal",
+      "vibe": "Dark-first power tool. Mono digits, status lines.",
+      "defaultMode": "dark",
+      "dark": {
+        "background": "#0B0E14", "onBackground": "#D9E0EA",
+        "surface": "#121721", "surfaceContainer": "#161C28", "surfaceVariant": "#1A2130", "onSurfaceVariant": "#6C7A8A",
+        "onSurface": "#D9E0EA",
+        "primary": "#9BE15D", "onPrimary": "#0B0E14", "primaryContainer": "#24351A", "onPrimaryContainer": "#D6F5A7",
+        "outline": "#2A3345", "outlineVariant": "#232B3A", "error": "#FF6B6B",
+        "positive": "#9BE15D", "onPositive": "#0B0E14", "negative": "#FF6B6B", "onNegative": "#2B0A0B",
+        "pending": "#E2B857", "onPending": "#2A1F05"
+      },
+      "light": {
+        "background": "#F6F7F5", "onBackground": "#171B22",
+        "surface": "#FFFFFF", "surfaceContainer": "#FFFFFF", "surfaceVariant": "#ECF0EB", "onSurfaceVariant": "#5E6A77",
+        "onSurface": "#171B22",
+        "primary": "#4F9A34", "onPrimary": "#FFFFFF", "primaryContainer": "#E2F2D6", "onPrimaryContainer": "#1E3D0E",
+        "outline": "#D5DAD3", "outlineVariant": "#E3E7E1", "error": "#C23B3B",
+        "positive": "#4F9A34", "onPositive": "#FFFFFF", "negative": "#C23B3B", "onNegative": "#FFFFFF",
+        "pending": "#A87715", "onPending": "#FFFFFF"
+      },
+      "typography": { "fontDisplay": "Space Grotesk", "fontBody": "Space Grotesk", "fontNumeric": "JetBrains Mono" },
+      "shape": { "card": 8, "sheet": 12, "chip": 6, "button": 8, "key": 10 },
+      "elevation": "none - 1dp borders",
+      "motion": "100ms linear, status lines type out"
+    },
+    {
+      "id": "warm-cashbook",
+      "label": "Theme 4 - Warm Cashbook",
+      "vibe": "Cozy money diary. Cream, serif, terracotta.",
+      "defaultMode": "system",
+      "light": {
+        "background": "#FFF8EF", "onBackground": "#3B2F26",
+        "surface": "#FFFDF8", "surfaceContainer": "#FBF3E4", "surfaceVariant": "#F6EBDB", "onSurfaceVariant": "#9A8B7A",
+        "onSurface": "#3B2F26",
+        "primary": "#E07A5F", "onPrimary": "#FFF8EF", "primaryContainer": "#FADFD4", "onPrimaryContainer": "#5C2313",
+        "outline": "#E3D5BE", "outlineVariant": "#EADFCB", "error": "#C14E3E",
+        "positive": "#468B6B", "onPositive": "#FFF8EF", "negative": "#C14E3E", "onNegative": "#FFF8EF",
+        "pending": "#B7791F", "onPending": "#FFF8EF"
+      },
+      "dark": {
+        "background": "#201A15", "onBackground": "#F2E8DC",
+        "surface": "#2A211A", "surfaceContainer": "#312721", "surfaceVariant": "#382C24", "onSurfaceVariant": "#A7937E",
+        "onSurface": "#F2E8DC",
+        "primary": "#E8906F", "onPrimary": "#2A130A", "primaryContainer": "#703C2C", "onPrimaryContainer": "#F8D6C8",
+        "outline": "#4A3C30", "outlineVariant": "#3A2E24", "error": "#E08073",
+        "positive": "#7FBF9A", "onPositive": "#14281E", "negative": "#E08073", "onNegative": "#2A100C",
+        "pending": "#D9B25E", "onPending": "#2A1F05"
+      },
+      "typography": { "fontDisplay": "Fraunces", "fontBody": "Inter", "fontNumeric": "Inter tabular" },
+      "shape": { "card": 14, "sheet": 22, "chip": 999, "button": 14, "key": 14 },
+      "elevation": "paper shadow + ruled hairlines",
+      "motion": "250ms ease-out, day groups unfold"
+    },
+    {
+      "id": "sticker-ledger",
+      "label": "Theme 5 - Sticker Ledger (CHOSEN)",
+      "vibe": "Neo-brutalist money wallet. Cream screens, 3px ink outlines, hard offset shadows, flower stickers, candy chips, chunky type.",
+      "defaultMode": "light",
+      "light": {
+        "background": "#F6F3EC", "onBackground": "#191614",
+        "surface": "#FFFDF7", "surfaceContainer": "#FFFDF7", "surfaceVariant": "#EFE9DA", "onSurfaceVariant": "#6E675D",
+        "onSurface": "#191614",
+        "primary": "#F2C14E", "onPrimary": "#191614", "primaryContainer": "#FBE7AE", "onPrimaryContainer": "#4A3A0A",
+        "secondaryContainer": "#F6AEDB", "onSecondaryContainer": "#5C2345",
+        "outline": "#191614", "outlineVariant": "#DCD5C4", "error": "#C14E3E",
+        "positive": "#A9E8A2", "onPositive": "#173B14", "negative": "#F6AEDB", "onNegative": "#5C2345",
+        "pending": "#C9B8F5", "onPending": "#2E2350",
+        "canvas": "#F0C64F"
+      },
+      "dark": {
+        "background": "#1B1712", "onBackground": "#F6F3EC",
+        "surface": "#241F18", "surfaceContainer": "#2A241C", "surfaceVariant": "#332C23", "onSurfaceVariant": "#B0A794",
+        "onSurface": "#F6F3EC",
+        "primary": "#F2C14E", "onPrimary": "#191614", "primaryContainer": "#4A3A0A", "onPrimaryContainer": "#FBE7AE",
+        "secondaryContainer": "#5C2345", "onSecondaryContainer": "#F6AEDB",
+        "outline": "#F6F3EC", "outlineVariant": "#4A4133", "error": "#E08073",
+        "positive": "#A9E8A2", "onPositive": "#173B14", "negative": "#F6AEDB", "onNegative": "#2E1726",
+        "pending": "#C9B8F5", "onPending": "#2E2350",
+        "canvas": "#20180B"
+      },
+      "typography": {
+        "fontDisplay": "Archivo Black", "fontBody": "Roboto (system)", "fontNumeric": "Roboto tabular",
+        "scale": {
+          "balanceHero": { "size": 30, "weight": 900, "fontDisplay": true, "numeric": true },
+          "headline": { "size": 22, "weight": 900, "fontDisplay": true },
+          "title": { "size": 15, "weight": 800 },
+          "body": { "size": 14, "weight": 500, "lineHeight": 20 },
+          "label": { "size": 10, "weight": 800, "tracking": 1.0, "caps": true },
+          "amount": { "size": 13, "weight": 800, "numeric": true }
+        }
+      },
+      "shape": { "card": 20, "sheet": 24, "chip": 999, "button": 999, "key": 16 },
+      "elevation": "hard offset shadow 4dp x 4dp solid ink (0 blur) + 2.5dp ink borders",
+      "motion": "sticker pop scale 1 -> 1.03 -> 1 on confirm (180ms); no springs elsewhere"
+    }
+  ],
+  "layouts": [
+    {
+      "id": "classic-ledger",
+      "label": "Layout A - Classic Ledger",
+      "nav": "bottom tabs x4",
+      "home": "balance hero card + day-grouped list + FAB",
+      "screens": ["onboarding keypad", "home", "accounts", "review"],
+      "notes": "Original structure. Works with any theme."
+    },
+    {
+      "id": "card-wallet",
+      "label": "Layout B - Card Wallet",
+      "nav": "hamburger drawer",
+      "home": "horizontal swipeable account cards with sparklines + flat recent feed",
+      "screens": ["home carousel", "drawer", "review full screen"],
+      "notes": "Accounts-as-home. FAB bottom right."
+    },
+    {
+      "id": "timeline-journal",
+      "label": "Layout C - Timeline Journal",
+      "nav": "overflow menu -> bottom sheet",
+      "home": "chronological spine timeline with time rail, day bubbles, system scan events",
+      "screens": ["timeline", "nav sheet", "entry sheet with keypad"],
+      "notes": "Chronicle-first. Reconcile appears as a manual event on the spine."
+    },
+    {
+      "id": "pulse-dashboard",
+      "label": "Layout D - Pulse Dashboard",
+      "nav": "floating pill bar with docked center FAB",
+      "home": "stats-first: net balance + weekly in/out bars + stat tiles + compact feed",
+      "screens": ["dashboard", "insights", "entry full screen"],
+      "notes": "Insight-first. Insights page has donut + category bars."
+    },
+    {
+      "id": "sticker-ledger",
+      "label": "Layout E - Sticker Ledger (CHOSEN)",
+      "nav": "black pill bottom bar: Home / Accounts / Review / Settings; active item = yellow pill",
+      "home": "greeting + avatar; balance StickerCard with Record + Scan SMS pills; accounts avatar row; Recent Transactions feed; floating + FAB",
+      "screens": ["sticker onboarding (flower promises)", "exact-balance keypad", "home", "accounts", "review", "entry", "reconcile", "settings"],
+      "notes": "Implemented exactly as mockups/design-5-sticker-ledger.html. Bottom bar lives in Scaffold bottomBar so feeds never clip. Flower stickers drawn with Canvas scallop path."
+    }
+  ]
+}
