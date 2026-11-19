@@ -38,9 +38,6 @@ const CLASS_INDEX = { NOT_TXN: 0, DEBIT: 1, CREDIT: 2 };
 
 const TRAIN_COUNTS = { NOT_TXN: 220, DEBIT: 195, CREDIT: 155 }; // ~550 base messages
 const HOLDOUT_COUNTS = { NOT_TXN: 100, DEBIT: 110, CREDIT: 90 }; // 300
-// Each base message is rendered with fresh amounts/dates/refs in training, so
-// numeric n-grams do not acquire spurious class weights.
-const TRAIN_AUGMENTATION_COPIES = 1;
 
 const TRAINING = {
   optimizer: "Adam",
@@ -889,59 +886,81 @@ function pickRegion(rng) {
   return REGIONS[REGIONS.length - 1];
 }
 
-/**
- * A sample spec fixes the language (region + template) and the label. Bodies
- * are rendered later with fresh slots, which lets the trainer show the same
- * phrasing with many different amounts/dates/refs. Real SMS are extremely
- * diverse in their numbers; without this augmentation the 1024-bucket model
- * overfits digit n-grams and becomes unstable on balance-only alerts.
- */
-function makeSpec(rng, label, pool) {
+function genTxn(rng, kind) {
   const region = pickRegion(rng);
-  return {
-    region,
-    template: pick(rng, T[region][pool]),
-    label,
-    sender: senderFor(rng, region),
-  };
+  const slots = mkSlots(rng, region);
+  const body = fill(pick(rng, T[region][kind]), slots);
+  return { sender: senderFor(rng, region), body, label: kind === "debit" ? "DEBIT" : "CREDIT" };
 }
 
-const SPEC_GENERATORS = {
-  NOT_TXN: (rng) => {
-    const r = rng();
-    if (r < 0.22) return makeSpec(rng, "NOT_TXN", "otp");
-    if (r < 0.44) return makeSpec(rng, "NOT_TXN", "promo");
-    if (r < 0.58) return makeSpec(rng, "NOT_TXN", "balance");
-    if (r < 0.68) return makeSpec(rng, "NOT_TXN", "service");
-    if (r < 0.83) return makeSpec(rng, "NOT_TXN", "future");
-    if (r < 0.93) return makeSpec(rng, "NOT_TXN", "personal");
-    return makeSpec(rng, "NOT_TXN", "spam");
-  },
-  DEBIT: (rng) => makeSpec(rng, "DEBIT", "debit"),
-  CREDIT: (rng) => makeSpec(rng, "CREDIT", "credit"),
-};
-
-function renderBody(rng, spec) {
-  return fill(spec.template, mkSlots(rng, spec.region));
+function genOtp(rng) {
+  const region = pickRegion(rng);
+  return { sender: senderFor(rng, region), body: fill(pick(rng, T[region].otp), mkSlots(rng, region)), label: "NOT_TXN" };
 }
 
-function generateRows(seed, counts, copies = 1) {
+function genPromo(rng) {
+  const region = pickRegion(rng);
+  return { sender: senderFor(rng, region), body: fill(pick(rng, T[region].promo), mkSlots(rng, region)), label: "NOT_TXN" };
+}
+
+function genBalance(rng) {
+  const region = pickRegion(rng);
+  return { sender: senderFor(rng, region), body: fill(pick(rng, T[region].balance), mkSlots(rng, region)), label: "NOT_TXN" };
+}
+
+function genService(rng) {
+  const region = pickRegion(rng);
+  return { sender: senderFor(rng, region), body: fill(pick(rng, T[region].service), mkSlots(rng, region)), label: "NOT_TXN" };
+}
+
+/**
+ * Conditional / future payment notices ("will be debited", "is scheduled",
+ * "is due"). These are deliberately over-represented hard negatives: a
+ * classifier that fires on the verb alone becomes unsafe for auto-recording.
+ */
+function genFuture(rng) {
+  const region = pickRegion(rng);
+  return { sender: senderFor(rng, region), body: fill(pick(rng, T[region].future), mkSlots(rng, region)), label: "NOT_TXN" };
+}
+
+function genPersonal(rng) {
+  const region = pickRegion(rng);
+  return { sender: senderFor(rng, region), body: fill(pick(rng, T[region].personal), mkSlots(rng, region)), label: "NOT_TXN" };
+}
+
+function genSpam(rng) {
+  const region = pickRegion(rng);
+  return { sender: senderFor(rng, region), body: fill(pick(rng, T[region].spam), mkSlots(rng, region)), label: "NOT_TXN" };
+}
+
+function genNotTxn(rng) {
+  const r = rng();
+  if (r < 0.22) return genOtp(rng);
+  if (r < 0.44) return genPromo(rng);
+  if (r < 0.58) return genBalance(rng);
+  if (r < 0.68) return genService(rng);
+  if (r < 0.83) return genFuture(rng);
+  if (r < 0.93) return genPersonal(rng);
+  return genSpam(rng);
+}
+
+function generateRows(seed, counts) {
   const rng = mulberry32(seed);
   const rows = [];
   const seen = new Set();
+  const generators = {
+    NOT_TXN: genNotTxn,
+    DEBIT: (r) => genTxn(r, "debit"),
+    CREDIT: (r) => genTxn(r, "credit"),
+  };
   for (const label of ["NOT_TXN", "DEBIT", "CREDIT"]) {
-    let baseMessages = 0;
-    let uniqueBodies = 0;
-    while (baseMessages < counts[label] || (copies === 1 && uniqueBodies < counts[label])) {
-      const spec = SPEC_GENERATORS[label](rng);
-      baseMessages++;
-      for (let copy = 0; copy < copies; copy++) {
-        const body = renderBody(rng, spec);
-        if (seen.has(body)) continue;
-        seen.add(body);
-        rows.push({ sender: spec.sender, body, label });
-        uniqueBodies++;
-      }
+    let made = 0;
+    while (made < counts[label]) {
+      const row = generators[label](rng);
+      if (seen.has(row.body)) continue;
+      seen.add(row.body);
+      rows.push(row);
+      made++;
     }
   }
   // Shuffle so the row order does not leak class during training.
@@ -1066,6 +1085,31 @@ const ADVERSARIAL = [
   ["CHASE: $12.34 at CVS 11/19. Avail bal $980.12", "DEBIT"],
   ["BOFA: Deposit $1,000 posted 11/19 to acct 3344.", "CREDIT"],
 ].map(([body, label]) => ({ sender: "ADVERSARIAL", body, label }));
+
+/**
+ * Curated balance-only hard negatives. Balance alerts have no direction verb,
+ * are short, and are dense with digits, which makes them the easiest negative
+ * class to lose to numeric noise. These augment the generated corpus with
+ * common bank phrasings (all are NOT_TXN; none is used in eval/adversarial).
+ */
+const EXTRA_TRAIN = [
+  "Your A/c XX1234 balance is Rs.45,678.90 as on 19-11",
+  "Your A/c XX7712 balance is Rs.1,23,456.00 as on 04-07-27",
+  "Your A/c XX8899 balance is ₹8,999 as on 11.11.26",
+  "A/c XX3456 balance: Rs.34,999 as on 17/02/2027",
+  "Balance in your A/c XX2345 is Rs.78,233.10 as on 19 Nov 2026",
+  "Your account XX7890 balance as on 19-11 is Rs.12,345.67",
+  "Available balance in A/c XX1122 is INR 5,678.25",
+  "Your HDFC Bank card ending 4433 has an outstanding balance of ₹2,499.",
+  "Your balance is £1,234.56. Available to spend £1,200.00.",
+  "Hello Priya, your savings account balance is £8,450.20.",
+  "Your available balance is $1,234.56. No new transactions.",
+  "Balance update: $45,678.90 available in your checking account ending 7788.",
+  "Aapke account mein balance Rs.34,999 hai.",
+  "Aapka account balance ₹8,999 hai.",
+  "Your A/c XX4455 balance is Rs.9,999 as on 01-01-27. No transaction since last update.",
+  "Your account ending 6622 has a balance of INR 2,345.67 as of 19/11/26.",
+].map((body) => ({ sender: "CURATED", body, label: "NOT_TXN" }));
 
 // ---------------------------------------------------------------------------
 // Training: softmax regression with Adam, L2, deterministic shuffling
@@ -1363,14 +1407,13 @@ function main() {
     `Adam lr=${TRAINING.learningRate} batch=${TRAINING.batchSize} epochs=${TRAINING.epochs} l2=${TRAINING.l2}`,
   );
 
-  const trainRows = generateRows(SEED, TRAIN_COUNTS, TRAIN_AUGMENTATION_COPIES);
-  const holdoutRows = generateRows(SEED + 101, HOLDOUT_COUNTS, 1);
+  const trainRows = generateRows(SEED, TRAIN_COUNTS);
+  trainRows.push(...EXTRA_TRAIN);
+  const holdoutRows = generateRows(SEED + 101, HOLDOUT_COUNTS);
   const adversarialRows = ADVERSARIAL;
 
   console.log(
-    `dataset: train ${Object.values(TRAIN_COUNTS).reduce((a, b) => a + b, 0)} base ` +
-      `x${TRAIN_AUGMENTATION_COPIES} = ${trainRows.length} rows, ` +
-      `holdout ${holdoutRows.length}, adversarial ${adversarialRows.length}`,
+    `dataset: train ${trainRows.length}, holdout ${holdoutRows.length}, adversarial ${adversarialRows.length}`,
   );
 
   const { W, bias } = trainModel(trainRows);
@@ -1452,21 +1495,13 @@ function main() {
     },
     training: TRAINING,
     dataset_sizes: {
-      train_base_messages: Object.values(TRAIN_COUNTS).reduce((a, b) => a + b, 0),
-      train_rows: trainRows.length,
+      train: trainRows.length,
+      train_generated: trainRows.length - EXTRA_TRAIN.length,
+      train_curated_hard_negatives: EXTRA_TRAIN.length,
       holdout: holdoutRows.length,
       adversarial: adversarialRows.length,
     },
-    augmentation: {
-      copies_per_base_message: TRAIN_AUGMENTATION_COPIES,
-      note: "training bases are rendered with independent amount/date/ref slots",
-    },
-    train_base_class_counts: {
-      NOT_TXN: TRAIN_COUNTS.NOT_TXN,
-      DEBIT: TRAIN_COUNTS.DEBIT,
-      CREDIT: TRAIN_COUNTS.CREDIT,
-    },
-    train_row_class_counts: {
+    train_class_counts: {
       NOT_TXN: trainRows.filter((r) => r.label === "NOT_TXN").length,
       DEBIT: trainRows.filter((r) => r.label === "DEBIT").length,
       CREDIT: trainRows.filter((r) => r.label === "CREDIT").length,

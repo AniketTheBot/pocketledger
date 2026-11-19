@@ -1,300 +1,300 @@
-{"sender":"BARCLAYS","body":"Get GBP30 credited to your account when you switch to Monzo. Apply now.","label":"NOT_TXN"}
-{"sender":"BZ-YESB","body":"Do not share OTP 454306. A debit of Rs. 199999 is pending on your card.","label":"NOT_TXN"}
-{"sender":"AD-ICICI","body":"Aapko Rs.149 cashback milega. Offer activate karein.","label":"NOT_TXN"}
-{"sender":"HSBC","body":"Payment of GBP 20.05 to BOOTS was successful. Balance £536,700.49.","label":"DEBIT"}
-{"sender":"72568","body":"Your Capital One debit card was used for USD 4.00 at UBER on Jan 21.","label":"DEBIT"}
-{"sender":"AX-AXISINB","body":"Received INR 27,999.99 from ANITA DESAI via UPI in your State Bank of India account. Ref 120452302885","label":"CREDIT"}
-{"sender":"LLOYDS","body":"GBP18.00 deposit received in your Monzo account ending 2900.","label":"CREDIT"}
-{"sender":"AX-SBIB","body":"Aapke account se ₹1,299.25 debit hua. Details check karein.","label":"DEBIT"}
-{"sender":"LLOYDS","body":"You have received a payment of £1,500 from EMMA JONES.","label":"CREDIT"}
-{"sender":"JD-YESINB","body":"Your card has been charged Rs.2999 for your MAKEMYTRIP subscription.","label":"DEBIT"}
-{"sender":"BARCLAYS","body":"Cashback of GBP 300 has been credited to your NatWest card.","label":"CREDIT"}
-{"sender":"JD-PNBINB","body":"Intl txn: $9 spent on card XX5989 at NYKAA. INR equivalent ₹1,999. Avl Bal Rs.89,012.25","label":"DEBIT"}
-{"sender":"72568","body":"Spend USD 2500.75 at NETFLIX this weekend and earn USD 180.00 back. Activate now.","label":"NOT_TXN"}
-{"sender":"AD-SBIBNK","body":"Wallet: ₹ 74999 paid to DECATHLON from your KOTAK wallet. Balance Rs 99,876.25","label":"DEBIT"}
-{"sender":"SBIINB","body":"Salary credited: INR14999 by ORBIT SOLUTIONS to A/c XX5988 on 2027-01-27. Bal ₹ 23,450.99","label":"CREDIT"}
-{"sender":"VM-HDFCINB","body":"Balance update: Rs 39999 available in A/c XX0720.","label":"NOT_TXN"}
-{"sender":"MONZO","body":"GBP8 deposit received in your Lloyds Bank account ending 7332.","label":"CREDIT"}
-{"sender":"BARCLAYS","body":"Your Santander UK verification code is 555503. Never share it.","label":"NOT_TXN"}
-{"sender":"VM-SBIB","body":"You have paid ₹ 1099 to JIO using Punjab National Bank UPI. Ref no 467147447702","label":"DEBIT"}
-{"sender":"MONZO","body":"Your food order is on the way. ETA 20 mins.","label":"NOT_TXN"}
-{"sender":"MONZO","body":"Refund from SAINSBURY'S of £99.49 is now in your account. Balance £ 157,020.00.","label":"CREDIT"}
-{"sender":"HDFC","body":"Your bank account is blocked. Send OTP to reactivate immediately.","label":"NOT_TXN"}
-{"sender":"AD-ICICIBNK","body":"INR1,999.10 refund credited to your AXIS wallet. Balance Rs. 45,678.50","label":"CREDIT"}
-{"sender":"BZ-SBIB","body":"Your A/c XX5428 balance is ₹99 as on 22-01-27.","label":"NOT_TXN"}
-{"sender":"AXISBNK","body":"IMPS: ₹ 449 deducted from your account ending 3239 on 15MAR27. Beneficiary SNEHA GUPTA. UPI Ref IMPS445500869","label":"DEBIT"}
-{"sender":"AD-YESBK","body":"Your card has been charged INR 1499.00 for your MYNTRA subscription.","label":"DEBIT"}
-{"sender":"PNBINB","body":"Your subscription of INR124999.00 renews on 28MAY26. It will be charged to your card ending 0215.","label":"NOT_TXN"}
-{"sender":"MONZO","body":"A transaction of GBP 2.10 was authorised on your NatWest card ending 5892.","label":"DEBIT"}
-{"sender":"AX-ICICIINB","body":"471184 is your one time password for Bank of Baroda UPI registration. Do not share.","label":"NOT_TXN"}
-{"sender":"AXISBK","body":"Your OTP for IDFC FIRST Bank card ending 1205 is 468584. Do not share with bank staff.","label":"NOT_TXN"}
-{"sender":"AX-SBIBK","body":"111526 is the OTP for your INR 8,999.90 purchase at CAFE COFFEE DAY. Valid 10 min.","label":"NOT_TXN"}
-{"sender":"BZ-BOBINB","body":"IMPS CR: Rs. 5,499 received in A/c XX3491 from RAHUL SHARMA.","label":"CREDIT"}
-{"sender":"VM-PNBB","body":"IMPS CR of INR1799 received from DEEPIKA REDDY. A/c XX0967. RRN UPI9813456764","label":"CREDIT"}
-{"sender":"VM-PNBBNK","body":"Rs 1,199.50 transferred from your account to NEHA JOSHI via IMPS. Txn ID UPI7325639690","label":"DEBIT"}
-{"sender":"ICICIBK","body":"Wallet: Rs.4499.00 paid to DECATHLON from your BOB wallet. Balance Rs. 45,678.25","label":"DEBIT"}
-{"sender":"PNBBK","body":"Wallet: Rs 1,399.50 paid to TATA CLIQ from your AXIS wallet. Balance Rs.1,78,900.49","label":"DEBIT"}
-{"sender":"JD-PNBINB","body":"NEFT debit: Rs. 229.90 transferred from A/c XX4041 to ARJUN SINGH. Ref no IMPS979370247. Bal Rs 3,12,450.05","label":"DEBIT"}
-{"sender":"VM-KOTAKINB","body":"Venmo request: AMIT PATEL requested Rs 29,999 for dinner last night.","label":"NOT_TXN"}
-{"sender":"KOTAKBNK","body":"You sent ₹ 1,299.49 to DEEPIKA REDDY via UPI. Ref UPI5899903572","label":"DEBIT"}
-{"sender":"AX-AXISBK","body":"OTP 085008 for txn of ₹ 199999 at JIO. Do not share with anyone.","label":"NOT_TXN"}
-{"sender":"AD-KOTAKBNK","body":"Rs.499.9 transferred to your account by WIPRO LTD. Reference NEFT97726030. New balance Rs 23,450.00","label":"CREDIT"}
-{"sender":"NATWEST","body":"Upcoming payment of GBP 75 to M&S on 05/03.","label":"NOT_TXN"}
-{"sender":"BZ-BOBBNK","body":"Refund of ₹ 199.99 received for MYNTRA txn. Credited to a/c XX5573. Bal Rs.89,012.00","label":"CREDIT"}
-{"sender":"BZ-AXISBNK","body":"Your A/c XX8296 was debited. Details in the app.","label":"DEBIT"}
-{"sender":"VM-BOBBK","body":"Earn 5% cashback up to ₹749.25 on MAKEMYTRIP purchases this weekend.","label":"NOT_TXN"}
-{"sender":"TA-IDFCBNK","body":"Wallet: ₹ 499.25 paid to NYKAA from your IDFC wallet. Balance Rs.3,12,450.00","label":"DEBIT"}
-{"sender":"JD-YESINB","body":"Card XX3960 used for Rs. 59,999 at AMAZON on 16 May 2026. Avl Bal Rs 89,012.75","label":"DEBIT"}
-{"sender":"TA-YESB","body":"Refund of Rs 5,999 received for MYNTRA txn. Credited to a/c XX3309. Bal ₹89,012.99","label":"CREDIT"}
-{"sender":"JD-BOBBNK","body":"Refund of ₹ 99.25 received for RELIANCE FRESH txn. Credited to a/c XX4562. Bal Rs 5,678.00","label":"CREDIT"}
-{"sender":"LLOYDS","body":"Your account ****8255 was debited GBP 750.50 on 25 Nov. Available balance GBP 70,350.75.","label":"DEBIT"}
-{"sender":"AX-YESBNK","body":"Your A/c XX3534 balance is Rs.18,999.50 as on 17-06-27.","label":"NOT_TXN"}
-{"sender":"HSBC","body":"NatWest: HARRY WILSON sent you £45. Balance: £ 70,350.00","label":"CREDIT"}
-{"sender":"TA-AXISB","body":"A/c XX0863 debited Rs.1,599.50 - DECATHLON - 2027-06-26. Avl bal Rs. 1,78,900.00","label":"DEBIT"}
-{"sender":"AX-SBIINB","body":"Salary Rs 120 aa gayi hai account mein.","label":"CREDIT"}
-{"sender":"TA-PNBBK","body":"Your one-time password is 014483. Valid for 10 minutes. Never share.","label":"NOT_TXN"}
-{"sender":"HDFCINB","body":"₹15999 transferred from your account to RAHUL SHARMA via IMPS. Txn ID F3LZO9Z4JZ","label":"DEBIT"}
-{"sender":"24273","body":"Bank of America Alert: A debit of $ 2500.99 was made on your card ending 4395 at HOME DEPOT.","label":"DEBIT"}
-{"sender":"HSBC","body":"Refund from UBER of £ 20 is now in your account. Balance £ 737,034.00.","label":"CREDIT"}
-{"sender":"32245","body":"$15.05 off your next TRADER JOE'S order with code SAVE3363.","label":"NOT_TXN"}
-{"sender":"AD-ICICIBNK","body":"Your Yes Bank account will be debited for the annual fee of Rs 199 soon.","label":"NOT_TXN"}
-{"sender":"BARCLAYS","body":"Salary: GBP 20 from ASTRA ZENECA has been credited to your account.","label":"CREDIT"}
-{"sender":"HSBC","body":"Refund from BOOTS of £ 60 is now in your account. Balance £ 103,701.10.","label":"CREDIT"}
-{"sender":"IDFCBNK","body":"Your A/c XX1647 is debited by Rs 120.5 on 04-07-27 for FLIPKART. Bal: ₹ 5,678.99","label":"DEBIT"}
-{"sender":"AX-YESBK","body":"NEFT CR: INR 149.05 received from NIMBUS LABS. A/c XX3108. Reference 451465643641","label":"CREDIT"}
-{"sender":"VM-KOTAK","body":"Sent Rs 549 to NEHA JOSHI via UPI. Txn ID UPI8519709239. Avl Bal Rs.3,12,450.00","label":"DEBIT"}
-{"sender":"HSBC","body":"Payment of £250 to M&S was successful. Balance £267,036.50.","label":"DEBIT"}
-{"sender":"JD-PNBINB","body":"Rs. 149999 spent on your Bank of Baroda debit card at ZEPTO on 19NOV27.","label":"DEBIT"}
-{"sender":"AD-SBI","body":"Your Axis Bank card ending 7581 has an outstanding balance of Rs 649.00.","label":"NOT_TXN"}
-{"sender":"YES","body":"Your EMI of INR 799 will be debited on 27 Feb 2026. Keep sufficient balance.","label":"NOT_TXN"}
-{"sender":"MONZO","body":"A transaction of £ 20 was made at ASOS on your NatWest debit card ending 2097. Available balance GBP 17,034.99.","label":"DEBIT"}
-{"sender":"BZ-KOTAKBNK","body":"Your card ending 4238 will be debited ₹ 99.49 on 25/01/2027 for MAKEMYTRIP.","label":"NOT_TXN"}
-{"sender":"NATWEST","body":"Incoming payment: GBP9 from HARRY WILSON on 13 Jan 2026.","label":"CREDIT"}
-{"sender":"LLOYDS","body":"Your account was credited with £ 25 by ACME LTD. Balance £ 56,280.00.","label":"CREDIT"}
-{"sender":"TA-HDFCBK","body":"Rs. 549.5 has been debited from your ICICI Bank account towards IRCTC.","label":"DEBIT"}
-{"sender":"JD-IDFCBNK","body":"UPI txn of ₹2,199.05 to BOOKMYSHOW is successful. Ref 077127386360. Avl Bal INR1,78,900.49","label":"DEBIT"}
-{"sender":"AX-HDFC","body":"You have received INR2199.50 from NEHA JOSHI in your a/c XX6431 via UPI. RRN HDFC5175534358","label":"CREDIT"}
-{"sender":"JD-PNBBK","body":"Interest of ₹ 4,499.99 credited to A/c XX5202. Avl Bal ₹ 2,45,678.50","label":"CREDIT"}
-{"sender":"VM-ICICIBNK","body":"INR 11,999 was received from ROHAN MEHTA via UPI. UTR UPI3509774136.","label":"CREDIT"}
-{"sender":"24273","body":"Your EMI of USD 35.49 is scheduled for May 24 from A/c XX7713.","label":"NOT_TXN"}
-{"sender":"32245","body":"Refund: USD1500 from STARBUCKS credited to your card ending 8085.","label":"CREDIT"}
-{"sender":"AD-SBIBK","body":"UPI txn of INR 120 to CAFE COFFEE DAY is successful. Txn ID UPI4314149949. Avl Bal ₹ 45,678.50","label":"DEBIT"}
-{"sender":"JD-HDFCBK","body":"You have received a payment of Rs. 699.90 from DEEPIKA REDDY in your account ending 0510.","label":"CREDIT"}
-{"sender":"CHASE","body":"Your pre-approved credit limit is $ 5.50. Activate in the app today.","label":"NOT_TXN"}
-{"sender":"NATWEST","body":"Win a free iPhone! Just pay GBP 6.00 shipping. Click here.","label":"NOT_TXN"}
-{"sender":"NATWEST","body":"Earn £ 120.00 cash back on your next TFL purchase. Activate now.","label":"NOT_TXN"}
-{"sender":"JD-BOBBNK","body":"Aapke account mein balance Rs. 34999 hai.","label":"NOT_TXN"}
-{"sender":"IDFCBK","body":"Rs.699.00 paid to BLINKIT from A/c XX6446 on 20MAR27. Txn ID NEFT24348555","label":"DEBIT"}
-{"sender":"AD-PNBB","body":"NEFT CR: Rs. 1,399.50 received from TCS LTD. A/c XX8023. RRN HDFC7322594687","label":"CREDIT"}
-{"sender":"VM-KOTAKBNK","body":"Wallet: Rs. 19,999.10 paid to BLINKIT from your ICICI wallet. Balance ₹ 45,678.05","label":"DEBIT"}
-{"sender":"HDFC","body":"A/c XX5140 debited Rs.599 - TATA CLIQ - 09.04.26. Avl bal ₹99,876.75","label":"DEBIT"}
-{"sender":"LLOYDS","body":"Direct Debit ASOS GBP75 paid from your account. Balance now GBP103,701.99.","label":"DEBIT"}
-{"sender":"LLOYDS","body":"VODAFONE UK £ 45 8 Feb. Your balance is £267,036.10.","label":"DEBIT"}
-{"sender":"AX-AXISBNK","body":"Wallet: Rs. 21,999.25 paid to FLIPKART from your ICICI wallet. Balance Rs.2,45,678.99","label":"DEBIT"}
-{"sender":"HDFCINB","body":"Your EMI of Rs 12,499.25 is scheduled for 01/03/2026 from A/c XX2716.","label":"NOT_TXN"}
-{"sender":"AX-AXISBK","body":"Your Uber ride is arriving now. Driver ANITA DESAI.","label":"NOT_TXN"}
-{"sender":"AX-IDFCBNK","body":"₹29999.25 paid from your HDFC wallet to JIO. New balance Rs 2,45,678.49.","label":"DEBIT"}
-{"sender":"MONZO","body":"Your Santander UK verification code is 996132. Never share it.","label":"NOT_TXN"}
-{"sender":"AD-YESBNK","body":"Received ₹ 499.49 from KAVYA IYER via UPI in your ICICI Bank account. Ref no NEFT05402087","label":"CREDIT"}
-{"sender":"692632","body":"Your paycheck of $ 5.75 was deposited into account ending 2101.","label":"CREDIT"}
-{"sender":"JD-YESINB","body":"IMPS CR Rs. 2,999.00 from NEHA JOSHI to A/c XX3603. Ref no WV4I5CXQDR. Bal INR1,234.00","label":"CREDIT"}
-{"sender":"VM-AXISBK","body":"A debit alert: a transaction was authorised on your card ending 8959.","label":"DEBIT"}
-{"sender":"BARCLAYS","body":"Your Santander UK card was charged £15 at SCREWFIX.","label":"DEBIT"}
-{"sender":"24273","body":"Your card ending 6840 will be charged USD 45.99 on 01/24 for WALMART.","label":"NOT_TXN"}
-{"sender":"BARCLAYS","body":"Refund from TESCO of GBP500 is now in your account. Balance £299,628.99.","label":"CREDIT"}
-{"sender":"72568","body":"Recurring payment of $ 99 to WHOLE FOODS was debited from your account.","label":"DEBIT"}
-{"sender":"BZ-KOTAK","body":"Your Punjab National Bank account will be debited for the annual fee of Rs. 4499.49 soon.","label":"NOT_TXN"}
-{"sender":"692632","body":"Citibank Alert: A debit of $ 18 was made on your card ending 8193 at SPOTIFY.","label":"DEBIT"}
-{"sender":"AD-ICICIBK","body":"UPI credit: INR199.10 received from ROHAN MEHTA. Avl Bal ₹ 2,450.49","label":"CREDIT"}
-{"sender":"AX-HDFCBNK","body":"Deposit of ₹ 7,499.9 to your account ending 9587 is successful. UPI Ref IMPS574739240","label":"CREDIT"}
-{"sender":"PNBB","body":"Rs. 2,199.25 has been debited from your Axis Bank account towards DECATHLON.","label":"DEBIT"}
-{"sender":"VM-PNBB","body":"Aapko Rs 6,999.50 cashback mila hai. Account mein credit ho gaya.","label":"CREDIT"}
-{"sender":"VM-PNBBNK","body":"Rs 1,49,999.75 deposited to A/c XX3310 at AHMEDABAD branch on 09JAN27. Bal Rs.12,450.00","label":"CREDIT"}
-{"sender":"IDFCBNK","body":"Get paid ₹399.50 for every friend you refer. Start earning today.","label":"NOT_TXN"}
-{"sender":"NATWEST","body":"Security code 723963 for your GBP1200.05 purchase at SAINSBURY'S. Expires in 5 minutes.","label":"NOT_TXN"}
-{"sender":"BOFA","body":"A debit alert: a transaction was authorised on your card ending 3698.","label":"DEBIT"}
-{"sender":"BZ-IDFCB","body":"Aapko INR 74,999.25 cashback mila hai. Account mein credit ho gaya.","label":"CREDIT"}
-{"sender":"TA-PNB","body":"Rs. 3999.99 has been debited from your Punjab National Bank account ending 5789 towards CROMA. Available balance Rs.23,450.49.","label":"DEBIT"}
-{"sender":"72568","body":"Chase: Your verification code is 220773. Never share this code.","label":"NOT_TXN"}
-{"sender":"BOFA","body":"Your card ending 7558 was charged USD 150.75 at NETFLIX.","label":"DEBIT"}
-{"sender":"BZ-IDFCBNK","body":"Rs.2999.00 deposited to A/c XX7840 at DELHI branch on 18/03/2027. Bal INR2,45,678.50","label":"CREDIT"}
-{"sender":"JD-HDFC","body":"Congratulations! You are eligible for a loan of Rs.5,00,000.25 at 10.5%. Apply now.","label":"NOT_TXN"}
-{"sender":"BARCLAYS","body":"You received GBP99.49 from CHLOE DAVIES. Your balance is GBP 299,628.75.","label":"CREDIT"}
+{"sender":"AD-IDFCINB","body":"Flat Rs. 14,999.99 off on your next MAKEMYTRIP order. Use code PNB2721.","label":"NOT_TXN"}
+{"sender":"TA-YESBNK","body":"OTP 454306 for IMPS transfer of Rs. 199999 from A/c XX1191. Valid 10 min.","label":"NOT_TXN"}
+{"sender":"TA-BOBINB","body":"Your available balance is Rs 1,399.9. No debits or credits since your last statement.","label":"NOT_TXN"}
+{"sender":"MONZO","body":"£ 7.99 paid to M&S from your account. New balance GBP 937,350.00.","label":"DEBIT"}
+{"sender":"TA-KOTAKBNK","body":"Your card was used for a purchase of Rs. 49.05 at CAFE COFFEE DAY.","label":"DEBIT"}
+{"sender":"LLOYDS","body":"HSBC: LUCY THOMAS sent you GBP 1200. Balance: £7,350.49","label":"CREDIT"}
+{"sender":"IDFCBNK","body":"Cashback of Rs.12999.50 credited to your card ending 0857.","label":"CREDIT"}
+{"sender":"TA-IDFCBK","body":"Your card was used for a purchase of Rs. 1099.00 at AIRTEL.","label":"DEBIT"}
+{"sender":"BOFA","body":"Tax refund of $ 5.05 was deposited to your account ending 3108.","label":"CREDIT"}
+{"sender":"BOFA","body":"Wells Fargo Alert: A debit of USD 99.10 was made on your card ending 7036 at STARBUCKS.","label":"DEBIT"}
+{"sender":"NATWEST","body":"Cashback of GBP8.00 has been credited to your Lloyds Bank card.","label":"CREDIT"}
+{"sender":"VM-KOTAKB","body":"Rs. 7,999 transferred to VIKRAM RAO via IMPS. UTR UPI5508949686. New balance Rs.12,450.49","label":"DEBIT"}
+{"sender":"BOFA","body":"Your pre-approved credit limit is USD 50.49. Activate in the app today.","label":"NOT_TXN"}
+{"sender":"JD-BOBB","body":"UPI txn of Rs 7999.10 to BIGBASKET is successful. RRN IMPS207814272. Avl Bal Rs 2,45,678.00","label":"DEBIT"}
+{"sender":"NATWEST","body":"Received £50.00 from OLIVER SMITH in your HSBC account. Balance £337,035.10.","label":"CREDIT"}
+{"sender":"AX-KOTAKBK","body":"Your A/c XX0720 balance is Rs 39999 as on 03-04-26.","label":"NOT_TXN"}
+{"sender":"AX-IDFCBNK","body":"Cashback of Rs. 549.05 credited to your card ending 1660.","label":"CREDIT"}
+{"sender":"VM-AXISBK","body":"IMPORTANT: 788481 is your OTP to authorize a debit of INR299.5. Never share.","label":"NOT_TXN"}
+{"sender":"BZ-IDFCINB","body":"Aapke account se Rs.2,799.5 debit hua. Details check karein.","label":"DEBIT"}
+{"sender":"MONZO","body":"Can you send me GBP5? I'll return it tonight.","label":"NOT_TXN"}
+{"sender":"BARCLAYS","body":"£1,500 deposit received in your HSBC account ending 2691.","label":"CREDIT"}
+{"sender":"AD-AXISINB","body":"085008 is the OTP for your ₹ 199999 purchase at JIO. Valid 10 min.","label":"NOT_TXN"}
+{"sender":"CHASE","body":"Zelle: JANE SMITH sent you USD50.00. New balance $356,048.49.","label":"CREDIT"}
+{"sender":"IDFCBNK","body":"Bal ₹99 in A/c XX5428. No transaction since last update.","label":"NOT_TXN"}
+{"sender":"AD-IDFCBK","body":"Wallet: INR6,999.25 paid to MYNTRA from your PNB wallet. Balance INR 67,890.00","label":"DEBIT"}
+{"sender":"CHASE","body":"ACH debit $150.49 to CVS on 2027-06-22. Balance USD 209,360.49.","label":"DEBIT"}
+{"sender":"BZ-KOTAK","body":"Your subscription of INR124999.00 renews on 28MAY26. It will be charged to your card ending 0215.","label":"NOT_TXN"}
+{"sender":"TA-ICICIB","body":"Aapke account se INR 39,999.90 debit ho gaya hai. Available balance ₹1,234.99.","label":"DEBIT"}
+{"sender":"BZ-PNBINB","body":"OTP 471184 for txn of INR649.50 at BIGBASKET. Do not share with anyone.","label":"NOT_TXN"}
+{"sender":"VM-SBI","body":"Your OTP for IDFC FIRST Bank card ending 1205 is 468584. Do not share with bank staff.","label":"NOT_TXN"}
 {"sender":"BOFA","body":"Your Bank of America card offer: spend $35.00 and get USD300 back. Activate by 06/26/26.","label":"NOT_TXN"}
-{"sender":"VM-KOTAKINB","body":"Your OTP for Bank of Baroda card ending 9474 is 788481. Do not share with bank staff.","label":"NOT_TXN"}
-{"sender":"CHASE","body":"Your paycheck of USD 15 was deposited into account ending 3769.","label":"CREDIT"}
-{"sender":"JD-IDFCB","body":"Rs. 49999.49 deposited to A/c XX1166 at MUMBAI branch on 05/04/2026. Bal INR1,12,345.75","label":"CREDIT"}
-{"sender":"JD-HDFCINB","body":"Deposited ₹199999.25 to A/c XX5244. Txn ID HDFC1519619358. Bal INR23,450.10","label":"CREDIT"}
-{"sender":"MONZO","body":"Your direct debit of GBP 45 to BOOTS is due on 17 Aug.","label":"NOT_TXN"}
-{"sender":"LLOYDS","body":"£99 paid to VODAFONE UK from your account. New balance GBP 3,702.10.","label":"DEBIT"}
-{"sender":"AD-BOB","body":"VIKRAM RAO, are we still meeting at 7? Let me know.","label":"NOT_TXN"}
-{"sender":"TA-KOTAKBK","body":"Deposited Rs. 14,999.99 to A/c XX9056. Txn ID XOP81KP0R8. Bal Rs 3,12,450.99","label":"CREDIT"}
-{"sender":"AXIS","body":"Upcoming debit of INR 6499.75 on 04.05.27 for IRCTC. Ensure sufficient balance.","label":"NOT_TXN"}
-{"sender":"MONZO","body":"We've added GBP50.50 to your account. New balance GBP3,702.75.","label":"CREDIT"}
-{"sender":"PNBINB","body":"Rs.549.25 has been credited to your Bank of Baroda account ending 2954 by SURESH KUMAR. Available balance Rs.2,450.00.","label":"CREDIT"}
-{"sender":"BZ-YESBNK","body":"Intl txn: USD 300 spent on card XX7192 at MYNTRA. INR equivalent Rs. 4499.05. Avl Bal ₹12,450.25","label":"DEBIT"}
-{"sender":"AX-HDFCINB","body":"You received INR 49999 in your account from SURESH KUMAR. Txn ID NEFT99389098","label":"CREDIT"}
-{"sender":"32245","body":"Final reminder: update your details or your account will be closed. Click here.","label":"NOT_TXN"}
-{"sender":"BARCLAYS","body":"Your Barclays card was charged GBP 200.49 at ASOS.","label":"DEBIT"}
-{"sender":"BOFA","body":"Your subscription of $45.99 renews on 04/17. It will be charged to your card ending 2392.","label":"NOT_TXN"}
-{"sender":"IDFCINB","body":"Your EMI of Rs 1999 is due on 09NOV26. Pay now to avoid late fees.","label":"NOT_TXN"}
-{"sender":"LLOYDS","body":"Your account was credited with £300 by ASTRA ZENECA. Balance £ 299,628.00.","label":"CREDIT"}
-{"sender":"TA-HDFC","body":"Insurance premium of Rs 1599 is due. Pay now to avoid penalty.","label":"NOT_TXN"}
-{"sender":"BZ-AXISINB","body":"A/c XX9937 debited ₹799.99 - ZOMATO - 12FEB26. Avl bal Rs 5,678.25","label":"DEBIT"}
-{"sender":"BZ-ICICI","body":"UPI txn of Rs. 7,999 to MYNTRA is successful. UTR UPI5508949686. Avl Bal Rs.12,450.49","label":"DEBIT"}
-{"sender":"24273","body":"Direct deposit of $ 6 from INITECH posted to your account ending 9164.","label":"CREDIT"}
-{"sender":"NATWEST","body":"You spent GBP5.00 at VODAFONE UK. Balance: £299,628.25","label":"DEBIT"}
-{"sender":"AX-SBIBNK","body":"Your card has been unblocked. You can use it now.","label":"NOT_TXN"}
-{"sender":"LLOYDS","body":"Salary: GBP1,500 from ACME LTD has been credited to your account.","label":"CREDIT"}
-{"sender":"NATWEST","body":"A faster payment of £35.05 was received into your account ending ****8995. Balance £267,036.05.","label":"CREDIT"}
-{"sender":"TA-YESBNK","body":"Your account has been debited by Rs 3999 on 25.08.27.","label":"DEBIT"}
-{"sender":"AD-YESBK","body":"Flat ₹549.00 off on your next ZOMATO order. Use code ICICI8221.","label":"NOT_TXN"}
-{"sender":"32245","body":"Recurring payment of USD250 to CHIPOTLE was debited from your account.","label":"DEBIT"}
-{"sender":"SBI","body":"Win cashback up to ₹10,999.00 on every UPI payment. Click here to activate.","label":"NOT_TXN"}
-{"sender":"AX-KOTAKBK","body":"INR2,999.99 deducted from your ICICI Bank account towards DOMINOS on 18 Feb 2026.","label":"DEBIT"}
-{"sender":"NATWEST","body":"A transaction of GBP 15.49 was made at ASOS on your Barclays debit card ending 1015. Available balance £ 56,280.00.","label":"DEBIT"}
-{"sender":"MONZO","body":"Payment of GBP300.49 to ASOS was successful. Balance £137,034.05.","label":"DEBIT"}
-{"sender":"BZ-YES","body":"₹ 849.25 has been debited from your Kotak Mahindra Bank account ending 8027 towards DMART. Available balance Rs.2,450.00.","label":"DEBIT"}
-{"sender":"TA-IDFCBK","body":"Recharge now and get Rs.17499.00 cashback instantly. Offer valid today only.","label":"NOT_TXN"}
-{"sender":"VM-YES","body":"ATM WDL INR29,999.5 from A/c XX7555 at JAIPUR. Bal Rs 45,678.00","label":"DEBIT"}
-{"sender":"24273","body":"BOFA: USD150 debit card purchase at CHIPOTLE. Avail bal $138,268.00","label":"DEBIT"}
-{"sender":"LLOYDS","body":"Win a free iPhone! Just pay GBP9.00 shipping. Click here.","label":"NOT_TXN"}
-{"sender":"CHASE","body":"You received a refund of $ 5.49 from DOORDASH. Avail bal USD49,800.00","label":"CREDIT"}
-{"sender":"24273","body":"Use code 224299 to authorize a $ 18 purchase at NETFLIX. We never ask for codes.","label":"NOT_TXN"}
-{"sender":"AD-HDFCBNK","body":"Deposited ₹ 1,999.10 to A/c XX6329. UTR NEFT64822353. Bal INR 99,876.49","label":"CREDIT"}
-{"sender":"692632","body":"Upcoming debit of USD 180.00 from account ending 3451 on 04/13/26.","label":"NOT_TXN"}
-{"sender":"BZ-ICICIBK","body":"Your ICICI Bank account will be debited for the annual fee of Rs. 39,999 soon.","label":"NOT_TXN"}
-{"sender":"HSBC","body":"NatWest: JAMES TAYLOR sent you £ 18. Balance: £56,280.75","label":"CREDIT"}
-{"sender":"YESINB","body":"₹ 99999 withdrawn from A/c XX3051 at ATM AHMEDABAD on 06/12/2027. Bal Rs 5,678.05","label":"DEBIT"}
-{"sender":"AX-IDFCB","body":"Use 5369 to verify your Yes Bank login. OTP valid 5 min. Do not share.","label":"NOT_TXN"}
-{"sender":"72568","body":"Card purchase: USD20 at COSTCO. New balance $ 9,800.49.","label":"DEBIT"}
-{"sender":"HSBC","body":"Limited time: £ 30 bonus when you open a new HSBC account.","label":"NOT_TXN"}
+{"sender":"AX-ICICIB","body":"₹749.50 was received from PRIYA NAIR via UPI. Txn ID IMPS417156715.","label":"CREDIT"}
+{"sender":"32245","body":"Refund: $ 1,500.00 from STARBUCKS credited to your card ending 5463.","label":"CREDIT"}
+{"sender":"AX-IDFCB","body":"Card XX7827 used for Rs. 19999 at MYNTRA on 10.06.26. Avl Bal ₹1,12,345.99","label":"DEBIT"}
+{"sender":"AD-BOBBNK","body":"Rs 999 withdrawn from A/c XX7210 at ATM KOCHI on 06.08.26. Bal Rs.67,890.00","label":"DEBIT"}
+{"sender":"JD-IDFCBK","body":"Intl txn: USD20.10 spent on card XX5768 at CROMA. INR equivalent INR549.90. Avl Bal Rs. 2,450.00","label":"DEBIT"}
+{"sender":"VM-YESB","body":"Your account has been debited by INR21999.00 on 22-01-26.","label":"DEBIT"}
+{"sender":"AX-SBIINB","body":"111526 is your verification code for a payment of INR 8,999.90 to CAFE COFFEE DAY. Never share this code.","label":"NOT_TXN"}
+{"sender":"BARCLAYS","body":"Your account ****4146 was debited GBP300.99 on 06-08-26. Available balance £937,350.50.","label":"DEBIT"}
+{"sender":"692632","body":"He spent USD9.10 on groceries last week.","label":"NOT_TXN"}
+{"sender":"BOFA","body":"Refund: USD 12 from DOORDASH credited to your card ending 3058.","label":"CREDIT"}
+{"sender":"NATWEST","body":"Upcoming payment of GBP 75 to M&S on 05/03.","label":"NOT_TXN"}
+{"sender":"692632","body":"Zelle: JANE SMITH sent you $180.00. New balance $356,048.49.","label":"CREDIT"}
+{"sender":"BZ-BOBBNK","body":"Debit alert: ₹749.49 debited from your ICICI Bank account on 13.12.26.","label":"DEBIT"}
+{"sender":"AD-AXISBK","body":"Special offer: flat ₹749.25 off on electricity bills. Use code SAVE1062.","label":"NOT_TXN"}
+{"sender":"AD-PNBBK","body":"You have paid Rs. 849.00 to NYKAA using Kotak Mahindra Bank UPI. Txn ID IMPS268852483","label":"DEBIT"}
+{"sender":"CHASE","body":"Your card has been charged $250.50 for your COSTCO subscription.","label":"DEBIT"}
+{"sender":"JD-SBIBNK","body":"Aapke account mein ₹3,999 credit ho gaya. Bal Rs 45,678.10.","label":"CREDIT"}
+{"sender":"MONZO","body":"We've added GBP18.05 to your account. New balance GBP299,628.10.","label":"CREDIT"}
+{"sender":"JD-AXISBK","body":"ATM WDL ₹21999.50 from A/c XX3388 at BENGALURU. Bal Rs. 1,234.00","label":"DEBIT"}
+{"sender":"BOBINB","body":"Aapka account balance Rs.18,999.50 hai.","label":"NOT_TXN"}
+{"sender":"AD-AXISBNK","body":"IMPS CR of Rs.17499.05 received from VIKRAM RAO. A/c XX5075. UTR NEFT19461437","label":"CREDIT"}
+{"sender":"24273","body":"ATM withdrawal $150 from acct ending 4175. Available balance USD 138,268.05.","label":"DEBIT"}
+{"sender":"BARCLAYS","body":"Your account was credited with £60 by ASTRA ZENECA. Balance £337,035.05.","label":"CREDIT"}
+{"sender":"SBIB","body":"Your Bank of Baroda OTP is 014483 for a transaction of ₹ 39,999 on card ending 4909.","label":"NOT_TXN"}
+{"sender":"AX-AXISB","body":"Aapke account se INR10999 debit hua. Details check karein.","label":"DEBIT"}
+{"sender":"LLOYDS","body":"Your card has been charged £8 for your PRET A MANGER subscription.","label":"DEBIT"}
+{"sender":"AX-SBIB","body":"Salary credited: ₹59,999.50 by INFOSYS LTD to A/c XX6390 on 06.03.26. Bal Rs 18,760.75","label":"CREDIT"}
+{"sender":"32245","body":"Get paid $15.05 for every friend you refer. Start today.","label":"NOT_TXN"}
+{"sender":"TA-BOBBK","body":"Your EMI of Rs 199 is scheduled for 17-12-26 from A/c XX1813.","label":"NOT_TXN"}
+{"sender":"AX-AXIS","body":"Your salary of Rs 199.50 has been credited to Kotak Mahindra Bank A/c XX1414.","label":"CREDIT"}
+{"sender":"72568","body":"Tax refund of $60.00 was deposited to your account ending 3603.","label":"CREDIT"}
+{"sender":"AD-ICICIB","body":"Wallet: ₹ 14,999 paid to DMART from your AXIS wallet. Balance INR2,45,678.00","label":"DEBIT"}
+{"sender":"BZ-AXISINB","body":"Refund of INR 8,999.99 received for ZEPTO txn. Credited to a/c XX8866. Bal INR 1,234.99","label":"CREDIT"}
+{"sender":"MONZO","body":"Your account ****6276 was debited £ 450.75 on 20 Sep 2027. Available balance GBP17,034.75.","label":"DEBIT"}
+{"sender":"VM-SBIBK","body":"Txn alert: ₹27,999.00 debited from your KOTAK Bank A/c XX9872 at 21:24. Bal Rs.12,450.50","label":"DEBIT"}
+{"sender":"CHASE","body":"Your Citibank debit card was used for USD4.00 at STARBUCKS on Dec 4.","label":"DEBIT"}
+{"sender":"VM-HDFCBK","body":"Bal Rs 649.00 in A/c XX7581. No transaction since last update.","label":"NOT_TXN"}
+{"sender":"HDFC","body":"Your loan EMI of INR 799 is due on 27 Feb 2026. Pay now to avoid late fees.","label":"NOT_TXN"}
+{"sender":"AD-HDFCINB","body":"₹ 3,299.00 deducted from your HDFC Bank account towards AIRTEL on 13 Dec 2027.","label":"DEBIT"}
+{"sender":"BZ-PNBBNK","body":"Your account will be debited for the annual fee of ₹ 99.49 soon.","label":"NOT_TXN"}
+{"sender":"CHASE","body":"Tax refund of $25 was deposited to your account ending 3783.","label":"CREDIT"}
+{"sender":"692632","body":"Zelle: SARAH MILLER sent you $8. New balance $209,360.49.","label":"CREDIT"}
+{"sender":"CHASE","body":"A debit alert: a transaction was authorised on your card ending 2834.","label":"DEBIT"}
+{"sender":"24273","body":"ATM withdrawal $1200.00 from acct ending 1159. Available balance $ 1,249,800.00.","label":"DEBIT"}
+{"sender":"AD-HDFCINB","body":"Refund of INR14999 received for ZEPTO txn. Credited to a/c XX9509. Bal INR 5,678.25","label":"CREDIT"}
+{"sender":"VM-PNBBNK","body":"IMPS CR: Rs.1,099.00 received in A/c XX0172 from PRIYA NAIR.","label":"CREDIT"}
+{"sender":"BARCLAYS","body":"Incoming payment: £3 from GEORGE EVANS on 08/10.","label":"CREDIT"}
+{"sender":"32245","body":"Your autopay of USD 35.49 will be debited on May 24. Ensure funds are available.","label":"NOT_TXN"}
+{"sender":"72568","body":"You received a refund of $45.05 from NETFLIX. Avail bal $356,048.05","label":"CREDIT"}
+{"sender":"AD-KOTAKB","body":"INR 12999 debited from a/c XX6068 on 11.06.26 to UPI/DEEPIKA REDDY/KOTAK. Avl Bal ₹1,78,900.10","label":"DEBIT"}
+{"sender":"AD-SBI","body":"Rs. 2,999.50 refund credited to your PNB wallet. Balance Rs 45,678.49","label":"CREDIT"}
+{"sender":"72568","body":"BOFA: You've won $ 20.99 in our rewards draw! Claim now.","label":"NOT_TXN"}
+{"sender":"NATWEST","body":"Win a free iPhone! Just pay GBP 6.00 shipping. Click here.","label":"NOT_TXN"}
+{"sender":"AD-KOTAK","body":"Your Kotak Mahindra Bank account will be debited for the annual fee of Rs.3,799 soon.","label":"NOT_TXN"}
+{"sender":"JD-BOBB","body":"Available balance: Rs. 34999 in A/c XX5520. No new transactions.","label":"NOT_TXN"}
+{"sender":"32245","body":"Card purchase: USD 150.00 at TARGET. New balance USD449,380.25.","label":"DEBIT"}
+{"sender":"AD-BOBB","body":"You received INR3,299 in your account from SNEHA GUPTA. UTR HDFC1195103869","label":"CREDIT"}
+{"sender":"TA-HDFCINB","body":"Sent Rs 549 to SURESH KUMAR via UPI. Ref no 645026752615. Avl Bal Rs 89,012.75","label":"DEBIT"}
+{"sender":"BARCLAYS","body":"You spent GBP60.50 at BOOTS. Balance: £ 17,034.25","label":"DEBIT"}
+{"sender":"LLOYDS","body":"A transaction of £ 300.99 was authorised on your Monzo card ending 7764.","label":"DEBIT"}
+{"sender":"CHASE","body":"Your card ending 1887 was charged USD1,200 at AMAZON.COM.","label":"DEBIT"}
+{"sender":"JD-IDFCINB","body":"INR 449 paid from your IDFC wallet to CAFE COFFEE DAY. New balance Rs 67,890.00.","label":"DEBIT"}
+{"sender":"MONZO","body":"Available balance: £ 40 in your account ending 3504. No new transactions.","label":"NOT_TXN"}
+{"sender":"AX-SBIINB","body":"Your Uber ride is arriving now. Driver ANITA DESAI.","label":"NOT_TXN"}
+{"sender":"HSBC","body":"Payment of GBP50 to SAINSBURY'S was successful. Balance GBP299,628.00.","label":"DEBIT"}
+{"sender":"MONZO","body":"Your Santander UK verification code is 996132. Never share it.","label":"NOT_TXN"}
+{"sender":"JD-YES","body":"Dividend of Rs 3,999.9 credited to your demat account ending 3158.","label":"CREDIT"}
+{"sender":"JD-AXISBNK","body":"IMPS CR of Rs 499 received from DEEPIKA REDDY. A/c XX7107. RRN A3XGL1W2NE","label":"CREDIT"}
+{"sender":"VM-AXISB","body":"₹24,999 refund credited to your ICICI wallet. Balance Rs.99,876.10","label":"CREDIT"}
+{"sender":"32245","body":"CAPONE: A debit of USD200.75 posted to your checking account ending 1030 on 01/16/26.","label":"DEBIT"}
+{"sender":"VM-KOTAK","body":"Sent INR 12499 to KAVYA IYER via UPI. Ref 936930131676. Avl Bal ₹ 23,450.05","label":"DEBIT"}
+{"sender":"24273","body":"Your card ending 6840 will be charged USD 45.99 on 01/24 for WALMART.","label":"NOT_TXN"}
+{"sender":"VM-IDFCBK","body":"Deposited ₹ 229 to A/c XX3104. Ref IMPS175086317. Bal Rs.12,450.00","label":"CREDIT"}
+{"sender":"AD-AXISBNK","body":"You sent INR44999.25 to PRIYA NAIR via UPI. UPI Ref NEFT96047204","label":"DEBIT"}
+{"sender":"TA-HDFCBNK","body":"Reminder: Rs. 4499.49 will be deducted from your account on 18.03.27.","label":"NOT_TXN"}
+{"sender":"AX-PNBBNK","body":"NEFT debit: Rs.9,999 transferred from A/c XX5388 to DEEPIKA REDDY. Reference JNU7UJPWO2. Bal Rs. 99,876.99","label":"DEBIT"}
+{"sender":"692632","body":"Your paycheck of USD99 was deposited into account ending 1171.","label":"CREDIT"}
+{"sender":"BZ-ICICIINB","body":"Received ₹ 24,999.00 from SURESH KUMAR via UPI in your Yes Bank account. Txn ID NEFT75015150","label":"CREDIT"}
+{"sender":"AX-IDFCBK","body":"Debit alert: ₹ 18999.49 debited from your IDFC FIRST Bank account on 25OCT26.","label":"DEBIT"}
+{"sender":"AD-PNBB","body":"Rs 29,999 was received from DEEPIKA REDDY via UPI. Reference NEFT39104321.","label":"CREDIT"}
+{"sender":"VM-PNBBNK","body":"Rs.399.25 deposited to A/c XX6541 at BENGALURU branch on 01 Nov 2026. Bal Rs. 1,12,345.49","label":"CREDIT"}
+{"sender":"TA-YES","body":"Aapko ₹399.50 cashback milega. Offer activate karein.","label":"NOT_TXN"}
+{"sender":"LLOYDS","body":"Your one-time code is 723963. Do not share it with anyone, even bank staff.","label":"NOT_TXN"}
+{"sender":"BOFA","body":"ACH debit USD 9 to CVS on 2027-09-09. Balance $138,268.25.","label":"DEBIT"}
+{"sender":"AD-BOBINB","body":"Aapke account mein Rs 99,999.49 credit ho gaya. Bal ₹2,45,678.49.","label":"CREDIT"}
+{"sender":"MONZO","body":"Direct Debit M&S £ 450.25 paid from your account. Balance now GBP 3,702.00.","label":"DEBIT"}
+{"sender":"692632","body":"Capital One: Your verification code is 224299. Never share this code.","label":"NOT_TXN"}
+{"sender":"AX-IDFC","body":"IMPS: Rs.1,899.25 deducted from your account ending 2503 on 23-12-26. Beneficiary DEEPIKA REDDY. Ref UPI9339859051","label":"DEBIT"}
+{"sender":"BZ-BOBB","body":"INR99,999.00 deposited to A/c XX7621 at CHENNAI branch on 2026-12-01. Bal Rs 1,12,345.49","label":"CREDIT"}
+{"sender":"AD-ICICIB","body":"Win cashback up to INR9,999 on every UPI payment. Click here to activate.","label":"NOT_TXN"}
+{"sender":"VM-PNBBK","body":"IMPS CR of ₹ 12,499 received from DEEPIKA REDDY. A/c XX0241. Ref UPI2924736131","label":"CREDIT"}
+{"sender":"BARCLAYS","body":"Get £ 120.00 off your next TFL order. Use code SAVE4307.","label":"NOT_TXN"}
+{"sender":"32245","body":"Your card ending 4983 will be charged USD30 on 01/08/27 for BEST BUY.","label":"NOT_TXN"}
+{"sender":"JD-SBIBNK","body":"You received Rs.14,999.9 in your account from ARJUN SINGH. Reference IMPS098007232","label":"CREDIT"}
+{"sender":"VM-HDFC","body":"Rs. 5,499.50 has been credited to your IDFC FIRST Bank account ending 4092 by ROHAN MEHTA. Available balance ₹3,12,450.50.","label":"CREDIT"}
+{"sender":"VM-IDFCB","body":"Dividend of INR49,999.25 credited to your demat account ending 8901.","label":"CREDIT"}
+{"sender":"BARCLAYS","body":"Your card ending 5567 will be charged GBP 45 on 17 Aug for BOOTS. Manage in app.","label":"NOT_TXN"}
+{"sender":"IDFCBNK","body":"INR 249.9 paid to DECATHLON from A/c XX8296 on 28.11.26. Reference UPI0743092294","label":"DEBIT"}
+{"sender":"ICICIBK","body":"The courier said he paid the customs fee of ₹17,499.","label":"NOT_TXN"}
+{"sender":"BZ-AXISB","body":"Salary credited: Rs.499.9 by WIPRO LTD to A/c XX1800 on 12JUL26. Bal Rs 23,450.00","label":"CREDIT"}
+{"sender":"AX-ICICI","body":"Your payment of INR 6499.75 to IRCTC is scheduled for 04.05.27.","label":"NOT_TXN"}
+{"sender":"24273","body":"Tax refund of $ 750 was deposited to your account ending 3936.","label":"CREDIT"}
+{"sender":"692632","body":"Refund: $180 from CVS credited to your card ending 5358.","label":"CREDIT"}
+{"sender":"LLOYDS","body":"£40.75 was debited from your current account for TESCO on 26 Nov. Balance GBP267,036.05.","label":"DEBIT"}
+{"sender":"NATWEST","body":"NatWest: OLIVER SMITH sent you £1,500. Balance: £3,702.99","label":"CREDIT"}
+{"sender":"72568","body":"Win a free iPhone! Just pay $60 shipping. Click here.","label":"NOT_TXN"}
+{"sender":"BOFA","body":"CITI: A debit of USD 9.99 posted to your checking account ending 1673 on Jan 13.","label":"DEBIT"}
+{"sender":"AX-IDFCINB","body":"Dear winner, your lottery of INR849.99 is ready. Send bank details now.","label":"NOT_TXN"}
+{"sender":"BZ-AXIS","body":"Aapke liye INR 1,00,000 ka pre-approved loan ready hai. Apply karein.","label":"NOT_TXN"}
+{"sender":"BOFA","body":"$25 was credited to your Bank of America account on 07/04. Balance $271,560.50.","label":"CREDIT"}
+{"sender":"VM-HDFCB","body":"Win cashback up to Rs 1599 on every UPI payment. Click here to activate.","label":"NOT_TXN"}
+{"sender":"BOFA","body":"Your card ending 9465 was charged $ 75 at NETFLIX.","label":"DEBIT"}
+{"sender":"ICICIINB","body":"Debit alert: INR 799.50 debited from your HDFC Bank account on 07APR26.","label":"DEBIT"}
+{"sender":"AD-IDFC","body":"INR 15,999 was received from PRIYA NAIR via UPI. UPI Ref 018142105384.","label":"CREDIT"}
+{"sender":"NATWEST","body":"Your account ****8572 was debited GBP 40.10 on 07/06/2026. Available balance GBP70,350.00.","label":"DEBIT"}
+{"sender":"AD-PNBINB","body":"Your card has been unblocked. You can use it now.","label":"NOT_TXN"}
+{"sender":"VM-BOB","body":"You have received Rs. 6,999.05 from DEEPIKA REDDY in your a/c XX8597 via UPI. Ref 702224539564","label":"CREDIT"}
+{"sender":"AX-SBIINB","body":"Rs. 899 added to your ICICI wallet. New balance INR18,760.99","label":"CREDIT"}
+{"sender":"BOFA","body":"A debit alert: a transaction was authorised on your card ending 1334.","label":"DEBIT"}
+{"sender":"TA-SBI","body":"Get paid ₹549.00 for every friend you refer. Start earning today.","label":"NOT_TXN"}
+{"sender":"HSBC","body":"£300 was debited from your current account for BOOTS on 03/12. Balance £ 157,020.00.","label":"DEBIT"}
+{"sender":"ICICI","body":"Limited offer! EMI at ₹10,999.00/month on MYNTRA. No cost EMI available.","label":"NOT_TXN"}
+{"sender":"NATWEST","body":"Direct Debit ARGOS £80.10 paid from your account. Balance now GBP37,350.00.","label":"DEBIT"}
+{"sender":"HDFCBK","body":"Rs.9,999 transferred to SURESH KUMAR via IMPS. UPI Ref UPI0068005103. New balance Rs.67,890.00","label":"DEBIT"}
+{"sender":"BZ-SBIBNK","body":"A/c XX7802 debited ₹149999.00 - BLINKIT - 2027-10-23. Avl bal ₹5,678.00","label":"DEBIT"}
+{"sender":"CHASE","body":"CAPONE: $ 2,500.75 debit card purchase at NETFLIX. Avail bal USD 271,560.00","label":"DEBIT"}
+{"sender":"AX-AXISB","body":"Aapko Rs.17499.00 cashback milega. Offer activate karein.","label":"NOT_TXN"}
+{"sender":"LLOYDS","body":"Payment of GBP 200 to BOOTS was successful. Balance £536,700.50.","label":"DEBIT"}
+{"sender":"AD-ICICI","body":"INR29,999.25 has been debited from your Kotak Mahindra Bank account ending 7322 towards OLA. Available balance Rs.23,450.25.","label":"DEBIT"}
+{"sender":"VM-BOBBNK","body":"Reminder: Rs.949.75 will be deducted from your account on 2026-07-18.","label":"NOT_TXN"}
+{"sender":"MONZO","body":"Incoming payment: £ 35 from CHLOE DAVIES on 24/05/2027.","label":"CREDIT"}
+{"sender":"HSBC","body":"URGENT: Your account will be suspended. Click http://bit.ly/xyz to verify your details.","label":"NOT_TXN"}
+{"sender":"BZ-SBIBK","body":"₹ 399.5 credited to a/c XX8143 towards NEFT CR-INFOSYS LTD Ref no IMPS884854877. Avl Bal Rs. 23,450.00","label":"CREDIT"}
+{"sender":"72568","body":"Your autopay of USD 180.00 will be debited on 04/13/26. Ensure funds are available.","label":"NOT_TXN"}
+{"sender":"TA-ICICIBNK","body":"Your card ending 3690 will be charged Rs. 39,999 on 06.02.27 for BOOKMYSHOW.","label":"NOT_TXN"}
+{"sender":"TA-ICICIBK","body":"Rs. 11999 added to your HDFC wallet. New balance ₹ 3,12,450.00","label":"CREDIT"}
+{"sender":"HSBC","body":"Direct Debit VODAFONE UK £12 paid from your account. Balance now GBP 3,702.00.","label":"DEBIT"}
+{"sender":"AD-IDFCINB","body":"Aapka OTP 5369 hai. Kisi ke saath share na karein.","label":"NOT_TXN"}
+{"sender":"AD-SBIBK","body":"Rs.149.50 deducted from your Yes Bank account towards CROMA on 11 Feb 2027.","label":"DEBIT"}
+{"sender":"HSBC","body":"You're eligible for a GBP30.25 loan. Apply today. No impact on your credit score.","label":"NOT_TXN"}
 {"sender":"HSBC","body":"Reminder: GBP450.99 will be deducted from your account on 5 Feb.","label":"NOT_TXN"}
-{"sender":"AXISINB","body":"₹ 3,799.75 deducted from your Kotak Mahindra Bank account towards UBER on 17.02.26.","label":"DEBIT"}
-{"sender":"MONZO","body":"ATM withdrawal of GBP 80.25 from LONDON on 26/09/2027. Balance £ 536,700.75.","label":"DEBIT"}
-{"sender":"ICICIBNK","body":"IMPS: Rs. 229.99 deducted from your account ending 2815 on 22.01.26. Beneficiary NEHA JOSHI. Ref IMPS592873243","label":"DEBIT"}
-{"sender":"HSBC","body":"A faster payment of GBP1,200.75 was received into your account ending ****7282. Balance £37,350.75.","label":"CREDIT"}
-{"sender":"24273","body":"Wells Fargo: Your verification code is 4507. Never share this code.","label":"NOT_TXN"}
-{"sender":"VM-BOBBK","body":"Rs 199.99 transferred to your account by NIMBUS LABS. RRN IMPS357338621. New balance Rs. 12,450.50","label":"CREDIT"}
-{"sender":"BZ-IDFCBNK","body":"IMPS: INR 1,199 deducted from your account ending 4804 on 04-03-27. Beneficiary KAVYA IYER. RRN NEFT67007175","label":"DEBIT"}
-{"sender":"BOFA","body":"Zelle: CHRIS WILSON sent you $6.00. New balance USD49,800.05.","label":"CREDIT"}
-{"sender":"BZ-YES","body":"Earn 5% cashback up to Rs 149999.05 on CAFE COFFEE DAY purchases this weekend.","label":"NOT_TXN"}
-{"sender":"CHASE","body":"CHASE: A debit of $ 45 posted to your checking account ending 3661 on 2026-06-18.","label":"DEBIT"}
-{"sender":"VM-IDFCINB","body":"Debit alert: INR849 debited from your Punjab National Bank account on 04JAN27.","label":"DEBIT"}
-{"sender":"CHASE","body":"Interest payment of $ 2,000.00 posted to your savings account ending 9488.","label":"CREDIT"}
-{"sender":"BZ-ICICIBNK","body":"Rs 2,199.90 debited from a/c XX8928 on 05-08-27 to UPI/SNEHA GUPTA/IDFC. Avl Bal Rs.12,450.00","label":"DEBIT"}
-{"sender":"BOB","body":"186011 is your OTP for Yes Bank netbanking. Do not share it with anyone.","label":"NOT_TXN"}
-{"sender":"VM-AXISINB","body":"Interest of Rs. 299 credited to A/c XX8476. Avl Bal INR 1,12,345.50","label":"CREDIT"}
-{"sender":"AX-BOBINB","body":"Rs. 149.00 withdrawn from A/c XX2729 at ATM DELHI on 03/04/2027. Bal ₹12,450.49","label":"DEBIT"}
-{"sender":"HSBC","body":"Your account was credited with GBP 2000.05 by BRITISH TELECOM. Balance £103,701.00.","label":"CREDIT"}
-{"sender":"TA-SBIBNK","body":"Debit alert: INR24,999.5 debited from your Axis Bank account on 22JUN27.","label":"DEBIT"}
-{"sender":"TA-PNBBK","body":"OTP 133294 for IMPS transfer of INR8999.00 from A/c XX9186. Valid 10 min.","label":"NOT_TXN"}
-{"sender":"BARCLAYS","body":"£3.00 paid to COSTA from your account. New balance £56,280.00.","label":"DEBIT"}
-{"sender":"TA-YES","body":"Aapko INR 2,199.9 cashback mila hai. Account mein credit ho gaya.","label":"CREDIT"}
-{"sender":"HSBC","body":"You spent GBP 200.25 at SAINSBURY'S. Balance: £267,036.00","label":"DEBIT"}
-{"sender":"AXISINB","body":"You have won ₹ 1,24,999.9! Claim your prize by calling 1800270696.","label":"NOT_TXN"}
-{"sender":"BZ-PNBB","body":"You paid the rent already? Thanks a lot!","label":"NOT_TXN"}
-{"sender":"32245","body":"BOFA: Earn $ 180.00 cash back on your next COSTCO purchase. Activate now.","label":"NOT_TXN"}
-{"sender":"JD-IDFCBNK","body":"Aapke UPI se Rs.899 ka payment ho gaya. UTR UPI0617218273","label":"DEBIT"}
-{"sender":"CHASE","body":"Your card has been charged $ 8 for your TARGET subscription.","label":"DEBIT"}
-{"sender":"24273","body":"Cash back of USD300.75 was credited to your account. Balance $ 1,249,800.25.","label":"CREDIT"}
-{"sender":"KOTAKB","body":"Rs 5,999.25 deposited to A/c XX7509 at JAIPUR branch on 02SEP27. Bal Rs. 45,678.75","label":"CREDIT"}
-{"sender":"VM-IDFCBK","body":"A debit alert: a transaction was authorised on your card ending 4352.","label":"DEBIT"}
-{"sender":"CHASE","body":"ACH debit USD 4 to WHOLE FOODS on 04/16. Balance USD182,712.49.","label":"DEBIT"}
-{"sender":"KOTAK","body":"NEFT CR: Rs.19,999 received from WIPRO LTD. A/c XX1335. RRN IMPS015220196","label":"CREDIT"}
-{"sender":"YESBNK","body":"Aapko INR 7,499 cashback mila hai. Account mein credit ho gaya.","label":"CREDIT"}
-{"sender":"AD-AXIS","body":"Yes Bank: Your payment of Rs. 34,999 is scheduled for 2026-01-14. Ensure sufficient balance.","label":"NOT_TXN"}
-{"sender":"YESBNK","body":"Refund of Rs. 17,499.49 received for AIRTEL txn. Credited to a/c XX8139. Bal ₹2,45,678.00","label":"CREDIT"}
-{"sender":"TA-YES","body":"You have received a payment of ₹ 14,999.99 from SURESH KUMAR in your account ending 6488.","label":"CREDIT"}
-{"sender":"24273","body":"Your Bank of America debit card was used for $450.00 at SPOTIFY on 2026-01-11.","label":"DEBIT"}
-{"sender":"BZ-YES","body":"Sent ₹149 to RAHUL SHARMA via UPI. Ref no UPI3417915289. Avl Bal INR 5,678.00","label":"DEBIT"}
-{"sender":"AD-ICICIBK","body":"You received Rs.549.90 in your account from KAVYA IYER. UPI Ref IMPS075634039","label":"CREDIT"}
-{"sender":"BZ-PNBBNK","body":"Aapke account mein balance INR1,499.00 hai.","label":"NOT_TXN"}
-{"sender":"PNBINB","body":"Debit alert: INR 10999.75 debited from your HDFC Bank account on 23/05/2026.","label":"DEBIT"}
-{"sender":"JD-AXISB","body":"IMPS CR: INR9999.50 received in A/c XX4615 from ARJUN SINGH.","label":"CREDIT"}
-{"sender":"32245","body":"Tax refund of $ 6.00 was deposited to your account ending 2017.","label":"CREDIT"}
-{"sender":"BZ-AXISINB","body":"Received INR 8,999.99 from AMIT PATEL via UPI in your HDFC Bank account. Ref UPI2321814412","label":"CREDIT"}
-{"sender":"BARCLAYS","body":"We've added GBP450 to your account. New balance £ 17,034.50.","label":"CREDIT"}
-{"sender":"692632","body":"You received a refund of $ 8 from SHELL. Avail bal USD138,268.00","label":"CREDIT"}
-{"sender":"VM-PNBBK","body":"Your account has been debited by Rs 44,999.9 on 02.08.26.","label":"DEBIT"}
-{"sender":"32245","body":"Security alert: a new device signed in to your account. If this wasn't you, call us.","label":"NOT_TXN"}
-{"sender":"JD-IDFCBNK","body":"Rs 1,799 off on flight bookings this weekend. Use code FLY1618.","label":"NOT_TXN"}
-{"sender":"CHASE","body":"Win a free iPhone! Just pay USD 750 shipping. Click here.","label":"NOT_TXN"}
-{"sender":"LLOYDS","body":"A transaction of GBP 200 was authorised on your Lloyds Bank card ending 2182.","label":"DEBIT"}
-{"sender":"692632","body":"Capital One: You received USD35.50 from JANE SMITH. New balance $1,249,800.10.","label":"CREDIT"}
-{"sender":"JD-BOBBK","body":"UPI credit: ₹ 849.00 received from VIKRAM RAO. Avl Bal INR23,450.50","label":"CREDIT"}
-{"sender":"NATWEST","body":"HSBC: JAMES TAYLOR sent you GBP75. Balance: GBP 737,034.10","label":"CREDIT"}
-{"sender":"TA-BOBBK","body":"Wallet: INR949.9 paid to JIO from your YES wallet. Balance Rs.99,876.49","label":"DEBIT"}
-{"sender":"JD-KOTAKINB","body":"Your KYC is expiring. Share Aadhaar and OTP to continue services.","label":"NOT_TXN"}
-{"sender":"AX-HDFCBNK","body":"I spent INR 2399.00 on dinner last night. It was worth it.","label":"NOT_TXN"}
-{"sender":"VM-BOB","body":"A credit of Rs.3,499.5 has been posted to your account ending 0777.","label":"CREDIT"}
-{"sender":"72568","body":"Your card ending 9211 will be charged $50 on Jan 16 for AMAZON.COM.","label":"NOT_TXN"}
-{"sender":"JD-BOBBK","body":"Your card ending 7383 has been charged Rs. 1499.05 for UBER.","label":"DEBIT"}
-{"sender":"TA-HDFCB","body":"OTP: 469786. Amount: Rs.21,999. Merchant: ZEPTO. Do not share this code.","label":"NOT_TXN"}
-{"sender":"CHASE","body":"CITI: $8 debit card purchase at SHELL. Avail bal $ 982,712.00","label":"DEBIT"}
-{"sender":"BOFA","body":"ACH debit $ 750.25 to WHOLE FOODS on 12/10/27. Balance USD 4,936.00.","label":"DEBIT"}
-{"sender":"JD-IDFCBK","body":"Congratulations! You are eligible for a loan of INR 15,00,000 at 10.5%. Apply now.","label":"NOT_TXN"}
-{"sender":"VM-PNB","body":"₹ 199999 transferred to your account by ACME CORP. UTR DT7QV9FCH0. New balance INR18,760.75","label":"CREDIT"}
-{"sender":"TA-BOBBK","body":"Interest of INR1,899.50 credited to A/c XX4608. Avl Bal ₹99,876.50","label":"CREDIT"}
-{"sender":"VM-YES","body":"NEFT debit: INR 18,999 transferred from A/c XX2176 to KAVYA IYER. UPI Ref NEFT75545700. Bal Rs.1,234.00","label":"DEBIT"}
-{"sender":"AXIS","body":"UPI credit: INR 18,999 received from PRIYA NAIR. Avl Bal ₹99,876.00","label":"CREDIT"}
-{"sender":"TA-HDFCINB","body":"Intl txn: $99 spent on card XX5753 at DMART. INR equivalent Rs. 12,499.00. Avl Bal ₹2,45,678.49","label":"DEBIT"}
-{"sender":"JD-PNB","body":"UPI credit: Rs 2199 received from PRIYA NAIR. Avl Bal Rs. 1,78,900.25","label":"CREDIT"}
-{"sender":"BOFA","body":"A debit alert: a transaction was authorised on your card ending 4064.","label":"DEBIT"}
-{"sender":"72568","body":"Congratulations! You are today's lucky winner of $200.00. Claim now.","label":"NOT_TXN"}
-{"sender":"NATWEST","body":"Cashback of £25.00 has been credited to your Lloyds Bank card.","label":"CREDIT"}
-{"sender":"AD-PNBBK","body":"IMPS CR: INR 29,999.50 received in A/c XX8327 from RAHUL SHARMA.","label":"CREDIT"}
-{"sender":"BOBINB","body":"Your card ending 0855 will be charged Rs.3,799 on 20 Jan 2026 for TATA CLIQ.","label":"NOT_TXN"}
-{"sender":"CHASE","body":"Upcoming debit of USD 50.25 from account ending 2873 on 04/04.","label":"NOT_TXN"}
-{"sender":"AD-ICICIBNK","body":"INR 1,599.75 has been debited from your Bank of Baroda account ending 1951 towards MYNTRA. Available balance ₹ 1,234.25.","label":"DEBIT"}
-{"sender":"JD-AXIS","body":"Received Rs. 5499.99 from ARJUN SINGH via UPI in your Yes Bank account. Ref NEFT04718480","label":"CREDIT"}
-{"sender":"LLOYDS","body":"Your Monzo card was charged £2.25 at JUST EAT.","label":"DEBIT"}
-{"sender":"HSBC","body":"Your Santander UK account will be debited £25.25 on 01 Oct 2027 for your subscription.","label":"NOT_TXN"}
-{"sender":"72568","body":"Card purchase: USD12 at BEST BUY. New balance $22,712.00.","label":"DEBIT"}
-{"sender":"BARCLAYS","body":"You spent GBP40.00 at BOOTS. Balance: GBP 203,670.50","label":"DEBIT"}
-{"sender":"AD-YESB","body":"INR 5,999 has been debited from your HDFC Bank account ending 2974 towards AIRTEL. Available balance Rs. 1,12,345.49.","label":"DEBIT"}
-{"sender":"BZ-ICICIBNK","body":"Your available balance is Rs 27,999.50. No debits or credits since your last statement.","label":"NOT_TXN"}
-{"sender":"AX-PNBBNK","body":"Aapka account balance Rs 1,399.9 hai.","label":"NOT_TXN"}
-{"sender":"BOFA","body":"Your card ending 7333 was charged $ 1,500.05 at TRADER JOE'S.","label":"DEBIT"}
-{"sender":"24273","body":"Your EMI of USD30 is scheduled for 01/08/27 from A/c XX4983.","label":"NOT_TXN"}
-{"sender":"AD-HDFCBNK","body":"Your card was used for a purchase of INR 8,999.50 at UBER.","label":"DEBIT"}
-{"sender":"JD-SBIBNK","body":"Limited offer! EMI at ₹ 19999.99/month on DMART. No cost EMI available.","label":"NOT_TXN"}
-{"sender":"TA-AXISBNK","body":"Aapke account mein balance INR1,099.75 hai.","label":"NOT_TXN"}
-{"sender":"MONZO","body":"Payment of £5.99 to BOOTS was successful. Balance £ 3,702.75.","label":"DEBIT"}
-{"sender":"HSBC","body":"Lloyds Bank: HARRY WILSON sent you £150. Balance: GBP299,628.25","label":"CREDIT"}
-{"sender":"JD-AXISINB","body":"₹7499.05 has been debited from your Punjab National Bank account ending 5929 towards RELIANCE FRESH. Available balance INR 2,45,678.00.","label":"DEBIT"}
-{"sender":"BZ-KOTAKBNK","body":"Your card ending 3551 will be debited Rs.949.75 on 2026-07-18 for JIO.","label":"NOT_TXN"}
-{"sender":"KOTAK","body":"IMPS CR Rs 49,999.49 from DEEPIKA REDDY to A/c XX2814. UPI Ref HDFC4877931855. Bal Rs 12,450.50","label":"CREDIT"}
-{"sender":"VM-HDFCBNK","body":"Bal ₹ 8999 in A/c XX8860. No transaction since last update.","label":"NOT_TXN"}
-{"sender":"AX-BOBINB","body":"Txn alert: ₹949 debited from your AXIS Bank A/c XX7643 at 09:44. Bal Rs.52,340.25","label":"DEBIT"}
-{"sender":"32245","body":"Your appointment is confirmed for Jul 23.","label":"NOT_TXN"}
-{"sender":"BZ-IDFCBK","body":"₹ 12,499.50 deducted from your Axis Bank account towards BIGBASKET on 2026-10-24.","label":"DEBIT"}
-{"sender":"VM-ICICIB","body":"Your payment of Rs. 349.50 to PHARMEASY is scheduled for 11FEB27.","label":"NOT_TXN"}
-{"sender":"TA-IDFC","body":"Deposit of INR21,999 to your account ending 5468 is successful. UPI Ref IMPS845761326","label":"CREDIT"}
-{"sender":"VM-IDFCINB","body":"Your card has been charged ₹11,999.9 for your NYKAA subscription.","label":"DEBIT"}
-{"sender":"LLOYDS","body":"Your card ending 0770 has been frozen. Tap in the app to unfreeze it.","label":"NOT_TXN"}
-{"sender":"AX-YESB","body":"Congratulations! You are eligible for a loan of INR10,00,000.50 at 10.5%. Apply now.","label":"NOT_TXN"}
-{"sender":"VM-AXIS","body":"Rs. 39,999.10 paid to MAKEMYTRIP from A/c XX6261 on 2026-07-20. UPI Ref A0DWTPAGOF","label":"DEBIT"}
-{"sender":"HDFCB","body":"Aapke account se ₹ 4,499.49 debit ho gaya hai. Available balance ₹99,876.00.","label":"DEBIT"}
-{"sender":"AX-ICICI","body":"Interest of Rs 6,999.99 credited to A/c XX9849. Avl Bal Rs 1,12,345.00","label":"CREDIT"}
-{"sender":"692632","body":"$ 60 off your next STARBUCKS order with code SAVE6779.","label":"NOT_TXN"}
-{"sender":"32245","body":"Your card has been charged $99 for your SPOTIFY subscription.","label":"DEBIT"}
-{"sender":"24273","body":"ACH debit $ 8.49 to DOORDASH on 11/05/27. Balance USD 715,600.00.","label":"DEBIT"}
-{"sender":"NATWEST","body":"Hello JAMES TAYLOR, your savings account balance is £ 40.","label":"NOT_TXN"}
-{"sender":"72568","body":"Your EMI of USD300.05 is scheduled for 07/20/26 from A/c XX4002.","label":"NOT_TXN"}
+{"sender":"BZ-AXISINB","body":"You sent INR 1299 to SNEHA GUPTA via UPI. Ref no UPI6606519891","label":"DEBIT"}
+{"sender":"NATWEST","body":"Payment of £ 50 to M&S was successful. Balance GBP 56,280.00.","label":"DEBIT"}
+{"sender":"AD-YESBK","body":"You sent Rs. 3,299.00 to AMIT PATEL via UPI. Ref no 642015952128","label":"DEBIT"}
+{"sender":"BZ-AXISBK","body":"IMPS CR of ₹17,499.5 received from RAHUL SHARMA. A/c XX6211. Ref no 451781632512","label":"CREDIT"}
+{"sender":"TA-HDFC","body":"URGENT: Your account will be suspended. Click http://bit.ly/xyz to verify KYC.","label":"NOT_TXN"}
+{"sender":"JD-IDFCB","body":"NEFT CR: ₹ 3,499 received from TECHNOVA PVT LTD. A/c XX3496. Reference UPI1069264955","label":"CREDIT"}
+{"sender":"HSBC","body":"Card ending 0406: GBP450.05 spent at TESCO on 22/02.","label":"DEBIT"}
+{"sender":"BOFA","body":"Zelle: SARAH MILLER sent you USD 20.50. New balance $ 271,560.99.","label":"CREDIT"}
+{"sender":"LLOYDS","body":"Your NatWest login code is 156035. If this wasn't you, contact us.","label":"NOT_TXN"}
+{"sender":"LLOYDS","body":"Your NatWest card was charged GBP40.00 at ARGOS.","label":"DEBIT"}
+{"sender":"72568","body":"Your card has been charged $120.99 for your WALMART subscription.","label":"DEBIT"}
+{"sender":"AD-IDFC","body":"Interest of Rs.6499.49 credited to A/c XX7806. Avl Bal INR 67,890.25","label":"CREDIT"}
+{"sender":"BOFA","body":"You paid $99.00 at CHIPOTLE with your debit card ending 0806.","label":"DEBIT"}
+{"sender":"ICICI","body":"OTP: 186011. Amount: Rs 349. Merchant: JIO. Do not share this code.","label":"NOT_TXN"}
+{"sender":"32245","body":"Cash back of USD 180.49 was credited to your account. Balance $ 4,936.10.","label":"CREDIT"}
+{"sender":"692632","body":"Your Capital One debit card was used for USD15 at SHELL on Aug 14.","label":"DEBIT"}
+{"sender":"IDFCINB","body":"₹ 3499.25 refund credited to your HDFC wallet. Balance ₹ 1,12,345.10","label":"CREDIT"}
+{"sender":"CHASE","body":"Your card has been charged USD 30.00 for your UBER subscription.","label":"DEBIT"}
+{"sender":"72568","body":"Your subscription of USD 50.25 renews on 04/04. It will be charged to your card ending 2873.","label":"NOT_TXN"}
+{"sender":"AD-HDFC","body":"Wallet: ₹ 39,999.00 paid to ZOMATO from your HDFC wallet. Balance ₹89,012.05","label":"DEBIT"}
+{"sender":"HSBC","body":"Cashback of GBP 15.10 has been credited to your Monzo card.","label":"CREDIT"}
+{"sender":"AD-YESBNK","body":"Debit alert: INR 4,499 debited from your Kotak Mahindra Bank account on 15/12/2026.","label":"DEBIT"}
+{"sender":"KOTAK","body":"Investment opportunity: earn 30% monthly guaranteed. WhatsApp us.","label":"NOT_TXN"}
+{"sender":"JD-BOBB","body":"Aapko Rs 1,799 cashback milega. Offer activate karein.","label":"NOT_TXN"}
+{"sender":"24273","body":"Get paid $ 180.00 for every friend you refer. Start today.","label":"NOT_TXN"}
+{"sender":"HSBC","body":"Direct Debit AMAZON UK £60 paid from your account. Balance now GBP3,702.25.","label":"DEBIT"}
+{"sender":"BARCLAYS","body":"A transaction of GBP80 was authorised on your HSBC card ending 8792.","label":"DEBIT"}
+{"sender":"VM-YES","body":"IMPS CR: Rs.19,999 received in A/c XX1335 from VIKRAM RAO.","label":"CREDIT"}
+{"sender":"24273","body":"$99.99 was credited to your Bank of America account on Mar 4. Balance $ 271,560.75.","label":"CREDIT"}
+{"sender":"IDFC","body":"Rs. 1899.00 transferred from your account to ANITA DESAI via IMPS. Reference IMPS643879648","label":"DEBIT"}
+{"sender":"JD-HDFCBK","body":"Your card has been charged Rs. 1199.50 for your FLIPKART subscription.","label":"DEBIT"}
+{"sender":"BZ-HDFC","body":"INR2199.50 credited to a/c XX6431 towards NEFT CR-BLUESTONE SYSTEMS RRN HDFC5175534358. Avl Bal ₹ 34,567.50","label":"CREDIT"}
+{"sender":"JD-BOB","body":"You have received Rs. 5499.99 from ARJUN SINGH in your a/c XX4683 via UPI. Ref NEFT04718480","label":"CREDIT"}
+{"sender":"JD-AXISBNK","body":"Your HDFC Bank OTP is 133294 for a transaction of INR8999.00 on card ending 9186.","label":"NOT_TXN"}
+{"sender":"AXISBK","body":"Refund of INR899 received for AMAZON txn. Credited to a/c XX3284. Bal Rs.12,450.05","label":"CREDIT"}
+{"sender":"72568","body":"You received a refund of USD 450.75 from DOORDASH. Avail bal $209,360.00","label":"CREDIT"}
+{"sender":"BARCLAYS","body":"GBP2,000.25 paid to JUST EAT from your account. New balance £536,700.00.","label":"DEBIT"}
+{"sender":"24273","body":"Your card has been charged $12.50 for your DOORDASH subscription.","label":"DEBIT"}
+{"sender":"24273","body":"Direct deposit of USD500 from UMBRELLA LLC posted to your account ending 7098.","label":"CREDIT"}
+{"sender":"AD-ICICIBK","body":"Get pre-approved personal loan up to ₹15,00,000.05! Apply now. T&C apply.","label":"NOT_TXN"}
+{"sender":"72568","body":"USD120 was spent using your Capital One card at COSTCO.","label":"DEBIT"}
+{"sender":"BOFA","body":"You received a refund of USD50 from NETFLIX. Avail bal $182,712.99","label":"CREDIT"}
+{"sender":"32245","body":"Tax refund of USD12.49 was deposited to your account ending 7356.","label":"CREDIT"}
+{"sender":"AX-KOTAKINB","body":"Aapke account mein Rs 6499.05 credit ho gaya. Bal ₹ 67,890.99.","label":"CREDIT"}
+{"sender":"AX-SBIBK","body":"You received ₹ 1,899.5 in your account from NEHA JOSHI. RRN HDFC7803749216","label":"CREDIT"}
+{"sender":"JD-PNBBNK","body":"Your wallet has been topped up with INR 499. Balance ₹ 89,012.00","label":"CREDIT"}
+{"sender":"AD-IDFCBK","body":"Card XX5957 used for INR1,499.50 at SWIGGY on 04 Jun 2026. Avl Bal ₹12,450.10","label":"DEBIT"}
+{"sender":"BOFA","body":"Your payment of USD 180.25 is scheduled for 03/12. No action needed.","label":"NOT_TXN"}
+{"sender":"LLOYDS","body":"Earn GBP30 cash back on your next UBER purchase. Activate now.","label":"NOT_TXN"}
+{"sender":"32245","body":"Your account is blocked. Share your OTP to reactivate immediately.","label":"NOT_TXN"}
+{"sender":"32245","body":"Card purchase: USD 300 at HOME DEPOT. New balance USD399,504.75.","label":"DEBIT"}
+{"sender":"AD-YESBK","body":"Aapko Rs. 14,999.99 cashback mila hai. Account mein credit ho gaya.","label":"CREDIT"}
+{"sender":"692632","body":"Cash back of USD12 was credited to your account. Balance USD49,800.99.","label":"CREDIT"}
+{"sender":"24273","body":"Zelle: CHRIS WILSON sent you USD1500. New balance USD 138,268.49.","label":"CREDIT"}
+{"sender":"BOFA","body":"A debit alert: a transaction was authorised on your card ending 1717.","label":"DEBIT"}
+{"sender":"AX-PNBB","body":"Your KYC is expiring. Share Aadhaar and OTP to continue services.","label":"NOT_TXN"}
+{"sender":"AX-BOBINB","body":"ARJUN SINGH, are we still meeting at 7? Let me know.","label":"NOT_TXN"}
+{"sender":"JD-AXISBNK","body":"Rs.6499 was received from AMIT PATEL via UPI. Reference NEFT54682154.","label":"CREDIT"}
+{"sender":"24273","body":"Upcoming debit of $50 from account ending 9211 on Jan 16.","label":"NOT_TXN"}
+{"sender":"VM-AXISB","body":"INR1,99,999.49 transferred from your account to ARJUN SINGH via IMPS. Txn ID HDFC1411562856","label":"DEBIT"}
+{"sender":"AD-AXIS","body":"Your EMI of Rs 12,499.25 will be debited on 01/03/2026. Keep sufficient balance.","label":"NOT_TXN"}
+{"sender":"CHASE","body":"Card purchase: $1500.00 at BEST BUY. New balance USD 356,048.00.","label":"DEBIT"}
+{"sender":"TA-SBIB","body":"Sent ₹ 229 to KAVYA IYER via UPI. Txn ID IMPS757932044. Avl Bal Rs 1,12,345.00","label":"DEBIT"}
+{"sender":"AD-SBIB","body":"INR99 off on flight bookings this weekend. Use code FLY1961.","label":"NOT_TXN"}
+{"sender":"AX-KOTAK","body":"You have received a payment of ₹24999.00 from PRIYA NAIR in your account ending 9386.","label":"CREDIT"}
+{"sender":"BZ-HDFCINB","body":"INR 8999.49 deposited to A/c XX9674 at KOLKATA branch on 03.11.26. Bal INR 1,78,900.49","label":"CREDIT"}
+{"sender":"PNBBNK","body":"NEFT debit: INR 49.5 transferred from A/c XX5202 to VIKRAM RAO. Txn ID UPI3882835318. Bal INR2,45,678.25","label":"DEBIT"}
+{"sender":"LLOYDS","body":"A faster payment of £1500 was received into your account ending ****0346. Balance GBP 137,034.00.","label":"CREDIT"}
+{"sender":"IDFCINB","body":"You have paid INR3,299.25 to PHARMEASY using Axis Bank UPI. Ref no NEFT65375897","label":"DEBIT"}
+{"sender":"TA-PNBINB","body":"Received INR99.90 from VIKRAM RAO via UPI in your Kotak Mahindra Bank account. Reference HDFC3956387057","label":"CREDIT"}
+{"sender":"JD-IDFCB","body":"Aapke account se ₹ 8,999.00 debit hua. Details check karein.","label":"DEBIT"}
+{"sender":"32245","body":"Dear winner, your lottery of $200.00 is ready. Send bank details now.","label":"NOT_TXN"}
+{"sender":"BARCLAYS","body":"A faster payment of GBP 2000.50 was received into your account ending ****6670. Balance £70,350.10.","label":"CREDIT"}
+{"sender":"MONZO","body":"Salary: GBP 2.50 from BRITISH TELECOM has been credited to your account.","label":"CREDIT"}
+{"sender":"TA-HDFC","body":"Your debit card will expire soon. Request a replacement in the app.","label":"NOT_TXN"}
+{"sender":"JD-YESBNK","body":"Can you believe the taxi cost Rs 399.25? Ridiculous.","label":"NOT_TXN"}
+{"sender":"JD-ICICIINB","body":"Card XX4497 used for Rs.3,999.5 at JIO on 02.05.26. Avl Bal ₹67,890.10","label":"DEBIT"}
+{"sender":"692632","body":"You received a refund of USD50 from TRADER JOE'S. Avail bal $449,380.00","label":"CREDIT"}
+{"sender":"AX-KOTAKBNK","body":"You have paid ₹6,999 to AIRTEL using Bank of Baroda UPI. Txn ID HDFC9303395580","label":"DEBIT"}
+{"sender":"HSBC","body":"We've received your request to replace your card ending 2073.","label":"NOT_TXN"}
+{"sender":"BZ-IDFCBNK","body":"Txn alert: ₹ 3,299.25 debited from your IDFC Bank A/c XX3601 at 08:54. Bal INR 12,450.00","label":"DEBIT"}
+{"sender":"692632","body":"$9 was spent using your Citibank card at HOME DEPOT.","label":"DEBIT"}
+{"sender":"MONZO","body":"Your account ****0432 was debited £8 on 12 Apr 2027. Available balance GBP 157,020.00.","label":"DEBIT"}
+{"sender":"BZ-BOBBNK","body":"Available balance in your account ending 2585 is Rs 27,999.50.","label":"NOT_TXN"}
+{"sender":"BOFA","body":"Your subscription of $45.99 renews on 04/17. It will be charged to your card ending 2392.","label":"NOT_TXN"}
+{"sender":"VM-KOTAKBK","body":"Intl txn: USD120.75 spent on card XX0430 at JIO. INR equivalent INR 499. Avl Bal ₹ 3,12,450.75","label":"DEBIT"}
+{"sender":"BZ-YESB","body":"Your one-time password is 469786. Valid for 10 minutes. Never share.","label":"NOT_TXN"}
+{"sender":"BZ-BOBB","body":"Autopay of ₹399 for SWIGGY processed on card ending 9643. Avl Bal Rs. 34,567.05","label":"DEBIT"}
 {"sender":"BOFA","body":"Txn code 6921 for USD 30.05 at STARBUCKS. Never share.","label":"NOT_TXN"}
-{"sender":"AX-IDFCB","body":"Your card ending 9004 has been charged INR 229.49 for DECATHLON.","label":"DEBIT"}
-{"sender":"LLOYDS","body":"Security code 156035 for your £ 750.00 purchase at JUST EAT. Expires in 5 minutes.","label":"NOT_TXN"}
-{"sender":"VM-HDFC","body":"Congratulations! You are eligible for a loan of ₹15,00,000.05 at 10.5%. Apply now.","label":"NOT_TXN"}
-{"sender":"CHASE","body":"Your card ending 3591 was charged USD2000 at SHELL.","label":"DEBIT"}
-{"sender":"MONZO","body":"Refund from TESCO of GBP 2 is now in your account. Balance £ 337,035.05.","label":"CREDIT"}
-{"sender":"YESB","body":"UPI/SNEHA GUPTA/Rs 6,499.25 debited from A/c XX6095. Txn ID NEFT02071055. Bal ₹ 89,012.10","label":"DEBIT"}
-{"sender":"LLOYDS","body":"Your Santander UK verification code is 2090. Never share it.","label":"NOT_TXN"}
+{"sender":"JD-PNBBNK","body":"Balance update: INR1,099.75 available in A/c XX6165.","label":"NOT_TXN"}
+{"sender":"692632","body":"A debit alert: a transaction was authorised on your card ending 9189.","label":"DEBIT"}
+{"sender":"BARCLAYS","body":"GBP500.50 credited to your account ending 8117. Balance £ 3,702.75.","label":"CREDIT"}
+{"sender":"JD-PNBB","body":"NEFT debit: ₹ 1,99,999.9 transferred from A/c XX7934 to RAHUL SHARMA. UTR UPI0115514761. Bal ₹34,567.25","label":"DEBIT"}
+{"sender":"JD-BOBBNK","body":"Your available balance is INR1,499.00. No debits or credits since your last statement.","label":"NOT_TXN"}
+{"sender":"CHASE","body":"Direct deposit of $5 from ACME CORP posted to your account ending 4004.","label":"CREDIT"}
+{"sender":"24273","body":"Wells Fargo: Your verification code is 4507. Never share this code.","label":"NOT_TXN"}
+{"sender":"KOTAKBNK","body":"Your A/c XX9660 was debited. Details in the app.","label":"DEBIT"}
+{"sender":"AD-ICICIINB","body":"Rs 149999.05 off on flight bookings this weekend. Use code FLY1081.","label":"NOT_TXN"}
+{"sender":"692632","body":"CHASE: A debit of USD15.99 posted to your checking account ending 8319 on 2027-01-10.","label":"DEBIT"}
+{"sender":"VM-IDFCBK","body":"Your EMI of Rs. 349.50 is scheduled for 11FEB27 from A/c XX7980.","label":"NOT_TXN"}
+{"sender":"AD-PNBB","body":"A credit of ₹ 2799.25 has been posted to your account ending 5819.","label":"CREDIT"}
+{"sender":"AX-PNBINB","body":"Your A/c XX1838 was debited. Details in the app.","label":"DEBIT"}
+{"sender":"MONZO","body":"Your Lloyds Bank account will be debited GBP 1,200.00 on 09/02 for your subscription.","label":"NOT_TXN"}
+{"sender":"MONZO","body":"555503 is your one-time passcode for a GBP 15.99 payment to JUST EAT. Do not share.","label":"NOT_TXN"}
+{"sender":"HSBC","body":"Your account ****1212 was debited £ 99.50 on 23 Jan. Available balance £56,280.50.","label":"DEBIT"}
+{"sender":"32245","body":"Your card has been charged $ 5.99 for your CVS subscription.","label":"DEBIT"}
+{"sender":"AD-KOTAK","body":"NEFT CR: Rs 3,999.75 received from WIPRO LTD. A/c XX8564. Txn ID NEFT19069651","label":"CREDIT"}
+{"sender":"32245","body":"Limited offer: 0% APR for 12 months on purchases over $ 60. Apply now.","label":"NOT_TXN"}
+{"sender":"HDFC","body":"IMPS: Rs. 6,999 deducted from your account ending 0005 on 15.06.26. Beneficiary KAVYA IYER. Reference NEFT38582426","label":"DEBIT"}
+{"sender":"VM-PNBB","body":"Your card was used for a purchase of ₹ 6499 at DECATHLON.","label":"DEBIT"}
+{"sender":"AD-BOBBK","body":"Your A/c XX8860 balance is ₹ 8999 as on 11.11.26.","label":"NOT_TXN"}
+{"sender":"32245","body":"Upcoming debit of USD300.05 from account ending 4002 on 07/20/26.","label":"NOT_TXN"}
+{"sender":"JD-HDFCBK","body":"Special offer: Rs.149 cashback on your State Bank of India credit card. Apply by 22.01.27.","label":"NOT_TXN"}
+{"sender":"NATWEST","body":"We've paid £ 80.50 to ASOS from your account ending 1910.","label":"DEBIT"}
+{"sender":"24273","body":"CITI Security Alert: 220773 is your one-time code for a debit of $ 500. Do not share.","label":"NOT_TXN"}
+{"sender":"VM-BOBB","body":"Limited offer! EMI at ₹ 19999.99/month on DMART. No cost EMI available.","label":"NOT_TXN"}
+{"sender":"NATWEST","body":"A transaction of £ 2 was made at COSTA on your NatWest debit card ending 2687. Available balance £137,034.00.","label":"DEBIT"}
+{"sender":"TA-BOBB","body":"INR 7,499.25 deposited to A/c XX9983 at KOLKATA branch on 05APR26. Bal INR 23,450.00","label":"CREDIT"}
+{"sender":"BZ-PNBBK","body":"₹11,999.5 has been debited from your State Bank of India account ending 9818 towards DECATHLON. Available balance Rs 23,450.75.","label":"DEBIT"}
+{"sender":"MONZO","body":"Security code 2090 for your £45 purchase at ARGOS. Expires in 5 minutes.","label":"NOT_TXN"}
 {"sender":"72568","body":"CHASE Security Alert: 533304 is your one-time code for a debit of USD 1,200. Do not share.","label":"NOT_TXN"}
-{"sender":"VM-BOBBK","body":"You have paid Rs.499 to SWIGGY using State Bank of India UPI. UTR 159015008998","label":"DEBIT"}
-{"sender":"BOFA","body":"Your card ending 1958 was charged USD20 at UBER.","label":"DEBIT"}
-{"sender":"32245","body":"Tax refund of USD99.99 was deposited to your account ending 5678.","label":"CREDIT"}
-{"sender":"32245","body":"Capital One: Your statement is now available online.","label":"NOT_TXN"}
-{"sender":"CHASE","body":"Zelle: JOHN DOE sent you $ 250. New balance $ 356,048.00.","label":"CREDIT"}
-{"sender":"JD-IDFCBK","body":"Rs 1,24,999.75 paid from your KOTAK wallet to DECATHLON. New balance INR99,876.75.","label":"DEBIT"}
-{"sender":"72568","body":"Scheduled payment: $50 to NETFLIX on 2027-08-23.","label":"NOT_TXN"}
+{"sender":"HSBC","body":"TESCO £18.00 14 Mar. Your balance is £737,034.75.","label":"DEBIT"}
+{"sender":"32245","body":"Capital One Alert: A debit of USD8.25 was made on your card ending 6740 at DOORDASH.","label":"DEBIT"}
+{"sender":"HSBC","body":"£200 credited to your account ending 6214. Balance £ 137,034.00.","label":"CREDIT"}
+{"sender":"692632","body":"Your payment of USD 1500.10 is scheduled for 2026-01-07. No action needed.","label":"NOT_TXN"}
+{"sender":"AD-AXISBK","body":"IMPS CR of Rs 1,499 received from ROHAN MEHTA. A/c XX8317. Ref no 361315647485","label":"CREDIT"}
+{"sender":"BZ-SBIB","body":"Sent ₹ 3,799 to ROHAN MEHTA via UPI. Reference NEFT34020710. Avl Bal INR2,45,678.50","label":"DEBIT"}
+{"sender":"BOFA","body":"Your payment of $50 is scheduled for 2027-08-23. No action needed.","label":"NOT_TXN"}

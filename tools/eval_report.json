@@ -25,22 +25,14 @@
     "l2": 0.00001
   },
   "dataset_sizes": {
-    "train_base_messages": 570,
-    "train_rows": 570,
+    "train": 586,
+    "train_generated": 570,
+    "train_curated_hard_negatives": 16,
     "holdout": 300,
     "adversarial": 89
   },
-  "augmentation": {
-    "copies_per_base_message": 1,
-    "note": "training bases are rendered with independent amount/date/ref slots"
-  },
-  "train_base_class_counts": {
-    "NOT_TXN": 220,
-    "DEBIT": 195,
-    "CREDIT": 155
-  },
-  "train_row_class_counts": {
-    "NOT_TXN": 220,
+  "train_class_counts": {
+    "NOT_TXN": 236,
     "DEBIT": 195,
     "CREDIT": 155
   },
@@ -52,223 +44,135 @@
   "targets": {
     "holdout_txn_precision": {
       "required": 0.99,
-      "achieved": 0.9515,
-      "passed": false
+      "achieved": 0.995,
+      "passed": true
     },
     "holdout_txn_recall": {
       "required": 0.9,
-      "achieved": 0.98,
+      "achieved": 0.99,
       "passed": true
     },
     "adversarial_txn_precision": {
       "required": 0.95,
-      "achieved": 0.9565,
+      "achieved": 0.9778,
       "passed": true
     }
   },
-  "targets_passed": false,
+  "targets_passed": true,
   "holdout": {
     "confusion_matrix": [
       [
-        90,
-        6,
-        4
-      ],
-      [
-        2,
-        105,
-        3
-      ],
-      [
-        2,
+        99,
         1,
-        87
+        0
+      ],
+      [
+        0,
+        109,
+        1
+      ],
+      [
+        2,
+        3,
+        85
       ]
     ],
     "per_class": {
       "NOT_TXN": {
-        "precision": 0.9574,
-        "recall": 0.9,
-        "f1": 0.9278,
+        "precision": 0.9802,
+        "recall": 0.99,
+        "f1": 0.9851,
         "support": 100
       },
       "DEBIT": {
-        "precision": 0.9375,
-        "recall": 0.9545,
-        "f1": 0.9459,
+        "precision": 0.9646,
+        "recall": 0.9909,
+        "f1": 0.9776,
         "support": 110
       },
       "CREDIT": {
-        "precision": 0.9255,
-        "recall": 0.9667,
-        "f1": 0.9457,
+        "precision": 0.9884,
+        "recall": 0.9444,
+        "f1": 0.9659,
         "support": 90
       }
     },
     "txn_binary": {
-      "precision": 0.9515,
-      "recall": 0.98,
-      "f1": 0.9655,
-      "tp": 196,
-      "fp": 10,
-      "fn": 4,
-      "tn": 90
+      "precision": 0.995,
+      "recall": 0.99,
+      "f1": 0.9925,
+      "tp": 198,
+      "fp": 1,
+      "fn": 2,
+      "tn": 99
     },
-    "direction_accuracy_among_txn": 0.9796,
-    "accuracy": 0.94,
+    "direction_accuracy_among_txn": 0.9798,
+    "accuracy": 0.9767,
     "cases": 300,
     "misses": [
       {
-        "body": "Refund from SAINSBURY'S of £99.49 is now in your account. Balance £ 157,020.00.",
-        "actual": "CREDIT",
-        "predicted": "NOT_TXN",
-        "pNotTxn": 0.5332,
-        "pDebit": 0.2021,
-        "pCredit": 0.2647
-      },
-      {
-        "body": "Your A/c XX5428 balance is ₹99 as on 22-01-27.",
-        "actual": "NOT_TXN",
-        "predicted": "CREDIT",
-        "pNotTxn": 0.0175,
-        "pDebit": 0.1574,
-        "pCredit": 0.8252
-      },
-      {
-        "body": "Your subscription of INR124999.00 renews on 28MAY26. It will be charged to your card ending 0215.",
-        "actual": "NOT_TXN",
-        "predicted": "DEBIT",
-        "pNotTxn": 0.1773,
-        "pDebit": 0.8227,
-        "pCredit": 0
-      },
-      {
-        "body": "₹15999 transferred from your account to RAHUL SHARMA via IMPS. Txn ID F3LZO9Z4JZ",
-        "actual": "DEBIT",
-        "predicted": "NOT_TXN",
-        "pNotTxn": 0.7496,
-        "pDebit": 0.0767,
-        "pCredit": 0.1737
-      },
-      {
-        "body": "Aapke account mein balance Rs. 34999 hai.",
-        "actual": "NOT_TXN",
-        "predicted": "CREDIT",
-        "pNotTxn": 0,
-        "pDebit": 0.1019,
-        "pCredit": 0.898
-      },
-      {
-        "body": "Your card has been unblocked. You can use it now.",
-        "actual": "NOT_TXN",
-        "predicted": "DEBIT",
-        "pNotTxn": 0.2217,
-        "pDebit": 0.7783,
-        "pCredit": 0
-      },
-      {
-        "body": "IMPS: Rs. 229.99 deducted from your account ending 2815 on 22.01.26. Beneficiary NEHA JOSHI. Ref IMPS592873243",
-        "actual": "DEBIT",
-        "predicted": "CREDIT",
-        "pNotTxn": 0,
-        "pDebit": 0.0003,
-        "pCredit": 0.9997
-      },
-      {
-        "body": "IMPS: INR 1,199 deducted from your account ending 4804 on 04-03-27. Beneficiary KAVYA IYER. RRN NEFT67007175",
-        "actual": "DEBIT",
-        "predicted": "NOT_TXN",
-        "pNotTxn": 0.9784,
-        "pDebit": 0.0009,
-        "pCredit": 0.0207
-      },
-      {
-        "body": "Zelle: CHRIS WILSON sent you $6.00. New balance USD49,800.05.",
-        "actual": "CREDIT",
-        "predicted": "NOT_TXN",
-        "pNotTxn": 0.5038,
-        "pDebit": 0.2327,
-        "pCredit": 0.2635
-      },
-      {
-        "body": "Sent ₹149 to RAHUL SHARMA via UPI. Ref no UPI3417915289. Avl Bal INR 5,678.00",
-        "actual": "DEBIT",
-        "predicted": "CREDIT",
-        "pNotTxn": 0.3489,
-        "pDebit": 0.0851,
-        "pCredit": 0.566
-      },
-      {
-        "body": "Aapke account mein balance INR1,499.00 hai.",
-        "actual": "NOT_TXN",
-        "predicted": "CREDIT",
-        "pNotTxn": 0.0003,
-        "pDebit": 0.1986,
-        "pCredit": 0.8011
-      },
-      {
-        "body": "I spent INR 2399.00 on dinner last night. It was worth it.",
-        "actual": "NOT_TXN",
-        "predicted": "DEBIT",
-        "pNotTxn": 0.0028,
-        "pDebit": 0.9971,
-        "pCredit": 0
-      },
-      {
-        "body": "Your Santander UK account will be debited £25.25 on 01 Oct 2027 for your subscription.",
-        "actual": "NOT_TXN",
-        "predicted": "DEBIT",
-        "pNotTxn": 0.4838,
-        "pDebit": 0.5162,
-        "pCredit": 0
-      },
-      {
-        "body": "Aapka account balance Rs 1,399.9 hai.",
-        "actual": "NOT_TXN",
-        "predicted": "DEBIT",
-        "pNotTxn": 0,
-        "pDebit": 0.9103,
-        "pCredit": 0.0897
-      },
-      {
-        "body": "Aapke account mein balance INR1,099.75 hai.",
-        "actual": "NOT_TXN",
-        "predicted": "CREDIT",
-        "pNotTxn": 0.0014,
-        "pDebit": 0.0775,
-        "pCredit": 0.9211
-      },
-      {
-        "body": "Hello JAMES TAYLOR, your savings account balance is £ 40.",
-        "actual": "NOT_TXN",
-        "predicted": "DEBIT",
-        "pNotTxn": 0.0299,
-        "pDebit": 0.7663,
-        "pCredit": 0.2038
-      },
-      {
-        "body": "UPI/SNEHA GUPTA/Rs 6,499.25 debited from A/c XX6095. Txn ID NEFT02071055. Bal ₹ 89,012.10",
-        "actual": "DEBIT",
-        "predicted": "CREDIT",
-        "pNotTxn": 0,
-        "pDebit": 0.0041,
-        "pCredit": 0.9959
-      },
-      {
-        "body": "Zelle: JOHN DOE sent you $ 250. New balance $ 356,048.00.",
+        "body": "Rs 29,999 was received from DEEPIKA REDDY via UPI. Reference NEFT39104321.",
         "actual": "CREDIT",
         "predicted": "DEBIT",
-        "pNotTxn": 0.0001,
-        "pDebit": 0.5743,
-        "pCredit": 0.4256
+        "pNotTxn": 0,
+        "pDebit": 0.9954,
+        "pCredit": 0.0046
+      },
+      {
+        "body": "INR99,999.00 deposited to A/c XX7621 at CHENNAI branch on 2026-12-01. Bal Rs 1,12,345.49",
+        "actual": "CREDIT",
+        "predicted": "DEBIT",
+        "pNotTxn": 0,
+        "pDebit": 0.9447,
+        "pCredit": 0.0553
+      },
+      {
+        "body": "NatWest: OLIVER SMITH sent you £1,500. Balance: £3,702.99",
+        "actual": "CREDIT",
+        "predicted": "NOT_TXN",
+        "pNotTxn": 0.8669,
+        "pDebit": 0.0259,
+        "pCredit": 0.1072
+      },
+      {
+        "body": "Incoming payment: £ 35 from CHLOE DAVIES on 24/05/2027.",
+        "actual": "CREDIT",
+        "predicted": "NOT_TXN",
+        "pNotTxn": 0.9818,
+        "pDebit": 0.0116,
+        "pCredit": 0.0066
+      },
+      {
+        "body": "You sent INR 1299 to SNEHA GUPTA via UPI. Ref no UPI6606519891",
+        "actual": "DEBIT",
+        "predicted": "CREDIT",
+        "pNotTxn": 0.1014,
+        "pDebit": 0.1362,
+        "pCredit": 0.7624
+      },
+      {
+        "body": "Your wallet has been topped up with INR 499. Balance ₹ 89,012.00",
+        "actual": "CREDIT",
+        "predicted": "DEBIT",
+        "pNotTxn": 0.0005,
+        "pDebit": 0.9825,
+        "pCredit": 0.017
+      },
+      {
+        "body": "Upcoming debit of USD300.05 from account ending 4002 on 07/20/26.",
+        "actual": "NOT_TXN",
+        "predicted": "DEBIT",
+        "pNotTxn": 0.3397,
+        "pDebit": 0.659,
+        "pCredit": 0.0013
       }
     ]
   },
   "adversarial": {
     "confusion_matrix": [
       [
-        43,
-        1,
+        44,
+        0,
         1
       ],
       [
@@ -278,15 +182,15 @@
       ],
       [
         0,
-        0,
-        19
+        1,
+        18
       ]
     ],
     "per_class": {
       "NOT_TXN": {
         "precision": 1,
-        "recall": 0.9556,
-        "f1": 0.9773,
+        "recall": 0.9778,
+        "f1": 0.9888,
         "support": 45
       },
       "DEBIT": {
@@ -296,44 +200,44 @@
         "support": 25
       },
       "CREDIT": {
-        "precision": 0.95,
-        "recall": 1,
-        "f1": 0.9744,
+        "precision": 0.9474,
+        "recall": 0.9474,
+        "f1": 0.9474,
         "support": 19
       }
     },
     "txn_binary": {
-      "precision": 0.9565,
+      "precision": 0.9778,
       "recall": 1,
-      "f1": 0.9778,
+      "f1": 0.9888,
       "tp": 44,
-      "fp": 2,
+      "fp": 1,
       "fn": 0,
-      "tn": 43
+      "tn": 44
     },
-    "direction_accuracy_among_txn": 1,
+    "direction_accuracy_among_txn": 0.9773,
     "accuracy": 0.9775,
     "cases": 89,
     "misses": [
       {
-        "body": "Get ₹5,000 cashback credited to your account on your first credit card spend. Apply now.",
+        "body": "I received ₹1,000 from my cousin as a gift.",
         "actual": "NOT_TXN",
         "predicted": "CREDIT",
-        "pNotTxn": 0.1157,
+        "pNotTxn": 0.0957,
         "pDebit": 0,
-        "pCredit": 0.8843
+        "pCredit": 0.9043
       },
       {
-        "body": "I spent ₹500 on dinner last night. It was worth it.",
-        "actual": "NOT_TXN",
+        "body": "BOFA: Deposit $1,000 posted 11/19 to acct 3344.",
+        "actual": "CREDIT",
         "predicted": "DEBIT",
-        "pNotTxn": 0.008,
-        "pDebit": 0.992,
-        "pCredit": 0
+        "pNotTxn": 0.0005,
+        "pDebit": 0.6913,
+        "pCredit": 0.3082
       }
     ]
   },
-  "model_sha256": "65c5eaa903778275b0113343f985dd5b7a2bd9f37a77abb82d11fe10d9c31883",
+  "model_sha256": "20be1f8bb73edb0832398f405cc29f95cd0797b399e013eec9dc3815b6a302b2",
   "artifacts": {
     "kotlin_model": "app/src/main/java/app/pocketledger/ml/BundledModel.kt",
     "holdout_jsonl": "tools/eval_holdout.jsonl",
