@@ -44,6 +44,7 @@
             <intent-filter>
                 <action android:name="app.pocketledger.DEBUG_SEED" />
                 <action android:name="app.pocketledger.DEBUG_SCAN" />
+                <action android:name="app.pocketledger.DEBUG_EXPORT_CORPUS" />
             </intent-filter>
         </receiver>
 

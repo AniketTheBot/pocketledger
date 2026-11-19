@@ -3,6 +3,8 @@ package app.pocketledger
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.util.Log
+import app.pocketledger.ml.CorpusExporter
 import app.pocketledger.widget.BalanceWidget
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -35,6 +37,15 @@ class DemoSeedReceiver : BroadcastReceiver() {
                         app.container.settings.setOnboarded(true)
                     }
                     ACTION_SCAN -> app.container.scanner.scan()
+                    ACTION_EXPORT -> {
+                        val result = CorpusExporter.export(app, app.container.db)
+                        Log.i(
+                            "CorpusExport",
+                            "wrote ${result.rows} rows " +
+                                "(${result.hardLabeled} human-labeled, ${result.silverLabeled} silver) " +
+                                "-> files/corpus/${result.file.name}"
+                        )
+                    }
                 }
                 BalanceWidget.refresh(context)
             } finally {
@@ -46,5 +57,6 @@ class DemoSeedReceiver : BroadcastReceiver() {
     companion object {
         const val ACTION_SEED = "app.pocketledger.DEBUG_SEED"
         const val ACTION_SCAN = "app.pocketledger.DEBUG_SCAN"
+        const val ACTION_EXPORT = "app.pocketledger.DEBUG_EXPORT_CORPUS"
     }
 }

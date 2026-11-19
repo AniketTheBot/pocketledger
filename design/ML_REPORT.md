@@ -259,3 +259,25 @@ Runtime files:
 
 The trainer prints `TARGETS NOT MET` and exits non-zero if any gate regresses;
 thresholds must not be lowered silently.
+
+## Real-world corpus + JVM eval (v0.9.4)
+
+Two gaps closed so the bundled model can be retrained on real device data:
+
+1. **Corpus export (on device, debug builds only).**
+   `adb shell am broadcast -a app.pocketledger.DEBUG_EXPORT_CORPUS` dumps the
+   `sms` table to `files/corpus/corpus-<ts>.jsonl` via `CorpusExporter`.
+   Pull with `adb exec-out run-as app.pocketledger cat files/corpus/<name> > corpus.jsonl`.
+   Label policy: `user_confirmed`/`user_discarded` rows are hard human labels;
+   cleanly parsed rows carry a silver `ideal_label`; everything else unlabeled.
+
+2. **JVM-side eval runner.** `MlEvalTest` scores the compiled `BundledModel`
+   against the trainer's fixtures copied to `app/src/test/resources/`
+   (`eval_holdout.jsonl`, `eval_adversarial.jsonl`) and enforces the same
+   gates in CI: holdout txn P ≥ 0.99 / R ≥ 0.90, adversarial P ≥ 0.95.
+   Metrics mirror the trainer byte-for-byte (confusion[actual][pred],
+   trainer's argmax tie rule).
+
+Next step: mix a real-device corpus into `train_classifier.mjs`
+(hash-stable train/holdout split, retrain, regenerate `BundledModel.kt`
+and the feature fixtures, re-run gates on synthetic + adversarial + real).
