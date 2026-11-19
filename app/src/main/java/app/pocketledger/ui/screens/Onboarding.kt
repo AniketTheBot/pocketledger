@@ -125,9 +125,13 @@ fun OnboardingFlow(container: AppContainer, onFinished: () -> Unit) {
         Modifier
             .fillMaxSize()
             .background(if (step == 0) WelcomeYellow else Cream)
-            .statusBarsPadding()
-            .navigationBarsPadding()
-            .padding(horizontal = 22.dp, vertical = 6.dp)
+            .then(
+                if (step == 0) Modifier
+                else Modifier
+                    .statusBarsPadding()
+                    .navigationBarsPadding()
+                    .padding(horizontal = 22.dp, vertical = 6.dp)
+            )
     ) {
         when (step) {
             0 -> WelcomeScreen { step = 1 }
