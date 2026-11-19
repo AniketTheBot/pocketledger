@@ -1487,6 +1487,11 @@ function main() {
     seed: SEED,
     buckets: BUCKETS,
     classes: CLASSES,
+    confusion_matrix_axis: {
+      rows: "actual",
+      columns: "predicted",
+      order: CLASSES,
+    },
     features: {
       normalization: "lowercase, trim, collapse whitespace runs to one space",
       ngrams: "character n-grams n=2..4 over UTF-16 code units, presence=1",

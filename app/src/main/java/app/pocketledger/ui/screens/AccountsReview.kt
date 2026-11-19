@@ -274,7 +274,7 @@ fun AddAccountDialog(container: AppContainer, onDismiss: () -> Unit) {
     var currency by remember { mutableStateOf(settings?.currency ?: "INR") }
     val types = listOf("CHECKING" to "Checking", "SAVINGS" to "Savings", "WALLET" to "Wallet", "CASH" to "Cash", "CREDIT" to "Credit")
 
-    Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false)) {
+    Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = false)) {
         androidx.compose.material3.Surface(Modifier.fillMaxSize(), color = Cream) {
             Column(
                 Modifier
