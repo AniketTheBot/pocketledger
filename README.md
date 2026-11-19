@@ -15,16 +15,16 @@ outlines, hard offset shadows, flower stickers, candy chips).
 | Node | Scope | State |
 |---|---|---|
 | N0 | Design lock (Layout E + Sticker theme) | ✅ |
-| N1 | Scaffold: Compose, theme, nav shell | 🚧 |
-| N2 | Data: Room schema, money math, repos | ✅ code |
-| N3 | SMS parser + 16-case corpus | 🤖 subagent |
-| N3-ML | Bundled classifier + local learning + eval | 🤖 subagent |
-| N4 | Onboarding (stickers → exact balance keypad) | ✅ code |
-| N5 | Home / Accounts / Entry | ✅ code |
-| N6 | SMS engine (receiver, backfill, review queue) | ✅ code |
-| N7 | Reconcile, transfers, settings, export | ✅ code |
-| N8 | Emulator E2E + SMS injection | ⏳ |
-| N9 | Polish + APK | ⏳ |
+| N1 | Scaffold: Compose, theme, nav shell | ✅ |
+| N2 | Data: Room schema, money math, repos | ✅ |
+| N3 | SMS parser + corpus/adversarial tests | ✅ |
+| N3-ML | Bundled classifier + local learning + eval | ✅ (`design/ML_REPORT.md`) |
+| N4 | Onboarding (stickers → exact balance keypad) | ✅ |
+| N5 | Home / Accounts / Entry | ✅ |
+| N6 | SMS engine (receiver, backfill, review queue) | ✅ |
+| N7 | Reconcile, transfers, settings, export | ✅ |
+| N8 | Emulator E2E + SMS injection (Pixel 8) | ✅ |
+| N9 | Polish + APK | ✅ debug APK built |
 
 ## Privacy invariants (enforced, not promised)
 
