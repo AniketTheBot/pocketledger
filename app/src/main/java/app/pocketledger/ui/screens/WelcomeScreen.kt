@@ -2,21 +2,29 @@ package app.pocketledger.ui.screens
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,34 +37,112 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.pocketledger.R
 import app.pocketledger.ui.theme.ArchivoBlack
-import kotlinx.coroutines.delay
 
-private val CollagePurple = Color(0xFF9B5DE5)
+private val WelcomePurple = Color(0xFF9B5DE5)
+private val WelcomeBg = Color(0xFFF5F5F5)
 
 @Composable
 fun WelcomeScreen(onNext: () -> Unit) {
-    val artAlpha = remember { Animatable(0f) }
-    val artScale = remember { Animatable(1.04f) }
+    val entranceAlpha = remember { Animatable(0f) }
+    val entranceScale = remember { Animatable(1.03f) }
+
+    val motion = rememberInfiniteTransition(label = "welcome-motion")
+    val coinBob by motion.animateFloat(
+        initialValue = 0f,
+        targetValue = -4f,
+        animationSpec = infiniteRepeatable(tween(1700, easing = FastOutSlowInEasing), RepeatMode.Reverse),
+        label = "coin",
+    )
+    val handBob by motion.animateFloat(
+        initialValue = -1.2f,
+        targetValue = 1.2f,
+        animationSpec = infiniteRepeatable(tween(2600, easing = FastOutSlowInEasing), RepeatMode.Reverse),
+        label = "hand",
+    )
+    val bubbleFloat by motion.animateFloat(
+        initialValue = -2f,
+        targetValue = 2f,
+        animationSpec = infiniteRepeatable(tween(3200, easing = FastOutSlowInEasing), RepeatMode.Reverse),
+        label = "bubble",
+    )
+    val humanBob by motion.animateFloat(
+        initialValue = -0.8f,
+        targetValue = 0.8f,
+        animationSpec = infiniteRepeatable(tween(2400, easing = FastOutSlowInEasing), RepeatMode.Reverse),
+        label = "human",
+    )
+    val walletBreath by motion.animateFloat(
+        initialValue = 0.995f,
+        targetValue = 1.008f,
+        animationSpec = infiniteRepeatable(tween(2800, easing = FastOutSlowInEasing), RepeatMode.Reverse),
+        label = "wallet",
+    )
 
     LaunchedEffect(Unit) {
-        artAlpha.animateTo(1f, tween(520))
-        artScale.animateTo(1f, tween(760, easing = FastOutSlowInEasing))
+        entranceAlpha.animateTo(1f, tween(520))
+        entranceScale.animateTo(1f, tween(760, easing = FastOutSlowInEasing))
     }
 
-    Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Image(
-            painter = painterResource(R.drawable.welcome_illustration),
-            contentDescription = null,
-            modifier = Modifier
+    Box(Modifier.fillMaxSize().background(WelcomeBg)) {
+        BoxWithConstraints(
+            Modifier
                 .fillMaxWidth()
                 .aspectRatio(271f / 502f)
+                .align(Alignment.TopCenter)
                 .graphicsLayer {
-                    alpha = artAlpha.value
-                    scaleX = artScale.value
-                    scaleY = artScale.value
+                    alpha = entranceAlpha.value
+                    scaleX = entranceScale.value
+                    scaleY = entranceScale.value
                 },
-            contentScale = ContentScale.Fit,
-        )
+        ) {
+            val u = maxWidth / 271f
+
+            fun partModifier(x: Float, y: Float, w: Float, h: Float) =
+                Modifier
+                    .offset(x = u * x, y = u * y)
+                    .width(u * w)
+                    .height(u * h)
+
+            Image(
+                painter = painterResource(R.drawable.welcome_abstractshapes),
+                contentDescription = null,
+                modifier = partModifier(0f, 0f, 271f, 502f),
+                contentScale = ContentScale.FillBounds,
+            )
+            Image(
+                painter = painterResource(R.drawable.welcome_human),
+                contentDescription = null,
+                modifier = partModifier(170.5f, 190.5f, 100f, 89f).graphicsLayer { translationY = humanBob.dp.toPx() },
+                contentScale = ContentScale.FillBounds,
+            )
+            Image(
+                painter = painterResource(R.drawable.welcome_wallet),
+                contentDescription = null,
+                modifier = partModifier(60f, 322f, 171f, 148f).graphicsLayer {
+                    scaleX = walletBreath
+                    scaleY = walletBreath
+                },
+                contentScale = ContentScale.FillBounds,
+            )
+            Image(
+                painter = painterResource(R.drawable.welcome_coin),
+                contentDescription = null,
+                modifier = partModifier(108f, 298f, 47f, 47f).graphicsLayer { translationY = coinBob.dp.toPx() },
+                contentScale = ContentScale.FillBounds,
+            )
+            Image(
+                painter = painterResource(R.drawable.welcome_speechbubble),
+                contentDescription = null,
+                modifier = partModifier(10f, 62.3f, 154f, 129f).graphicsLayer { translationY = bubbleFloat.dp.toPx() },
+                contentScale = ContentScale.FillBounds,
+            )
+            Image(
+                painter = painterResource(R.drawable.welcome_hand),
+                contentDescription = null,
+                modifier = partModifier(17.5f, 226.5f, 140f, 103f).graphicsLayer { translationY = handBob.dp.toPx() },
+                contentScale = ContentScale.FillBounds,
+            )
+        }
 
         Box(
             Modifier
@@ -66,7 +152,7 @@ fun WelcomeScreen(onNext: () -> Unit) {
                 .padding(horizontal = 24.dp, vertical = 26.dp)
                 .height(58.dp)
                 .clip(RoundedCornerShape(percent = 50))
-                .background(CollagePurple)
+                .background(WelcomePurple)
                 .clickable(onClick = onNext),
             contentAlignment = Alignment.Center,
         ) {
