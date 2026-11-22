@@ -81,6 +81,20 @@ fun EntryDialog(container: AppContainer, prefillSms: SmsEntity?, onDismiss: () -
     var merchant by remember { mutableStateOf(prefillSms?.merchant ?: "") }
     var saving by remember { mutableStateOf(false) }
 
+    // Accounts/settings load async; re-anchor the selection once they arrive.
+    LaunchedEffect(accounts) {
+        if (accounts.isNotEmpty()) {
+            if (accounts.none { it.id == fromId }) {
+                fromId = prefillSms?.accountId?.takeIf { id -> accounts.any { it.id == id } }
+                    ?: accounts.firstOrNull()?.id
+                    ?: -1L
+            }
+            if (accounts.none { it.id == toId }) {
+                toId = accounts.firstOrNull { it.id != fromId }?.id ?: -1L
+            }
+        }
+    }
+
     val parsed = Money.parseMinor(amountText)
     val fromAccount = accounts.firstOrNull { it.id == fromId }
     val toAccount = accounts.firstOrNull { it.id == toId }
@@ -116,6 +130,11 @@ fun EntryDialog(container: AppContainer, prefillSms: SmsEntity?, onDismiss: () -
                         modifier = Modifier.clickableNoRipple { onDismiss() },
                     )
                 }
+                Column(
+                    Modifier
+                        .weight(1f)
+                        .verticalScroll(rememberScrollState())
+                ) {
                 Spacer(Modifier.height(10.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(7.dp)) {
                     FilterChipSticker("− Out", direction == "OUT", { direction = "OUT" })
@@ -165,7 +184,7 @@ fun EntryDialog(container: AppContainer, prefillSms: SmsEntity?, onDismiss: () -
                 MoneyKeypad(onKey = { amountText = applyKey(amountText, it) })
                 Spacer(Modifier.height(8.dp))
                 StickerTextField(merchant, { merchant = it }, "Merchant / note (optional)")
-                Spacer(Modifier.weight(1f))
+                Spacer(Modifier.height(12.dp))
                 PillButton(
                     text = when {
                         saving -> "Saving…"
@@ -215,6 +234,7 @@ fun EntryDialog(container: AppContainer, prefillSms: SmsEntity?, onDismiss: () -
                     modifier = Modifier.fillMaxWidth(),
                     enabled = canSave,
                 )
+                }
             }
         }
     }
@@ -236,6 +256,15 @@ fun ReconcileDialog(container: AppContainer, onDismiss: () -> Unit) {
     }
     var amountText by remember { mutableStateOf("") }
     var current by remember { mutableStateOf<Long?>(null) }
+
+    // Accounts/settings load async; re-anchor the selection once they arrive.
+    LaunchedEffect(accounts, settings) {
+        if (accounts.none { it.id == selectedId }) {
+            selectedId = settings?.activeAccountId?.takeIf { id -> accounts.any { it.id == id } }
+                ?: accounts.firstOrNull { !it.archived }?.id
+                ?: -1L
+        }
+    }
 
     LaunchedEffect(selectedId, accounts) {
         current = if (selectedId > 0) container.wallet.balance(selectedId) else null
@@ -259,6 +288,11 @@ fun ReconcileDialog(container: AppContainer, onDismiss: () -> Unit) {
                     Text("Reconcile", style = MaterialTheme.typography.headlineMedium, color = Ink)
                     Text("Close", fontSize = 12.sp, fontWeight = FontWeight.ExtraBold, color = MutedInk, modifier = Modifier.clickableNoRipple(onDismiss))
                 }
+                Column(
+                    Modifier
+                        .weight(1f)
+                        .verticalScroll(rememberScrollState())
+                ) {
                 Spacer(Modifier.height(6.dp))
                 Text("Type what your bank app says, exactly. The difference becomes one adjustment entry.", fontSize = 11.sp, color = MutedInk, lineHeight = 16.sp)
                 Spacer(Modifier.height(10.dp))
@@ -291,7 +325,7 @@ fun ReconcileDialog(container: AppContainer, onDismiss: () -> Unit) {
                 }
                 Spacer(Modifier.height(8.dp))
                 MoneyKeypad(onKey = { amountText = applyKey(amountText, it) })
-                Spacer(Modifier.weight(1f))
+                Spacer(Modifier.height(12.dp))
                 PillButton(
                     "Apply adjustment",
                     onClick = {
@@ -308,6 +342,7 @@ fun ReconcileDialog(container: AppContainer, onDismiss: () -> Unit) {
                 )
                 Spacer(Modifier.height(8.dp))
                 PillButton("Cancel", onDismiss, Modifier.fillMaxWidth(), bg = CardCream)
+                }
             }
         }
     }

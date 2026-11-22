@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.draw.clip
 import androidx.compose.foundation.lazy.LazyColumn
@@ -42,6 +44,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import app.pocketledger.data.AppContainer
+import app.pocketledger.data.AccountEntity
 import app.pocketledger.data.STATUS_REVIEW
 import app.pocketledger.data.SmsEntity
 import app.pocketledger.money.Money
@@ -57,6 +60,7 @@ import app.pocketledger.ui.components.StickerCard
 import app.pocketledger.ui.components.StickerTextField
 import app.pocketledger.ui.theme.CardCream
 import app.pocketledger.ui.theme.Cream
+import app.pocketledger.ui.theme.Danger
 import app.pocketledger.ui.theme.Green
 import app.pocketledger.ui.theme.Ink
 import app.pocketledger.ui.theme.Mustard
@@ -80,6 +84,7 @@ fun AccountsScreen(
     val total by container.wallet.observeTotal().collectAsState(initial = 0L)
     val lastTxn by container.wallet.observeRecentTxns(1).collectAsState(initial = emptyList())
     var balances by remember { mutableStateOf<Map<Long, Long>>(emptyMap()) }
+    var archiving by remember { mutableStateOf<AccountEntity?>(null) }
     val scope = rememberCoroutineScope()
 
     LaunchedEffect(accounts, lastTxn) { balances = container.wallet.balances() }
@@ -129,11 +134,59 @@ fun AccountsScreen(
                         fontSize = 13.sp,
                         color = Ink,
                     )
+                    Spacer(Modifier.width(8.dp))
+                    if (account.archived) {
+                        Text(
+                            "Restore",
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = Ink,
+                            modifier = Modifier.clickableNoRipple {
+                                scope.launch { container.wallet.setArchived(account.id, false) }
+                            },
+                        )
+                    } else {
+                        Text(
+                            "✕",
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = MutedInk,
+                            modifier = Modifier.clickableNoRipple { archiving = account },
+                        )
+                    }
                 }
             }
         }
         PillButton("＋ Add account", onAddAccount, Modifier.fillMaxWidth())
         Spacer(Modifier.height(120.dp))
+    }
+
+    archiving?.let { account ->
+        Dialog(onDismissRequest = { archiving = null }) {
+            StickerCard(Modifier.fillMaxWidth().padding(horizontal = 24.dp)) {
+                Text("Archive \"${account.name}\"?", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = Ink)
+                Spacer(Modifier.height(6.dp))
+                Text(
+                    "It disappears from pickers and totals. Transactions are kept and you can restore it here any time.",
+                    fontSize = 11.5.sp,
+                    color = MutedInk,
+                    lineHeight = 16.sp,
+                )
+                Spacer(Modifier.height(12.dp))
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    PillButton("Keep", { archiving = null }, Modifier.weight(1f), bg = CardCream)
+                    PillButton(
+                        "Archive",
+                        {
+                            scope.launch { container.wallet.setArchived(account.id, true) }
+                            archiving = null
+                        },
+                        Modifier.weight(1f),
+                        bg = Danger,
+                    )
+                }
+            }
+        }
     }
 }
 
@@ -407,4 +460,11 @@ fun AddAccountDialog(container: AppContainer, onDismiss: () -> Unit) {
             }
         }
     }
+}
+
+/** Sticker design is flat: click without ripple visuals. */
+@Composable
+private fun Modifier.clickableNoRipple(onClick: () -> Unit): Modifier {
+    val interaction = remember { MutableInteractionSource() }
+    return this.clickable(interactionSource = interaction, indication = null, onClick = onClick)
 }

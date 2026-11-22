@@ -84,6 +84,11 @@ class WalletRepository(val db: AppDatabase) {
     fun observeSenderRules(): Flow<List<SenderRuleEntity>> = db.senderRuleDao().observeAll()
 
     suspend fun accounts(): List<AccountEntity> = db.accountDao().getAll()
+
+    /** Archive keeps the account and its transactions; hidden from pickers and totals. */
+    suspend fun setArchived(id: Long, archived: Boolean) {
+        db.accountDao().byId(id)?.let { db.accountDao().update(it.copy(archived = archived)) }
+    }
     suspend fun activeAccounts(): List<AccountEntity> = db.accountDao().active()
     suspend fun allTxns(): List<TxnEntity> = db.txnDao().all()
     suspend fun allSms(): List<SmsEntity> = db.smsDao().all()

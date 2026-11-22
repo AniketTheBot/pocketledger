@@ -27,6 +27,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -45,6 +46,7 @@ import app.pocketledger.ui.components.SectionLabel
 import app.pocketledger.ui.components.StickerCard
 import app.pocketledger.ui.theme.CardCream
 import app.pocketledger.ui.theme.Cream
+import app.pocketledger.ui.theme.Danger
 import app.pocketledger.ui.theme.Green
 import app.pocketledger.ui.theme.Ink
 import app.pocketledger.ui.theme.Mustard
@@ -80,6 +82,7 @@ fun HomeScreen(
 
     var balances by remember { mutableStateOf<Map<Long, Long>>(emptyMap()) }
     var inOut by remember { mutableStateOf(InOutTotals(0, 0)) }
+    var deletingTxn by remember { mutableStateOf<TxnEntity?>(null) }
     val scope = rememberCoroutineScope()
 
     val active = accounts.firstOrNull { it.id == settings.activeAccountId && !it.archived }
@@ -249,7 +252,7 @@ fun HomeScreen(
         } else {
             StickerCard(Modifier.fillMaxWidth(), padding = androidx.compose.foundation.layout.PaddingValues(horizontal = 12.dp, vertical = 4.dp)) {
                 visibleTxns.forEachIndexed { index, txn ->
-                    TxnRow(txn, accountNames[txn.accountId] ?: "Account")
+                    TxnRow(txn, accountNames[txn.accountId] ?: "Account", onClick = { deletingTxn = txn })
                     if (index != visibleTxns.lastIndex) InlineDivider()
                 }
             }
@@ -257,12 +260,27 @@ fun HomeScreen(
 
         Spacer(Modifier.height(120.dp))
     }
+
+    deletingTxn?.let { txn ->
+        DeleteTxnDialog(
+            txn = txn,
+            accountName = accountNames[txn.accountId] ?: "Account",
+            onDismiss = { deletingTxn = null },
+            onDelete = {
+                scope.launch { container.money.deleteTxn(txn.id) }
+                deletingTxn = null
+            },
+        )
+    }
 }
 
 @Composable
-private fun TxnRow(txn: TxnEntity, accountName: String) {
+private fun TxnRow(txn: TxnEntity, accountName: String, onClick: () -> Unit) {
     Row(
-        Modifier.fillMaxWidth().padding(vertical = 8.dp),
+        Modifier
+            .fillMaxWidth()
+            .clickableNoRipple(onClick)
+            .padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Avatar(
@@ -290,6 +308,45 @@ private fun TxnRow(txn: TxnEntity, accountName: String) {
         }
         Spacer(Modifier.width(6.dp))
         AmountChip(txn.direction, txn.amountMinor, txn.currency)
+    }
+}
+
+@Composable
+private fun DeleteTxnDialog(
+    txn: TxnEntity,
+    accountName: String,
+    onDismiss: () -> Unit,
+    onDelete: () -> Unit,
+) {
+    Dialog(onDismissRequest = onDismiss) {
+        StickerCard(Modifier.fillMaxWidth().padding(horizontal = 24.dp)) {
+            Text("Delete entry?", fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = Ink)
+            Spacer(Modifier.height(6.dp))
+            Text(
+                txn.merchant ?: txn.note ?: if (txn.kind == "ADJUST") "Adjustment" else "Transaction",
+                fontWeight = FontWeight.ExtraBold,
+                fontSize = 13.5.sp,
+                color = Ink,
+            )
+            Text(
+                (if (txn.direction == "CREDIT") "+" else "−") + Money.format(txn.amountMinor, txn.currency) +
+                    " · $accountName · " +
+                    SimpleDateFormat("d MMM, HH:mm", Locale.getDefault()).format(Date(txn.ts)),
+                fontSize = 11.sp,
+                color = MutedInk,
+            )
+            Spacer(Modifier.height(4.dp))
+            Text(
+                if (txn.transferId != null) "Both sides of the transfer will be removed." else "It will be removed from your balance.",
+                fontSize = 11.sp,
+                color = MutedInk,
+            )
+            Spacer(Modifier.height(12.dp))
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                PillButton("Keep", onDismiss, Modifier.weight(1f), bg = CardCream)
+                PillButton("Delete", onDelete, Modifier.weight(1f), bg = Danger)
+            }
+        }
     }
 }
 

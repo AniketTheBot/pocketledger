@@ -24,10 +24,17 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.animation.Crossfade
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import app.pocketledger.data.AppContainer
 import app.pocketledger.data.SmsEntity
@@ -132,7 +139,16 @@ private fun MainShell(container: AppContainer) {
                     },
                 )
         ) {
-            Crossfade(targetState = tab, animationSpec = tween(160), label = "tab") { current ->
+            AnimatedContent(
+                targetState = tab,
+                transitionSpec = {
+                    val dir = if (tabOrder.indexOf(targetState) >= tabOrder.indexOf(initialState)) 1 else -1
+                    val spec = tween<IntOffset>(300, easing = FastOutSlowInEasing)
+                    (slideInHorizontally(spec) { full -> dir * full } + fadeIn(tween(90))) togetherWith
+                        (slideOutHorizontally(spec) { full -> -dir * full } + fadeOut(tween(90)))
+                },
+                label = "tab",
+            ) { current ->
                 saveableStateHolder.SaveableStateProvider(current) {
                 when (current) {
                     "home" -> HomeScreen(
