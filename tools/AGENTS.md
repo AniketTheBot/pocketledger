@@ -18,14 +18,17 @@ Inherits the root contract (`../AGENTS.md`).
 Full inbox (raw messages, no balance changes, no prior scan needed):
 ```bash
 tools/export_inbox.sh
-# -> tools/corpus/real/inbox-<ts>.jsonl (git-ignored)
+# -> tools/corpus/real/clean-<ts>.jsonl (filtered + redacted, git-ignored)
 ```
-or explicitly:
+The script deletes the raw dump from the phone and the Mac. `--keep-raw` keeps
+it locally for inspection. Manual equivalent:
 ```bash
 adb shell pm grant app.pocketledger android.permission.READ_SMS
 adb shell am broadcast -n app.pocketledger/.DemoSeedReceiver -a app.pocketledger.DEBUG_EXPORT_INBOX
 adb exec-out run-as app.pocketledger cat files/corpus/inbox-<ts>.jsonl > inbox.jsonl
+python3 tools/clean_corpus.py --input inbox.jsonl --delete-raw
 ```
+Privacy regressions: `python3 tools/test_clean_corpus.py`.
 
 App-processed corpus (labels + parser fields from the `sms` table):
 ```bash

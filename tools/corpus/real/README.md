@@ -15,8 +15,16 @@ tools/export_inbox.sh            # auto-picks the USB phone
 ```
 
 It grants `READ_SMS`, asks the app to dump the **entire inbox** to
-`files/corpus/inbox-<ts>.jsonl` (no balances touched), pulls it here, and prints
-the message count. The file is git-ignored.
+`files/corpus/inbox-<ts>.jsonl` (no balances touched), pulls it over USB, then:
+
+1. keeps only bank/financial messages and OTPs (OTPs are hard negatives)
+2. replaces OTP codes with `<OTP>`, and redacts names, phone numbers, emails,
+   URLs, UPI ids and full card/account numbers
+3. deletes the raw dump from both the phone and the Mac
+
+You end up with `tools/corpus/real/clean-<ts>.jsonl`; nothing leaves your
+machine and the folder is git-ignored. Pass `--keep-raw` if you want to inspect
+the unfiltered dump yourself (delete it afterwards).
 
 Manual equivalent:
 
@@ -25,6 +33,7 @@ adb shell pm grant app.pocketledger android.permission.READ_SMS
 adb shell am broadcast -n app.pocketledger/.DemoSeedReceiver -a app.pocketledger.DEBUG_EXPORT_INBOX
 adb logcat -d -s InboxExport | tail -2          # shows the file name
 adb exec-out run-as app.pocketledger cat files/corpus/inbox-<ts>.jsonl > tools/corpus/real/inbox.jsonl
+python3 tools/clean_corpus.py --input tools/corpus/real/inbox.jsonl --delete-raw
 ```
 
 ## What to include
@@ -67,12 +76,17 @@ Columns: `sender,body,label` — header row required.
 
 ## Privacy
 
-Real bank SMS contain names, account tails, amounts and sometimes phone
-numbers. The folder is ignored so this stays on the dev machine, but if you
-want to be extra safe:
+Old OTPs are expired, so they cannot be used to log in. They are still never
+kept: the exporter redacts the code and deletes the raw dump. What survives is
+bank/financial phrasing plus the amount and the a/c last-4 that the parser
+needs.
+
+The folder is ignored, and the app has no `INTERNET` permission, so nothing can
+be uploaded. If you add files manually, the same rules apply:
 
 - replace names with `XXXXX`
 - replace full account/card numbers with the last 4 digits
+- replace OTP codes with `<OTP>`
 - keep amounts and bank wording intact — those are what the model needs
 
 ## What happens next
