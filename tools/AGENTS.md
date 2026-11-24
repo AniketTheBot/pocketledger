@@ -14,11 +14,28 @@ Inherits the root contract (`../AGENTS.md`).
   (MlEvalTest re-checks the same gates on the JVM).
 
 ## Corpus from a device (debug builds)
+
+Full inbox (raw messages, no balance changes, no prior scan needed):
+```bash
+tools/export_inbox.sh
+# -> tools/corpus/real/inbox-<ts>.jsonl (git-ignored)
+```
+or explicitly:
+```bash
+adb shell pm grant app.pocketledger android.permission.READ_SMS
+adb shell am broadcast -n app.pocketledger/.DemoSeedReceiver -a app.pocketledger.DEBUG_EXPORT_INBOX
+adb exec-out run-as app.pocketledger cat files/corpus/inbox-<ts>.jsonl > inbox.jsonl
+```
+
+App-processed corpus (labels + parser fields from the `sms` table):
 ```bash
 adb shell am broadcast -n app.pocketledger/.DemoSeedReceiver -a app.pocketledger.DEBUG_EXPORT_CORPUS
 adb exec-out run-as app.pocketledger cat files/corpus/<file>.jsonl > corpus.jsonl
 ```
 Labels: `user_confirmed` / `user_discarded` are human; `ideal_label` is silver.
+
+**Never commit raw real SMS.** `tools/corpus/real/` is git-ignored for exactly
+this reason.
 
 ## Legacy emulator script
 `tools/emulator_e2e.sh` — seeds the app, injects SMS via `adb emu sms send`,

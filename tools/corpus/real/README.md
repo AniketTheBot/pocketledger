@@ -4,6 +4,29 @@ Drop real bank messages here. **This folder is git-ignored** — raw messages mu
 never be committed to the public repo. Only this README and `.gitignore` are
 tracked.
 
+## Fastest: export the whole inbox (one command)
+
+No manual copying. With the debug build installed and the phone connected over
+USB:
+
+```bash
+tools/export_inbox.sh            # auto-picks the USB phone
+# or: tools/export_inbox.sh 45291VDJH00989
+```
+
+It grants `READ_SMS`, asks the app to dump the **entire inbox** to
+`files/corpus/inbox-<ts>.jsonl` (no balances touched), pulls it here, and prints
+the message count. The file is git-ignored.
+
+Manual equivalent:
+
+```bash
+adb shell pm grant app.pocketledger android.permission.READ_SMS
+adb shell am broadcast -n app.pocketledger/.DemoSeedReceiver -a app.pocketledger.DEBUG_EXPORT_INBOX
+adb logcat -d -s InboxExport | tail -2          # shows the file name
+adb exec-out run-as app.pocketledger cat files/corpus/inbox-<ts>.jsonl > tools/corpus/real/inbox.jsonl
+```
+
 ## What to include
 
 Aim for **20–50 messages per bank/format**, plus the junk you actually receive:
