@@ -72,6 +72,9 @@ class SettingsRepository(private val context: Context) {
         it[Keys.REVIEW_THRESHOLD] = review.coerceIn(10, 84)
     }
     suspend fun setScanning(enabled: Boolean) = context.settingsStore.edit { it[Keys.SCANNING] = enabled }
+
+    /** Clears every preference (onboarding, name, thresholds, scan state). */
+    suspend fun resetAll() = context.settingsStore.edit { it.clear() }
 }
 
 class WalletRepository(val db: AppDatabase) {
@@ -185,4 +188,20 @@ class AppContainer(context: Context) {
     val money = MoneyOps(db)
     val pipeline = SmsPipeline(db, classifier, settings)
     val scanner = InboxScanner(appContext, pipeline, settings)
+
+    /**
+     * Erases everything the app owns: database rows, preferences (incl. onboarding),
+     * the on-device learned classifier, exported corpus and caches. Callers should
+     * relaunch the activity afterwards; the app comes up as a fresh install.
+     */
+    suspend fun wipeEverything() {
+        settings.resetAll()
+        wallet.wipe()
+        runCatching {
+            appContext.filesDir.listFiles()
+                ?.filter { it.name != "datastore" }
+                ?.forEach { it.deleteRecursively() }
+            appContext.cacheDir.deleteRecursively()
+        }
+    }
 }

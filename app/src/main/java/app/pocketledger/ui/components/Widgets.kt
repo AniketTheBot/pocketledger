@@ -29,6 +29,8 @@ import androidx.compose.animation.shrinkHorizontally
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.lerp
+import kotlin.math.abs
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -285,6 +287,7 @@ val NavDestinations = listOf(
 @Composable
 fun BottomPillNav(
     selected: String,
+    selection: Float,
     onSelect: (String) -> Unit,
     reviewCount: Int,
     modifier: Modifier = Modifier,
@@ -305,10 +308,13 @@ fun BottomPillNav(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(3.dp),
         ) {
-            NavDestinations.forEach { dest ->
+            NavDestinations.forEachIndexed { index, dest ->
+                val proximity = (1f - abs(selection - index)).coerceIn(0f, 1f)
+                val weight = proximity * proximity * (3f - 2f * proximity) // smoothstep
                 NavPillItem(
                     dest = dest,
                     active = dest.key == selected,
+                    weight = weight,
                     badgeCount = if (dest.key == "review") reviewCount else 0,
                     onClick = { onSelect(dest.key) },
                 )
@@ -321,27 +327,19 @@ fun BottomPillNav(
 private fun NavPillItem(
     dest: NavDest,
     active: Boolean,
+    weight: Float,
     badgeCount: Int,
     onClick: () -> Unit,
 ) {
     val shape = RoundedCornerShape(percent = 50)
-    val bg by animateColorAsState(
-        targetValue = if (active) Mustard else Color.Transparent,
-        animationSpec = tween(180, easing = FastOutSlowInEasing),
-        label = "navBg",
-    )
-    val contentColor by animateColorAsState(
-        targetValue = if (active) Ink else Cream,
-        animationSpec = tween(180),
-        label = "navContent",
-    )
+    val bg = lerp(Color.Transparent, Mustard, weight)
+    val contentColor = lerp(Cream, Ink, weight)
     val interaction = remember { MutableInteractionSource() }
     val pressed by interaction.collectIsPressedAsState()
     val iconScale by animateFloatAsState(
         targetValue = when {
             pressed -> 0.85f
-            active -> 1.08f
-            else -> 0.95f
+            else -> 0.95f + 0.13f * weight
         },
         animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessMediumLow),
         label = "navIconScale",
@@ -359,7 +357,7 @@ private fun NavPillItem(
             .background(bg)
             .clickable(interactionSource = interaction, indication = null, onClick = onClick)
             .heightIn(min = 42.dp)
-            .padding(horizontal = if (active) 14.dp else 11.dp, vertical = 9.dp),
+            .padding(horizontal = (11f + 3f * weight).dp, vertical = 9.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Box {

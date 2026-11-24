@@ -24,17 +24,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.gestures.detectHorizontalDragGestures
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.tween
-import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.unit.IntOffset
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.unit.dp
 import app.pocketledger.data.AppContainer
 import app.pocketledger.data.SmsEntity
@@ -97,12 +89,28 @@ private fun MainShell(container: AppContainer) {
     val scope = rememberCoroutineScope()
     val saveableStateHolder = rememberSaveableStateHolder()
 
+    val tabOrder = remember { listOf("home", "accounts", "review", "settings") }
+    val pagerState = rememberPagerState(
+        initialPage = tabOrder.indexOf(tab).coerceAtLeast(0),
+    ) { tabOrder.size }
+
+    fun goTo(key: String) {
+        tab = key
+        val index = tabOrder.indexOf(key)
+        if (index >= 0) scope.launch { pagerState.animateScrollToPage(index) }
+    }
+
+    LaunchedEffect(pagerState.currentPage) {
+        tab = tabOrder[pagerState.currentPage]
+    }
+
     Scaffold(
         containerColor = Cream,
         bottomBar = {
             BottomPillNav(
                 selected = tab,
-                onSelect = { tab = it },
+                selection = pagerState.currentPage + pagerState.currentPageOffsetFraction,
+                onSelect = { goTo(it) },
                 reviewCount = reviewCount,
             )
         },
@@ -123,33 +131,14 @@ private fun MainShell(container: AppContainer) {
             }
         },
     ) { padding ->
-        val tabOrder = listOf("home", "accounts", "review", "settings")
-        Box(
-            Modifier
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
-                .swipeToChangeTab(
-                    onSwipeLeft = {
-                        val i = tabOrder.indexOf(tab)
-                        if (i in 0 until tabOrder.lastIndex) tab = tabOrder[i + 1]
-                    },
-                    onSwipeRight = {
-                        val i = tabOrder.indexOf(tab)
-                        if (i > 0) tab = tabOrder[i - 1]
-                    },
-                )
-        ) {
-            AnimatedContent(
-                targetState = tab,
-                transitionSpec = {
-                    val dir = if (tabOrder.indexOf(targetState) >= tabOrder.indexOf(initialState)) 1 else -1
-                    val spec = tween<IntOffset>(300, easing = FastOutSlowInEasing)
-                    (slideInHorizontally(spec) { full -> dir * full } + fadeIn(tween(90))) togetherWith
-                        (slideOutHorizontally(spec) { full -> -dir * full } + fadeOut(tween(90)))
-                },
-                label = "tab",
-            ) { current ->
-                saveableStateHolder.SaveableStateProvider(current) {
+                .padding(padding),
+        ) { page ->
+            val current = tabOrder[page]
+            saveableStateHolder.SaveableStateProvider(current) {
                 when (current) {
                     "home" -> HomeScreen(
                         container = container,
@@ -159,17 +148,17 @@ private fun MainShell(container: AppContainer) {
                         },
                         onScan = { showScan = true },
                         onReconcile = { showReconcile = true },
-                        onAccounts = { tab = "accounts" },
-                        onReview = { tab = "review" },
+                        onAccounts = { goTo("accounts") },
+                        onReview = { goTo("review") },
                         onAnalyze = { showAnalyzer = true },
-                        onOpenSettings = { tab = "settings" },
+                        onOpenSettings = { goTo("settings") },
                     )
                     "accounts" -> AccountsScreen(
                         container = container,
                         onAddAccount = { showAddAccount = true },
                         onSelectAccount = { id ->
                             scope.launch { container.settings.setActiveAccount(id) }
-                            tab = "home"
+                            goTo("home")
                         },
                     )
                     "review" -> ReviewScreen(
@@ -184,7 +173,6 @@ private fun MainShell(container: AppContainer) {
                         onScan = { showScan = true },
                         onReconcile = { showReconcile = true },
                     )
-                }
                 }
             }
         }
@@ -208,20 +196,4 @@ private fun MainShell(container: AppContainer) {
     if (showAnalyzer) {
         AnalyzerDialog(container) { showAnalyzer = false }
     }
-}
-
-/** Horizontal swipe anywhere in the tab content moves to the neighbouring tab. */
-private fun Modifier.swipeToChangeTab(
-    onSwipeLeft: () -> Unit,
-    onSwipeRight: () -> Unit,
-): Modifier = pointerInput(onSwipeLeft, onSwipeRight) {
-    var totalDrag = 0f
-    detectHorizontalDragGestures(
-        onDragStart = { totalDrag = 0f },
-        onHorizontalDrag = { _, dragAmount -> totalDrag += dragAmount },
-        onDragEnd = {
-            if (totalDrag <= -90.dp.toPx()) onSwipeLeft()
-            else if (totalDrag >= 90.dp.toPx()) onSwipeRight()
-        },
-    )
 }

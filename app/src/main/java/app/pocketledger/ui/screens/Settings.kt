@@ -1,5 +1,6 @@
 package app.pocketledger.ui.screens
 
+import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
@@ -35,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import app.pocketledger.data.AppContainer
+import app.pocketledger.MainActivity
 import app.pocketledger.sms.SmsPermissions
 import app.pocketledger.ui.components.CandyChip
 import app.pocketledger.ui.components.PillButton
@@ -192,7 +194,7 @@ fun SettingsScreen(
                 Column(Modifier.padding(18.dp)) {
                     Text("Erase everything?", style = MaterialTheme.typography.headlineMedium, color = Ink)
                     Spacer(Modifier.height(6.dp))
-                    Text("All accounts, transactions and scanned messages will be permanently deleted. Type DELETE to confirm.", fontSize = 11.5.sp, color = MutedInk, lineHeight = 16.sp)
+                    Text("This erases all app storage — accounts, transactions, scanned messages, learned patterns and settings — then restarts PocketLedger from onboarding. Type DELETE to confirm.", fontSize = 11.5.sp, color = MutedInk, lineHeight = 16.sp)
                     Spacer(Modifier.height(10.dp))
                     StickerTextField(wipeText, { wipeText = it }, "Type DELETE")
                     Spacer(Modifier.height(12.dp))
@@ -200,10 +202,12 @@ fun SettingsScreen(
                         "Erase permanently",
                         onClick = {
                             scope.launch {
-                                container.wallet.wipe()
-                                container.settings.setOnboarded(false)
-                                container.settings.setActiveAccount(-1L)
                                 showWipe = false
+                                container.wipeEverything()
+                                context.startActivity(
+                                    Intent(context, MainActivity::class.java)
+                                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                )
                             }
                         },
                         modifier = Modifier.fillMaxWidth(),
