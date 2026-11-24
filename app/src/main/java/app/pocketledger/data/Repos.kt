@@ -13,6 +13,9 @@ import app.pocketledger.ml.HybridClassifier
 import app.pocketledger.sms.InboxScanner
 import app.pocketledger.sms.SmsPipeline
 import app.pocketledger.domain.MoneyOps
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -188,6 +191,9 @@ class AppContainer(context: Context) {
     val money = MoneyOps(db)
     val pipeline = SmsPipeline(db, classifier, settings)
     val scanner = InboxScanner(appContext, pipeline, settings)
+
+    /** Survives screen/activity teardown, e.g. the full erase flow. */
+    val appScope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     /**
      * Erases everything the app owns: database rows, preferences (incl. onboarding),

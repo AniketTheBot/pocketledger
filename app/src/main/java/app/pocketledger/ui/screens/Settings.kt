@@ -38,6 +38,8 @@ import androidx.compose.ui.window.Dialog
 import app.pocketledger.data.AppContainer
 import app.pocketledger.MainActivity
 import app.pocketledger.sms.SmsPermissions
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import app.pocketledger.ui.components.CandyChip
 import app.pocketledger.ui.components.PillButton
 import app.pocketledger.ui.components.SectionLabel
@@ -201,13 +203,14 @@ fun SettingsScreen(
                     PillButton(
                         "Erase permanently",
                         onClick = {
-                            scope.launch {
-                                showWipe = false
+                            container.appScope.launch {
                                 container.wipeEverything()
-                                context.startActivity(
-                                    Intent(context, MainActivity::class.java)
-                                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                )
+                                withContext(Dispatchers.Main) {
+                                    context.startActivity(
+                                        Intent(context, MainActivity::class.java)
+                                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                                    )
+                                }
                             }
                         },
                         modifier = Modifier.fillMaxWidth(),

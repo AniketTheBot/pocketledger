@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import app.pocketledger.data.AppContainer
 import app.pocketledger.data.SmsEntity
@@ -135,7 +136,8 @@ private fun MainShell(container: AppContainer) {
             state = pagerState,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding),
+                .padding(padding)
+                .testTag("tab_pager"),
         ) { page ->
             val current = tabOrder[page]
             saveableStateHolder.SaveableStateProvider(current) {
