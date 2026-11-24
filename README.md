@@ -6,7 +6,7 @@ account-aware balance — starting from the balance you type in, to the last
 digit. No internet permission exists in the manifest. Nothing leaves the device.
 
 **Design:** Layout E · Sticker Ledger (neo-brutalist: cream screens, ink
-outlines, hard offset shadows, flower stickers, candy chips).
+outlines, hard offset shadows, Figma sticker art, candy chips).
 
 **Agent workflow:** this repo is developed by role agents in a graph — start at
 [`AGENTS.md`](AGENTS.md) and [`agents/README.md`](agents/README.md); live board in
@@ -64,7 +64,7 @@ app/src/main/java/app/pocketledger/
 ├── domain/       transfers, reconcile, manual entries
 └── ui/
     ├── theme/    Sticker Ledger tokens
-    ├── components StickerCard, PillButton, CandyChip, Keypad, FlowerSticker, PillNav
+    ├── components StickerCard, PillButton, CandyChip, Keypad, StickerArt, PillNav
     └── screens/  onboarding, home, accounts, review, entry, reconcile, settings
 ```
 

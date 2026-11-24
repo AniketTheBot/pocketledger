@@ -1,6 +1,5 @@
 package app.pocketledger.ui.components
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -55,13 +54,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -75,8 +70,6 @@ import app.pocketledger.ui.theme.Mustard
 import app.pocketledger.ui.theme.MutedInk
 import app.pocketledger.ui.theme.Pink
 import app.pocketledger.ui.theme.SoftLine
-import kotlin.math.cos
-import kotlin.math.sin
 
 /** Cream card with 2.5dp ink border and a solid 4dp hard shadow. */
 @Composable
@@ -219,58 +212,6 @@ private fun StickerKey(label: String, modifier: Modifier = Modifier, onClick: ()
             contentAlignment = Alignment.Center,
         ) {
             Text(label, fontWeight = FontWeight.ExtraBold, fontSize = 17.sp, color = Ink)
-        }
-    }
-}
-
-/** Scalloped flower sticker drawn with Canvas (design 5 signature). */
-@Composable
-fun FlowerSticker(
-    label: String,
-    color: Color,
-    size: Dp,
-    modifier: Modifier = Modifier,
-    petals: Int = 11,
-    depth: Float = 7f,
-) {
-    Box(modifier.size(size), contentAlignment = Alignment.Center) {
-        Canvas(Modifier.matchParentSize()) {
-            val scale = this.size.minDimension / 100f
-            val cx = this.size.width / 2f
-            val cy = this.size.height / 2f
-            val steps = petals * 10
-            val points = ArrayList<Offset>(steps + 1)
-            for (i in 0..steps) {
-                val t = i.toFloat() / steps * (2f * Math.PI.toFloat())
-                val r = (40f + depth * sin(petals * t)) * scale
-                points.add(Offset(cx + r * cos(t), cy + r * sin(t)))
-            }
-            // Smooth the scallop with quadratic segments through midpoints so the
-            // sticker reads as a rounded flower, not a jagged star.
-            val path = Path()
-            path.moveTo(points[0].x, points[0].y)
-            var i = 1
-            while (i < points.size - 1) {
-                val midX = (points[i].x + points[i + 1].x) / 2f
-                val midY = (points[i].y + points[i + 1].y) / 2f
-                path.quadraticBezierTo(points[i].x, points[i].y, midX, midY)
-                i++
-            }
-            path.quadraticBezierTo(points.last().x, points.last().y, points[0].x, points[0].y)
-            path.close()
-            drawPath(path, color = color)
-            drawPath(path, color = Ink, style = Stroke(width = 2.6f * scale))
-        }
-        if (label.isNotBlank()) {
-            Text(
-                text = label,
-                modifier = Modifier.padding(horizontal = size * 0.16f),
-                textAlign = TextAlign.Center,
-                fontWeight = FontWeight.ExtraBold,
-                fontSize = (size.value * 0.095f).sp,
-                lineHeight = (size.value * 0.115f).sp,
-                color = Ink,
-            )
         }
     }
 }

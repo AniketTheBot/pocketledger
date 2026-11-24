@@ -183,7 +183,7 @@ fun WelcomeScreen(onNext: () -> Unit) {
                 .height(u * (h + 8f))
 
         Image(
-            painter = painterResource(R.drawable.welcome_human),
+            painter = painterResource(R.drawable.art_human),
             contentDescription = null,
             modifier = part(170.5f, 190.5f, 100f, 89f).graphicsLayer {
                 alpha = humanIn
@@ -193,7 +193,7 @@ fun WelcomeScreen(onNext: () -> Unit) {
             contentScale = ContentScale.FillBounds,
         )
         Image(
-            painter = painterResource(R.drawable.welcome_wallet),
+            painter = painterResource(R.drawable.art_wallet),
             contentDescription = null,
             modifier = part(60f, 322f, 171f, 148f).graphicsLayer {
                 alpha = walletIn
@@ -206,7 +206,7 @@ fun WelcomeScreen(onNext: () -> Unit) {
             contentScale = ContentScale.FillBounds,
         )
         Image(
-            painter = painterResource(R.drawable.welcome_coin),
+            painter = painterResource(R.drawable.art_coin),
             contentDescription = null,
             modifier = part(108f, 298f, 47f, 47f).graphicsLayer {
                 alpha = coinIn
@@ -216,7 +216,7 @@ fun WelcomeScreen(onNext: () -> Unit) {
             contentScale = ContentScale.FillBounds,
         )
         Image(
-            painter = painterResource(R.drawable.welcome_speechbubble),
+            painter = painterResource(R.drawable.art_speechbubble),
             contentDescription = null,
             modifier = part(10f, 62.3f, 154f, 129f).graphicsLayer {
                 alpha = bubbleIn
@@ -229,7 +229,7 @@ fun WelcomeScreen(onNext: () -> Unit) {
             contentScale = ContentScale.FillBounds,
         )
         Image(
-            painter = painterResource(R.drawable.welcome_hand),
+            painter = painterResource(R.drawable.art_hand),
             contentDescription = null,
             modifier = part(17.5f, 226.5f, 140f, 103f).graphicsLayer {
                 alpha = handIn

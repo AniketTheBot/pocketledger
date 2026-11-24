@@ -22,3 +22,9 @@ and ML expectations.
 4. When ML artifacts change, update `ML_REPORT.md` in the same change.
 5. Figma file (read-only): key `1lBncqAOnwlVBPA9q5kTJk`; local token at
    `~/.config/figma_token` — never commit tokens.
+6. **Illustrations come from the provided Figma parts** (`Coin`, `Hand`,
+   `Human`, `SpeechBubble`, `Wallet`) via
+   `app/.../ui/components/StickerArt.kt`. Do not draw replacement art with
+   `Canvas` and do not generate placeholder illustrations. When a new screen
+   needs art, compose these parts and animate them with the shared entrance +
+   idle language.

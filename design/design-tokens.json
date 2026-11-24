@@ -132,7 +132,7 @@
     {
       "id": "sticker-ledger",
       "label": "Theme 5 - Sticker Ledger (CHOSEN)",
-      "vibe": "Neo-brutalist money wallet. Cream screens, 3px ink outlines, hard offset shadows, flower stickers, candy chips, chunky type.",
+      "vibe": "Neo-brutalist money wallet. Cream screens, 3px ink outlines, hard offset shadows, Figma sticker art, candy chips, chunky type.",
       "defaultMode": "light",
       "light": {
         "background": "#F6F3EC", "onBackground": "#191614",
@@ -210,8 +210,8 @@
       "label": "Layout E - Sticker Ledger (CHOSEN)",
       "nav": "black pill bottom bar: Home / Accounts / Review / Settings; active item = yellow pill",
       "home": "greeting + avatar; balance StickerCard with Record + Scan SMS pills; accounts avatar row; Recent Transactions feed; floating + FAB",
-      "screens": ["sticker onboarding (flower promises)", "exact-balance keypad", "home", "accounts", "review", "entry", "reconcile", "settings"],
-      "notes": "Implemented exactly as mockups/design-5-sticker-ledger.html. Bottom bar lives in Scaffold bottomBar so feeds never clip. Flower stickers drawn with Canvas scallop path."
+      "screens": ["sticker onboarding (Figma art promises)", "exact-balance keypad", "home", "accounts", "review", "entry", "reconcile", "settings"],
+      "notes": "Implemented exactly as mockups/design-5-sticker-ledger.html. Bottom bar lives in Scaffold bottomBar so feeds never clip. Illustrations use the original Figma sticker parts via StickerArt scenes with entrance + idle animation."
     }
   ]
 }

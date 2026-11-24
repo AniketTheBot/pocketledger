@@ -51,7 +51,7 @@ import app.pocketledger.money.Money
 import app.pocketledger.ui.components.AmountChip
 import app.pocketledger.ui.components.Avatar
 import app.pocketledger.ui.components.CandyChip
-import app.pocketledger.ui.components.FlowerSticker
+import app.pocketledger.ui.components.AllClearArt
 import app.pocketledger.ui.components.FilterChipSticker
 import app.pocketledger.ui.components.InlineDivider
 import app.pocketledger.ui.components.PillButton
@@ -245,8 +245,8 @@ fun ReviewScreen(container: AppContainer, onEdit: (SmsEntity) -> Unit) {
                     Modifier.fillMaxWidth().padding(top = 40.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    FlowerSticker("All clear", Green, 120.dp)
-                    Spacer(Modifier.height(14.dp))
+                    AllClearArt(Modifier.fillMaxWidth(0.56f))
+                    Spacer(Modifier.height(6.dp))
                     Text("Nothing needs a look.", fontWeight = FontWeight.ExtraBold, fontSize = 14.sp, color = Ink)
                     Text(
                         "Parsed messages that need confirmation will appear here — fully offline.",

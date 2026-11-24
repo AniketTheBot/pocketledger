@@ -21,7 +21,10 @@ Inherits the root contract (`../AGENTS.md`). Local rules for anyone touching
    bottom (window can exceed the screen).
 4. Long-running/destructive work: `AppContainer.appScope`, not screen scopes.
 5. Async lists: re-anchor selections via `LaunchedEffect(accounts)`.
-6. After changing UI: run `./gradlew :app:assembleDebug` and update `testing/`
+6. Illustrations: compose the provided Figma parts through `StickerArt.kt`
+   (`SmsArrivalArt`, `AllClearArt`, or a new scene). Never add canvas-drawn
+   placeholder art or raster copies.
+7. After changing UI: run `./gradlew :app:assembleDebug` and update `testing/`
    flows when labels/structure change.
 
 ## Verify

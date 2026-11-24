@@ -67,6 +67,7 @@ class AppFlowTest {
     }
 
     /** Drives the complete real onboarding flow, then asserts exactly one account exists. */
+    @OptIn(ExperimentalTestApi::class)
     @Test
     fun onboarding_createsExactlyOneAccount() {
         rule.onNodeWithText("Get Started", substring = true).performClick()
@@ -77,6 +78,9 @@ class AppFlowTest {
 
         repeat(4) { rule.onNodeWithText("0").performClick() }
         rule.onNodeWithText("Start tracking").performClick()
+        rule.waitUntil(timeoutMillis = 5_000) {
+            rule.onAllNodesWithText("Not now", substring = true).fetchSemanticsNodes().isNotEmpty()
+        }
         rule.onNodeWithText("Not now", substring = true).performClick()
         rule.waitForIdle()
 

@@ -14,6 +14,7 @@ Statuses: `next` · `in-flight` · `blocked` · `done`.
 | `v0.9.6-app-icon` | Launcher icon from `Icon.svg` | drawer screenshot |
 | `v0.9.7-pager-wipe-icon` | Gesture pager + nav drag sync; full erase; icon sizing | unit build |
 | `v0.9.8-automation` | E2E suite in `testing/`; erase runs in `appScope` (fixes leftover accounts) | 4/4 connected tests green |
+| `v0.10.1-sticker-art` | Original Figma art replaces all Canvas flower placeholders; animated SMS-permission + All-clear scenes; `StickerArt.kt` reusable | `pixel8-sms-permission-art.png`, `pixel8-review-allclear-art.png`, `review-allclear-motion.mp4`, 4/4 connected |
 
 ## In flight
 
@@ -37,6 +38,12 @@ _(none)_
 
 ## Session log (newest first)
 
+- **2026-11-24** — Replaced every hand-drawn flower sticker with the original
+  Figma parts (wallet/coin/hand/human/speech bubble) through reusable animated
+  `StickerArt` scenes: SMS permission now shows the message arriving into the
+  hand + coin, Review empty state shows the coin dipping into the wallet. Dead
+  onboarding flower code removed. 4/4 E2E green; permission/scan selectors
+  hardened with a wait.
 - **2026-11-24** — Built agent graph docs (`agents/`), automation suite verified
   4/4, erase root-caused (screen-scoped coroutine cancelled by onboarding swap)
   and fixed via `AppContainer.appScope`.

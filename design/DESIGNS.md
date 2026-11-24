@@ -363,9 +363,9 @@ renders were removed on request).
 (Home · Accounts · Review · Settings), active item = mustard pill with dark
 icon+label. Home = greeting + avatar, balance StickerCard with two actions
 (Record − / Scan SMS), accounts avatar row, Recent Transactions feed, floating
-"+" FAB. Onboarding = welcome with four flower stickers (Scan bank SMS ·
-Exact balance start · Auto debit & credit log · 100% offline) → currency →
-account → exact-balance keypad → SMS permission → scan summary.
+"+" FAB. Onboarding = welcome with the Figma sticker cast (human, wallet,
+hand, coin, speech bubble) → currency → account → exact-balance keypad →
+SMS permission (animated message + hand + coin) → scan summary.
 
 **Theme tokens.** Background `#F6F3EC` · surface `#FFFDF7` · ink `#191614` ·
 primary mustard `#F2C14E` · debit/pink `#F6AEDB` · credit/green `#A9E8A2` ·
@@ -374,9 +374,11 @@ blur) · radius 20 cards / 16 keys / 999 pills · display type Archivo Black ·
 motion: one 180ms "sticker pop" on confirm, nothing else bouncy.
 
 **Component inventory (Compose):** `StickerCard`, `PillButton`, `CandyChip`,
-`MoneyKeypad`, `FlowerSticker` (Canvas scallop path), `BottomPillNav`,
+`MoneyKeypad`, `StickerArt` scenes (original Figma parts, animated), `BottomPillNav`,
 `ScreenScaffold`, `AmountField`.
 
 **Non-negotiables.** The bottom bar lives in `Scaffold.bottomBar` (never
-floating over content); every screen scrolls under it safely; flower stickers
-are decorative only (never the sole carrier of information).
+floating over content); every screen scrolls under it safely; sticker art is
+decorative only (never the sole carrier of information) and always comes from
+the original Figma parts in `design/assets/welcome-svg` — no generated or
+Canvas-drawn placeholder illustrations.
