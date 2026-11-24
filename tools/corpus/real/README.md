@@ -13,6 +13,15 @@ tools/export_inbox.sh            # auto-picks the USB phone
 # or: tools/export_inbox.sh 45291VDJH00989
 ```
 
+To review a small sample first, pull only the newest N messages:
+
+```bash
+tools/export_inbox.sh --limit 10
+```
+
+The script refuses to fall back to an emulator, so fake test messages cannot
+end up in the real corpus.
+
 It builds/installs the debug APK, grants `READ_SMS`, asks the app to dump the
 **entire inbox** to
 `files/corpus/inbox-<ts>.jsonl` (no balances touched), pulls it over USB, then:

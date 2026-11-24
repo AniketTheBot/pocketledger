@@ -10,6 +10,7 @@
 # Usage:
 #   tools/export_inbox.sh                 # auto-pick the USB phone
 #   tools/export_inbox.sh <serial>        # explicit device
+#   tools/export_inbox.sh --limit 10      # only the newest 10 messages
 #   tools/export_inbox.sh --keep-raw      # keep the raw, unfiltered dump
 #   tools/export_inbox.sh --no-build      # use the existing debug APK
 #   ANDROID_SERIAL=... tools/export_inbox.sh
@@ -23,22 +24,30 @@ OUT="$ROOT/tools/corpus/real"
 
 KEEP_RAW=0
 NO_BUILD=0
+LIMIT=""
 ARGS=()
-for arg in "$@"; do
-  case "$arg" in
-    --keep-raw) KEEP_RAW=1 ;;
-    --no-build) NO_BUILD=1 ;;
-    *) ARGS+=("$arg") ;;
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --keep-raw) KEEP_RAW=1; shift ;;
+    --no-build) NO_BUILD=1; shift ;;
+    --limit) LIMIT="${2:-}"; shift 2 ;;
+    --limit=*) LIMIT="${1#*=}"; shift ;;
+    *) ARGS+=("$1"); shift ;;
   esac
 done
+if [[ -n "$LIMIT" && ! "$LIMIT" =~ ^[0-9]+$ ]]; then
+  echo "✗ --limit needs a number"; exit 1
+fi
 SERIAL="${ANDROID_SERIAL:-${ARGS[0]:-}}"
 if [[ -z "$SERIAL" ]]; then
-  # Prefer a real USB phone over the emulator.
+  # Never fall back to the emulator: its fake messages must not enter the real
+  # corpus. Pass emulator-5554 explicitly when testing the pipeline.
   SERIAL="$("$ADB" devices | awk '$2=="device" && $1 !~ /^emulator-/ {print $1; exit}')"
-  [[ -n "$SERIAL" ]] || SERIAL="$("$ADB" devices | awk '$2=="device" {print $1; exit}')"
 fi
 if [[ -z "$SERIAL" ]]; then
-  echo "✗ no device/emulator connected (adb devices is empty)"; exit 1
+  echo "✗ no USB phone found (only an emulator, or nothing connected)."
+  echo "  plug in + unlock the phone, accept 'Allow USB debugging', then retry."
+  exit 1
 fi
 
 echo "▸ device: $SERIAL"
@@ -65,9 +74,16 @@ echo "▸ granting READ_SMS (debug build)"
 "$ADB" -s "$SERIAL" shell pm grant "$PKG" android.permission.READ_SMS 2>/dev/null || true
 
 echo "▸ exporting inbox on device (no balances touched)"
-"$ADB" -s "$SERIAL" shell am broadcast \
-  -n "$PKG/.DemoSeedReceiver" \
-  -a "$PKG.DEBUG_EXPORT_INBOX" >/dev/null
+if [[ -n "$LIMIT" ]]; then
+  echo "  newest $LIMIT messages only"
+  "$ADB" -s "$SERIAL" shell am broadcast \
+    -n "$PKG/.DemoSeedReceiver" \
+    -a "$PKG.DEBUG_EXPORT_INBOX" --ei limit "$LIMIT" >/dev/null
+else
+  "$ADB" -s "$SERIAL" shell am broadcast \
+    -n "$PKG/.DemoSeedReceiver" \
+    -a "$PKG.DEBUG_EXPORT_INBOX" >/dev/null
+fi
 sleep 3
 
 FILE="$("$ADB" -s "$SERIAL" shell run-as "$PKG" ls -t files/corpus 2>/dev/null \

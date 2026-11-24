@@ -48,7 +48,8 @@ class DemoSeedReceiver : BroadcastReceiver() {
                         )
                     }
                     ACTION_EXPORT_INBOX -> {
-                        val result = InboxExporter.export(app)
+                        val limit = intent.getIntExtra(EXTRA_LIMIT, 20_000).coerceIn(1, 20_000)
+                        val result = InboxExporter.export(app, limit)
                         if (result.error != null) {
                             Log.w("InboxExport", "failed: ${result.error}")
                         } else {
@@ -71,5 +72,6 @@ class DemoSeedReceiver : BroadcastReceiver() {
         const val ACTION_SCAN = "app.pocketledger.DEBUG_SCAN"
         const val ACTION_EXPORT = "app.pocketledger.DEBUG_EXPORT_CORPUS"
         const val ACTION_EXPORT_INBOX = "app.pocketledger.DEBUG_EXPORT_INBOX"
+        const val EXTRA_LIMIT = "limit"
     }
 }

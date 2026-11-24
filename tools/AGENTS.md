@@ -19,6 +19,7 @@ Full inbox (raw messages, no balance changes, no prior scan needed):
 ```bash
 tools/export_inbox.sh
 # -> tools/corpus/real/clean-<ts>.jsonl (filtered + redacted, git-ignored)
+tools/export_inbox.sh --limit 10   # review sample: newest 10 only
 ```
 The script deletes the raw dump from the phone and the Mac. `--keep-raw` keeps
 it locally for inspection. Manual equivalent:
