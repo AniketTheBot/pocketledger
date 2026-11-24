@@ -1,0 +1,4 @@
+# Raw bank SMS are private: keep everything out of git except the docs.
+*
+!.gitignore
+!README.md
