@@ -8,6 +8,10 @@ digit. No internet permission exists in the manifest. Nothing leaves the device.
 **Design:** Layout E · Sticker Ledger (neo-brutalist: cream screens, ink
 outlines, hard offset shadows, flower stickers, candy chips).
 
+**Agent workflow:** this repo is developed by role agents in a graph — start at
+[`AGENTS.md`](AGENTS.md) and [`agents/README.md`](agents/README.md); live board in
+[`agents/state.md`](agents/state.md).
+
 ---
 
 ## Status
