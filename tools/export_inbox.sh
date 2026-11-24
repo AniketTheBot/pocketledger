@@ -11,6 +11,7 @@
 #   tools/export_inbox.sh                 # auto-pick the USB phone
 #   tools/export_inbox.sh <serial>        # explicit device
 #   tools/export_inbox.sh --keep-raw      # keep the raw, unfiltered dump
+#   tools/export_inbox.sh --no-build      # use the existing debug APK
 #   ANDROID_SERIAL=... tools/export_inbox.sh
 set -euo pipefail
 
@@ -21,10 +22,12 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="$ROOT/tools/corpus/real"
 
 KEEP_RAW=0
+NO_BUILD=0
 ARGS=()
 for arg in "$@"; do
   case "$arg" in
     --keep-raw) KEEP_RAW=1 ;;
+    --no-build) NO_BUILD=1 ;;
     *) ARGS+=("$arg") ;;
   esac
 done
@@ -40,9 +43,14 @@ fi
 
 echo "▸ device: $SERIAL"
 
+if [[ "$NO_BUILD" == "0" ]]; then
+  echo "▸ building the debug APK"
+  (cd "$ROOT" && ./gradlew :app:assembleDebug --console=plain -q)
+fi
+
 APK="$ROOT/app/build/outputs/apk/debug/app-debug.apk"
 if [[ -f "$APK" ]]; then
-  echo "▸ installing latest debug build (data preserved)"
+  echo "▸ installing the debug build (data preserved)"
   "$ADB" -s "$SERIAL" install -r "$APK" >/dev/null
 else
   echo "! app-debug.apk missing — using the installed build"

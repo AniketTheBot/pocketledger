@@ -24,7 +24,7 @@ _(none)_
 
 | # | Item | Owner | Acceptance | Evidence required |
 |---|---|---|---|---|
-| P1 | Real-corpus ML retrain + held-out eval | ml + qa | Blend real device SMS (exported corpus) into `train_classifier.mjs`, regenerate `BundledModel.kt`, keep holdout/adversarial gates, add real-split metrics | `eval_report.json`, `MlEvalTest`, corpus JSONL |
+| P1 | Real-corpus ML retrain + held-out eval | ml + qa | Export the full inbox with `tools/export_inbox.sh` (filtered/redacted by default), blend into `train_classifier.mjs`, regenerate `BundledModel.kt`, keep holdout/adversarial gates, add real-split metrics | `eval_report.json`, `MlEvalTest`, clean corpus JSONL |
 | P2 | Manifest invariant as a JVM test | qa | Unit test fails if merged manifest gains INTERNET | test name in report |
 | P3 | Pager feel tuning (300 ms settle, edge friction) | implementation | Swipe follows finger; highlight matches drag fraction; no jank on 60 Hz | screen recording + e2e swipe test |
 | P4 | CI (GitHub Actions): unit + connected on AVD | release | PR runs both suites; ML gates block merge | workflow file + green run |
@@ -33,11 +33,17 @@ _(none)_
 
 ## Open questions
 
-- Real bank SMS corpus (user will provide examples) → shapes P1.
+- Real bank SMS corpus: exporter + cleaner are ready; blocked on the Pixel's USB connection → shapes P1.
 - Whether to add Room migrations/export before v1 (architecture decision needed).
 
 ## Session log (newest first)
 
+- **2026-11-24** — Added a one-command real-corpus pipeline:
+  `DEBUG_EXPORT_INBOX` dumps the full device inbox without touching balances,
+  `tools/export_inbox.sh` builds/installs, pulls over USB, and
+  `tools/clean_corpus.py` keeps bank/financial + OTP negatives while redacting
+  codes, names, phones, UPI ids, URLs and full card numbers; raw dumps are
+  deleted from phone and Mac. Privacy regression tests green (7/7).
 - **2026-11-24** — Replaced every hand-drawn flower sticker with the original
   Figma parts (wallet/coin/hand/human/speech bubble) through reusable animated
   `StickerArt` scenes: SMS permission now shows the message arriving into the

@@ -6,15 +6,15 @@ tracked.
 
 ## Fastest: export the whole inbox (one command)
 
-No manual copying. With the debug build installed and the phone connected over
-USB:
+No manual copying. With the phone connected over USB:
 
 ```bash
 tools/export_inbox.sh            # auto-picks the USB phone
 # or: tools/export_inbox.sh 45291VDJH00989
 ```
 
-It grants `READ_SMS`, asks the app to dump the **entire inbox** to
+It builds/installs the debug APK, grants `READ_SMS`, asks the app to dump the
+**entire inbox** to
 `files/corpus/inbox-<ts>.jsonl` (no balances touched), pulls it over USB, then:
 
 1. keeps only bank/financial messages and OTPs (OTPs are hard negatives)
